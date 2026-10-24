@@ -16,6 +16,7 @@ body.personal .tabbar .in{grid-template-columns:repeat(4,1fr)}
 body.personal .wtiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 .acct{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 </style>
+<script src="epochs.js"></script>
 </head><body>
 <title>Штаб</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -609,6 +610,89 @@ main{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
 .seg{border-radius:999px;padding:4px}.seg button{border-radius:999px}
 .ssec,.ncard{box-shadow:var(--shadow)}
 @media (max-width:360px){.pc2-name{font-size:16px}.bt .num{font-size:28px}}
+
+/* ===== v17 «Хроники»: эпохи вместо пастели ===== */
+body{background:var(--bg)!important}
+.ava{background:var(--accent)!important;font-family:var(--f-display);font-weight:var(--fw-d,400);box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--gold)!important}
+h1,h2,.hero-big,.bt .num,.pc2-name,.big,.sheet-top h3,.pp-name,.ntitle,.chr-title,.ep-name{font-family:var(--f-display)!important;font-weight:var(--fw-d,400)!important;letter-spacing:0!important}
+h1{font-size:28px!important}
+h2{font-size:20px}
+.eyebrow{color:var(--muted)}
+.icon-btn{background:var(--surface);border:1px solid var(--line);box-shadow:none}
+.card,.list,.group,.ssec,.ncard,.note-new,.pp-add,.rte,.hint{box-shadow:none!important;border:1px solid var(--line)}
+.list .row{border-color:var(--line)}
+.btn{font-weight:600}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+/* hero */
+.hero.scene.epoch{background:var(--hero-ground);min-height:0;box-shadow:none;border-radius:28px}
+.hero.epoch .scene-bg{inset:0 0 auto 0!important;height:320px!important}
+.hero.epoch .hero-row{min-height:214px;padding:20px 20px 0}
+.hero.epoch::after{content:"";position:absolute;inset:0 0 auto 0;height:230px;z-index:-1;pointer-events:none;background:linear-gradient(100deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.3) 45%,rgba(0,0,0,0) 72%)}
+.hero.epoch .hero-text{gap:4px}
+.hero.epoch .bot-wrap{display:none}
+.ep-tag{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);margin-bottom:8px}
+.ep-tag i{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.hero.epoch .hero-hi{font-size:15px;opacity:.92}
+.hero.epoch .hero-big{font-size:clamp(28px,8vw,36px);max-width:14ch;line-height:1.08;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hero.epoch .glass{background:rgba(0,0,0,.26);border-color:rgba(255,255,255,.16);margin-top:4px}
+.hero.epoch .hero-bar i{background:var(--gold)}
+.hero.epoch .bubble-name{color:var(--gold)}
+.hero.epoch .bubble .caret{background:var(--gold)}
+.hero.epoch .mood{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12)}
+/* day pills */
+.dpill{background:var(--surface);border-color:var(--line)}
+.dpill.has i{background:var(--gold)}
+/* bento */
+.bt{background:var(--bc)!important;border:1px solid color-mix(in srgb,var(--ink) 8%,transparent);border-radius:24px}
+.bt .deco{display:none}
+.bt .pill{background:transparent;padding:0;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.bt .num{font-size:40px}
+.bt.tall{justify-content:space-between}
+.bt.tall::after,.bt:not(.tall)::after{content:"";position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--ink) 14%,transparent);box-shadow:0 0 0 14px color-mix(in srgb,var(--ink) 4%,transparent)}
+.bt .dots7 i{background:color-mix(in srgb,var(--ink) 14%,transparent)} .bt .dots7 i.on{background:var(--ink)}
+.bt .mbar,.pc2-foot .mbar{background:color-mix(in srgb,var(--ink) 14%,transparent)}
+/* projects */
+.pcard{border:1px solid color-mix(in srgb,var(--ink) 8%,transparent)!important;border-radius:24px}
+.pc2-emo{font-size:24px!important;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid color-mix(in srgb,var(--ink) 10%,transparent);filter:none;margin:0}
+.pcard.feat .pc2-emo{width:54px;height:54px;font-size:28px!important}
+.pc2-tag{background:transparent;padding:0;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.pc2-b{background:var(--ink);color:var(--bg)}
+.pp-cover{border-bottom:1px solid var(--line)}
+.pp-emoji{background:color-mix(in srgb,var(--bg) 70%,transparent)!important;border:1px solid var(--line)}
+/* dock */
+.tabbar{box-shadow:0 14px 34px -10px rgba(0,0,0,.45)}
+.tab[aria-current="page"]{background:var(--dock-on)!important;color:var(--dock-on-ink)!important}
+/* quote */
+.quote{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 72%,#000),color-mix(in srgb,var(--accent) 38%,#000))!important;border-radius:24px}
+.q-label,.q-foot{color:var(--gold)!important}
+.q-kz{font-family:var(--f-display);font-weight:var(--fw-d,400)}
+/* chronicle */
+.chr{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.chr-art{position:relative;height:120px;overflow:hidden;background:var(--hero-ground)}
+.chr-art svg{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:1;transform:translateY(-27%)}
+.chr-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.chr-k{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;justify-content:space-between;gap:8px}
+.chr-title{margin:0;font-size:26px;line-height:1.1}
+.chr-era{font-size:14px;color:var(--muted);margin-top:-6px}
+.chr-story{margin:0;font-size:15.5px;line-height:1.55}
+.chr-story::first-letter{float:left;font-family:var(--f-display);font-size:52px;line-height:.9;padding:4px 8px 0 0;color:var(--accent)}
+.chr-facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.chr-facts li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;font-size:15px;line-height:1.5}
+.chr-facts .rn{font-family:var(--f-display);font-weight:var(--fw-d,400);color:var(--gold);font-size:18px;line-height:1.3;border-top:1.5px solid var(--gold);padding-top:4px}
+.chr-lesson{border-left:3px solid var(--gold);padding:4px 0 4px 12px;font-size:15px;line-height:1.5}
+.chr-lesson b{display:block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.chr-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.chr details summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);list-style:none;min-height:32px;display:flex;align-items:center}
+.chr details summary::-webkit-details-marker{display:none}
+.ep-list{display:flex;flex-direction:column;gap:10px}
+.ep-item{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:8px;text-align:left;width:100%}
+.ep-item.now{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.ep-thumb{width:72px;height:72px;border-radius:14px;overflow:hidden;position:relative}
+.ep-thumb svg{position:absolute;inset:0;width:100%;height:100%}
+.ep-name{font-size:18px;line-height:1.15}
+.ep-sub{font-size:13px;color:var(--muted)}
 </style>
 
 <header class="top">
@@ -992,6 +1076,37 @@ function dayPlan(d){
   return '<section><div class="sec-head"><h2>'+esc(dn.charAt(0).toUpperCase()+dn.slice(1))+(items.length?' <span class="count">'+items.length+'</span>':'')+'</h2><div class="inline"><button class="btn sm plain" data-day="'+t+'">Сегодня</button><button class="btn sm ghost" data-newtaskday="'+d+'">+ Задача</button></div></div>'+
     (items.length?list(items):'<div class="card empty"><b>'+(d<t?'В этот день задач не было.':'Пока свободно.')+'</b>'+(d<t?'':'Добавь задачу на этот день, и она появится в «Сегодня», когда он наступит.')+'</div>')+'</section>';
 }
+
+/* ===== Хроники: эпоха дня ===== */
+const ROMAN=['I','II','III','IV','V','VI'];
+function chronicle(){
+  const c=window.EPOCHS.current(),ep=c.epoch,d=c.day;
+  const today2=ep.facts.slice(d*2,d*2+2),past=ep.facts.slice(0,d*2);
+  const fl=(arr,off)=>'<ol class="chr-facts">'+arr.map((f,i)=>'<li><span class="rn">'+ROMAN[off+i]+'</span><span>'+esc(f)+'</span></li>').join('')+'</ol>';
+  return '<section class="chr" aria-label="Хроника дня"><div class="chr-art" style="--hero-ground:'+ep.art.near+'">'+window.EPOCHS.art()+'</div><div class="chr-body">'+
+    '<div class="chr-k"><span>Хроника · день '+(d+1)+' из 3</span><span>'+esc(ep.era)+'</span></div>'+
+    '<h2 class="chr-title">'+esc(ep.name)+'</h2>'+
+    (d===0?'<p class="chr-story">'+esc(ep.story)+'</p>':'<details><summary>Об эпохе ›</summary><p class="chr-story" style="margin-top:6px">'+esc(ep.story)+'</p></details>')+
+    '<div class="chr-k" style="color:var(--muted)"><span>Факты дня</span></div>'+fl(today2,d*2)+
+    (past.length?'<details><summary>Прошлые факты · '+past.length+' ›</summary>'+fl(past,0)+'</details>':'')+
+    '<div class="chr-lesson"><b>Урок эпохи</b>'+esc(ep.lessons[d])+'</div>'+
+    '<div class="chr-foot"><span>'+(c.left?'Через '+days(c.left)+': '+esc(c.next.name):'Завтра: '+esc(c.next.name))+'</span><button class="btn sm plain" data-epochs>Все эпохи</button></div>'+
+    '</div></section>';
+}
+function openEpochs(){
+  const c=window.EPOCHS.current(),L=window.EPOCHS.list;
+  let h=sheetTop('Эпохи')+'<p class="note" style="margin-bottom:12px">Каждые 3 дня штаб переезжает в новую эпоху: свой цвет, шрифт, орнамент и 6 фактов. Полный круг — '+(L.length*3)+' дней.</p><div class="ep-list">';
+  for(let k=0;k<L.length;k++){const i=(c.idx+k)%L.length,ep=L[i];const when=k===0?'сейчас · день '+(c.day+1)+' из 3':'через '+days(c.left+1+(k-1)*3);
+    h+='<button class="ep-item'+(k===0?' now':'')+'" data-epoch="'+i+'"><span class="ep-thumb" style="background:'+ep.art.near+'">'+ep.draw(ep.art)+'</span><span><b class="ep-name">'+esc(ep.name)+'</b><span class="ep-sub" style="display:block">'+esc(ep.era)+' · '+when+'</span></span></button>'}
+  openSheet(h+'</div>');
+}
+function openEpoch(i){
+  const ep=window.EPOCHS.list[i];if(!ep)return;
+  openSheet(sheetTop(esc(ep.name))+'<div class="chr"><div class="chr-art" style="height:150px">'+ep.draw(ep.art)+'</div><div class="chr-body"><div class="chr-k"><span>'+esc(ep.era)+'</span></div><p class="chr-story">'+esc(ep.story)+'</p>'+
+    '<ol class="chr-facts">'+ep.facts.map((f,j)=>'<li><span class="rn">'+ROMAN[j]+'</span><span>'+esc(f)+'</span></li>').join('')+'</ol>'+
+    ep.lessons.map((l,j)=>'<div class="chr-lesson"><b>Урок · день '+(j+1)+'</b>'+esc(l)+'</div>').join('')+
+    '<div class="actions"><button class="btn plain" data-epochs>← Все эпохи</button></div></div></div>');
+}
 function renderToday(){
   const it=computeItems(),w=weekInfo(),t=today();
   const left=it.burn.length+it.today.length,done=doneTodayCount(),tot=left+done;
@@ -1000,10 +1115,11 @@ function renderToday(){
   if(S.calErr)h+='<div class="banner warn">'+esc(S.calErr)+' <button class="btn sm plain" data-calsync style="margin-left:6px">Синхронизировать</button></div>';
   const md=S.moods[t]&&S.moods[t].mood;const MF={fire:'happy',ok:'idle',meh:'idle',tired:'sleep',stress:'alert'};
   const mood=md?MF[md]:new Date().getHours()<6?'sleep':it.burn.length?'alert':!left?'happy':'idle';
-  h+='<section class="hero scene ph-'+phaseNow()+'">'+sceneSVG(null,118)+'<div class="hero-row"><div class="hero-text">'+
+  const EPc=window.EPOCHS.current(),EP=EPc.epoch;
+  h+='<section class="hero scene epoch" style="--hero-ground:'+EP.art.near+'">'+window.EPOCHS.art()+'<div class="hero-row"><div class="hero-text"><span class="ep-tag"><i></i>'+esc(EP.name)+' · день '+(EPc.day+1)+'/3</span>'+
     '<p class="hero-hi">'+greet()+(S.settings.name?', '+esc(S.settings.name):'')+'</p>'+
     '<p class="hero-big">'+(left?(it.burn.length?it.burn.length+' горит, ':'')+'осталось '+left+' '+plural(left,'дело','дела','дел'):'День закрыт')+'</p></div>'+
-    '<button class="bot-wrap" id="botTap" aria-label="Дос: следующая подсказка">'+robotSVG(mood,'botMain')+'</button></div>'+
+    '</div>'+
     '<div class="glass"><div class="hero-bar"><i style="width:'+(tot?(done/tot*100).toFixed(1):100)+'%"></i></div>'+
     '<div class="bubble" aria-live="polite"><span class="bubble-name">ДОС</span><span id="botSay"></span><span class="caret" aria-hidden="true"></span></div>'+
     (md?'<div class="bot-actions"><button class="btn sm glass" id="botNext">Дальше</button>'+(S.sample?'<button class="btn sm glass" data-ask>Спросить Доса</button>':'')+'<button class="btn sm glass" data-remood>'+MOODS[md].e+' Настроение</button></div>':
@@ -1017,6 +1133,7 @@ function renderToday(){
   else h+='<div class="card empty"><b>Всё чисто.</b>'+(it.tomorrow.length?'Завтра: '+esc(it.tomorrow.slice(0,3).map(x=>x.title).join(', '))+(it.tomorrow.length>3?' и ещё '+(it.tomorrow.length-3):'')+'.':'И на завтра пусто. Редкая роскошь.')+'</div>';
   h+='</section>';}
   h+=calBlock();
+  h+=chronicle();
   // week
   const ws=weekStart(t);let wk=0,sq=0;for(let i=0;i<7;i++){const x=S.workouts[addDays(ws,i)];if(wdone(x))wk++;if(x&&x.squats)sq++}
   const ps=monthPays(mKey(t)),got=ps.filter(p=>p.status==='paid').reduce((a,p)=>a+(+p.amount||0),0),goal=+S.settings.incomeGoal||0;
@@ -1073,7 +1190,7 @@ function sceneSVG(ph,lift){
     '</g></svg>';
   return s;
 }
-window.SHTAB_SCENE=()=>sceneSVG();window.SHTAB_BOT=(m)=>robotSVG(m||'happy','botGate');
+window.SHTAB_SCENE=()=>window.EPOCHS.art();window.SHTAB_BOT=(m)=>robotSVG(m||'happy','botGate');
 /* ===== Дос: робот-ассистент ===== */
 function robotSVG(mood,id){
   const eyes={idle:'<rect class="eye" x="27" y="33" width="8" height="12" rx="4"/><rect class="eye" x="45" y="33" width="8" height="12" rx="4"/>',
@@ -1135,6 +1252,7 @@ function jarvisLines(){
   if(new Date().getHours()<6)L.push('Ночь на дворе. Я на дежурстве, а ты иди спать.');
   {const md=S.moods[t]&&S.moods[t].mood;if(md)L.push(moodAdvice(md))}
   {const ne=nextEventLine();if(ne)L.push(ne)}
+  {const c=window.EPOCHS.current();L.push('Из хроник, эпоха «'+c.epoch.name+'»: '+c.epoch.facts[c.day*2])}
   if(it.burn.length)L.push('Внимание: горит '+it.burn.length+'. Первым делом — «'+it.burn[0].title+'».');
   else L.push('Системы в норме. Ничего не горит.');
   if(it.today.length)L.push('На сегодня '+it.today.length+' '+plural(it.today.length,'дело','дела','дел')+'. Предлагаю начать с «'+it.today[0].title+'».');
@@ -2354,6 +2472,8 @@ document.addEventListener('click',e=>{
   if(t.hasAttribute('data-newidea')){S.tab='content';S.contentView='board';render();setTimeout(()=>{const i=$('#qi');if(i)i.focus()},40);return}
   if(t.hasAttribute('data-newproj')){openProject(null);return}
   if(t.hasAttribute('data-newlead')){openProject(null,{type:'client',stage:'lead'});return}
+  if(t.hasAttribute('data-epochs')){openEpochs();return}
+  if(d.epoch!=null&&d.epoch!==''){openEpoch(+d.epoch);return}
   if(t.hasAttribute('data-newtask')){openTask(null,null);return}
   if(d.newtaskday){openTask(null,null);const td=$('#t_date');if(td)td.value=d.newtaskday;return}
   if(d.day){S.selDay=d.day===today()?null:d.day;const sx=($('#days')||{}).scrollLeft||0;render();const dd=$('#days');if(dd)dd.scrollLeft=sx;return}
@@ -2410,8 +2530,8 @@ document.addEventListener('drop',e=>{const col=e.target.closest&&e.target.closes
   const v=S.videos[dragId];const ns=col.dataset.col;if(v&&v.stage!==ns){const n=clone(v);n.stage=ns;if(['pub','done'].includes(ns)&&!n.publishedAt)n.publishedAt=today();change('videos',dragId,n,'Этап: '+SL[ns])}dragId=null});
 document.addEventListener('dragend',()=>{dragId=null;document.querySelectorAll('.col.drop').forEach(x=>x.classList.remove('drop'))});
 let lastDay=today();
-let lastPh=phaseNow();setInterval(()=>{if(today()!==lastDay){lastDay=today();S.selDay=null;render()}else if(phaseNow()!==lastPh){lastPh=phaseNow();if(S.tab==='today'&&!S.sheet)render()}},60000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&today()!==lastDay){lastDay=today();render()}});
+let lastPh=phaseNow();setInterval(()=>{if(today()!==lastDay){lastDay=today();S.selDay=null;window.EPOCHS.apply();render()}else if(phaseNow()!==lastPh){lastPh=phaseNow();if(S.tab==='today'&&!S.sheet)render()}},60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&today()!==lastDay){lastDay=today();window.EPOCHS.apply();render()}});
 
 /* ---------- boot ---------- */
 render();

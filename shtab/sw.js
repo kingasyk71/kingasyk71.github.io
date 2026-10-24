@@ -1,6 +1,6 @@
 /* Офлайн-оболочка Штаба: свои файлы берём из сети, без сети — из кэша. Данные Supabase не кэшируются здесь. */
-const V = 'shtab-v2';
-const SHELL = ['./', './index.html', './backend.js', './config.js', './vendor/supabase-2.89.0.js', './manifest.webmanifest',
+const V = 'shtab-v3';
+const SHELL = ['./', './index.html', './backend.js', './epochs.js', './config.js', './vendor/supabase-2.89.0.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {

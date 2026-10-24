@@ -21,17 +21,18 @@
     background:#0E0B22;color:#fff;overflow:auto}
   .gate-scene{position:fixed;inset:0;z-index:-1}.gate-scene svg{width:100%;height:100%;display:block}
   .gate-bot{width:120px;height:150px;align-self:center;margin-bottom:-6px;filter:drop-shadow(0 14px 16px rgba(0,0,0,.35))}
-  .gate-card{background:rgba(14,10,46,.42);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-radius:30px;padding:22px 18px 14px}
+  .gate-card{background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-radius:30px;padding:22px 18px 14px}
   .gate[hidden]{display:none!important}
   .gate-card{width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px}
-  .gate h1{font-family:Unbounded,Onest,system-ui,sans-serif;font-weight:700;font-size:32px;margin:0;text-align:center;letter-spacing:-.01em}
+  .gate-ep{align-self:center;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#E8C46A)}
+  .gate h1{font-family:var(--f-display,Georgia),serif;font-weight:var(--fw-d,400);font-size:32px;margin:0;text-align:center;letter-spacing:-.01em}
   .gate p.sub{margin:0;text-align:center;color:#C9D4FF;font-size:15px;line-height:1.4}
   .gate form{display:flex;flex-direction:column;gap:10px;margin-top:6px}
   .gate label{font-size:13px;color:#C9D4FF;display:flex;flex-direction:column;gap:6px}
   .gate input{font:inherit;font-size:17px;padding:13px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;outline:none;min-height:48px;box-sizing:border-box;width:100%}
   .gate input::placeholder{color:#9FB0EE}
-  .gate input:focus{border-color:#FFD84D;background:rgba(255,255,255,.16)}
-  .gate .go{font:inherit;font-weight:700;font-size:17px;min-height:52px;border:0;border-radius:999px;background:#FFD84D;color:#0D1326;cursor:pointer;margin-top:4px}
+  .gate input:focus{border-color:var(--gold,#E8C46A);background:rgba(255,255,255,.16)}
+  .gate .go{font:inherit;font-weight:700;font-size:17px;min-height:52px;border:0;border-radius:999px;background:var(--gold,#E8C46A);color:#14110C;cursor:pointer;margin-top:4px}
   .gate .go:disabled{opacity:.6}
   .gate .lnk{font:inherit;font-size:15px;background:none;border:0;color:#fff;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px;min-height:40px}
   .gate .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
@@ -42,7 +43,7 @@
 
   function gateHTML() {
     return '<div class="gate" id="gate" hidden><div class="gate-scene" aria-hidden="true">' + (window.SHTAB_SCENE ? window.SHTAB_SCENE() : '') + '</div>' +
-      '<div class="gate-bot" aria-hidden="true">' + (window.SHTAB_BOT ? window.SHTAB_BOT('happy') : '') + '</div><div class="gate-card">' +
+      '<div class="gate-card">' + (window.EPOCHS ? '<span class="gate-ep">' + esc(window.EPOCHS.current().epoch.name) + ' · ' + esc(window.EPOCHS.current().epoch.era) + '</span>' : '') +
       '<h1>Штаб</h1><p class="sub" id="gSub"></p>' +
       '<div class="msg" id="gMsg" role="status" aria-live="polite" hidden></div>' +
       '<form id="gForm" novalidate></form>' +
