@@ -392,6 +392,6 @@
     return ep;
   }
 
-  window.EPOCHS = { list: E, current, apply, art: ep => (ep || current().epoch).draw((ep || current().epoch).art) };
+  window.EPOCHS = { list: E, current, apply, art: ep => { ep = ep || current().epoch; return window.SCENES ? window.SCENES.draw(ep) : ep.draw(ep.art); } };
   apply();
 })();

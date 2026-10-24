@@ -17,6 +17,9 @@ body.personal .wtiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 .acct{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 </style>
 <script src="epochs.js"></script>
+<script src="scenes.js"></script>
+<script src="dos.js"></script>
+<script src="fx.js"></script>
 </head><body>
 <title>Штаб</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -693,6 +696,48 @@ h2{font-size:20px}
 .ep-thumb svg{position:absolute;inset:0;width:100%;height:100%}
 .ep-name{font-size:18px;line-height:1.15}
 .ep-sub{font-size:13px;color:var(--muted)}
+
+/* ===== v18 «Живой штаб»: Дос, сцена, моушн ===== */
+.hero.epoch{overflow:hidden}
+.hero.epoch .hero-text{padding-right:104px}
+.hero.epoch .scene-bg{height:360px!important}
+.hero.epoch .hero-row{min-height:252px!important}
+.hero.epoch .hero-big{font-size:clamp(30px,8.6vw,40px)!important;max-width:9ch!important;line-height:1.02!important}
+.hero.epoch .hero-hi{font-size:16px!important}
+.hero-dos{position:absolute;right:4px;top:118px;width:124px;z-index:2;will-change:transform}
+.hero-dos .dos{width:124px}
+.hero .fx-canvas{z-index:-1;height:360px}
+.hero .tod{position:absolute;inset:0 0 auto 0;height:360px;z-index:-1;pointer-events:none}
+.tod-dawn{background:linear-gradient(180deg,rgba(255,140,160,.28),rgba(255,200,140,.14) 60%,transparent);mix-blend-mode:soft-light}
+.tod-dusk{background:linear-gradient(180deg,rgba(90,40,140,.35),rgba(255,120,80,.3) 70%,transparent);mix-blend-mode:soft-light}
+.tod-night{background:linear-gradient(180deg,rgba(6,8,40,.62),rgba(10,14,60,.35) 70%,rgba(0,0,0,.2));mix-blend-mode:multiply}
+.toast{width:max-content;max-width:min(92vw,440px)}
+.toast span{line-height:1.3}
+.glass{box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.2),0 24px 40px -24px rgba(0,0,0,.6)!important}
+.bubble{box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+#askBtn{padding:0;overflow:visible;transition:transform .55s var(--spring),opacity .3s}
+#askBtn .dos{width:40px}
+body.hero-in-view #askBtn{transform:scale(0) translateY(30px);opacity:0;pointer-events:none}
+.tabbar .tab[aria-current="page"]{background:transparent!important}
+.bt,.pcard,.chr,.card,.list{box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 16px 32px -22px color-mix(in srgb,var(--accent) 45%,transparent)!important}
+.bt .num,.pc2-name{text-shadow:0 1px 0 rgba(255,255,255,.4)}
+.sport-dos{display:flex;flex-direction:row!important;align-items:center;gap:14px;padding:12px 16px;overflow:hidden;position:relative;background:linear-gradient(120deg,var(--surface),var(--accent-soft))}
+.sport-dos .slot{width:92px;flex:none}
+.sport-dos .slot .dos{width:92px}
+.sport-dos b{font-family:var(--f-display);font-weight:var(--fw-d,400);font-size:19px;display:block;margin-bottom:2px}
+.sport-dos p{margin:0;font-size:14px;color:var(--muted);line-height:1.4}
+.dpill[aria-pressed="true"]{animation:pillPop .55s var(--spring)}
+@keyframes pillPop{0%{transform:scale(.9)}100%{transform:scale(1.06)}}
+.dpill[aria-pressed="true"]{transform:scale(1.06)}
+.hero-big{animation:heroIn .9s var(--spring-soft) both}
+.hero-hi,.ep-tag{animation:heroIn .7s var(--spring-soft) both}
+.ep-tag{animation-delay:.05s}.hero-hi{animation-delay:.12s}.hero-big{animation-delay:.18s}
+@keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chr-facts li{animation:heroIn .6s var(--spring-soft) both}
+.chr-facts li:nth-child(2){animation-delay:.12s}
+.check{position:relative}
+.fx-tick{left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px}
+@media (prefers-reduced-motion:reduce){.hero-big,.hero-hi,.ep-tag,.chr-facts li,.dpill{animation:none!important}}
 </style>
 
 <header class="top">
@@ -1097,15 +1142,78 @@ function openEpochs(){
   const c=window.EPOCHS.current(),L=window.EPOCHS.list;
   let h=sheetTop('Эпохи')+'<p class="note" style="margin-bottom:12px">Каждые 3 дня штаб переезжает в новую эпоху: свой цвет, шрифт, орнамент и 6 фактов. Полный круг — '+(L.length*3)+' дней.</p><div class="ep-list">';
   for(let k=0;k<L.length;k++){const i=(c.idx+k)%L.length,ep=L[i];const when=k===0?'сейчас · день '+(c.day+1)+' из 3':'через '+days(c.left+1+(k-1)*3);
-    h+='<button class="ep-item'+(k===0?' now':'')+'" data-epoch="'+i+'"><span class="ep-thumb" style="background:'+ep.art.near+'">'+ep.draw(ep.art)+'</span><span><b class="ep-name">'+esc(ep.name)+'</b><span class="ep-sub" style="display:block">'+esc(ep.era)+' · '+when+'</span></span></button>'}
+    h+='<button class="ep-item'+(k===0?' now':'')+'" data-epoch="'+i+'"><span class="ep-thumb" style="background:'+ep.art.near+'">'+window.EPOCHS.art(ep)+'</span><span><b class="ep-name">'+esc(ep.name)+'</b><span class="ep-sub" style="display:block">'+esc(ep.era)+' · '+when+'</span></span></button>'}
   openSheet(h+'</div>');
 }
 function openEpoch(i){
   const ep=window.EPOCHS.list[i];if(!ep)return;
-  openSheet(sheetTop(esc(ep.name))+'<div class="chr"><div class="chr-art" style="height:150px">'+ep.draw(ep.art)+'</div><div class="chr-body"><div class="chr-k"><span>'+esc(ep.era)+'</span></div><p class="chr-story">'+esc(ep.story)+'</p>'+
+  openSheet(sheetTop(esc(ep.name))+'<div class="chr"><div class="chr-art" style="height:150px">'+window.EPOCHS.art(ep)+'</div><div class="chr-body"><div class="chr-k"><span>'+esc(ep.era)+'</span></div><p class="chr-story">'+esc(ep.story)+'</p>'+
     '<ol class="chr-facts">'+ep.facts.map((f,j)=>'<li><span class="rn">'+ROMAN[j]+'</span><span>'+esc(f)+'</span></li>').join('')+'</ol>'+
     ep.lessons.map((l,j)=>'<div class="chr-lesson"><b>Урок · день '+(j+1)+'</b>'+esc(l)+'</div>').join('')+
     '<div class="actions"><button class="btn plain" data-epochs>← Все эпохи</button></div></div></div>');
+}
+
+/* ===== Дос и анимации ===== */
+const DOSX={hero:null,heroEl:null,mini:null,sport:null,sportEl:null,part:null,partHost:null,io:null,lastTab:null,alerted:false};
+function epId(){return window.EPOCHS.current().epoch.id}
+function epColors(){const e=window.EPOCHS.current().epoch;return [...e.tones,e.L.gold,'#ffffff']}
+function soundOn(){try{return localStorage.getItem('shtab_sound')!=='0'}catch(_){return true}}
+function dosMood(){
+  const t=today(),hr=new Date().getHours(),it=computeItems();const md=S.moods[t]&&S.moods[t].mood;
+  if(hr<6)return 'sleep';if(it.burn.length)return 'alert';if(!it.today.length&&doneTodayCount()>0)return 'proud';
+  return {fire:'happy',ok:'idle',meh:'think',tired:'sleep',stress:'alert'}[md]||'idle';
+}
+function dosReact(name){[DOSX.hero,DOSX.mini,DOSX.sport].forEach(d=>{if(d&&d.el.isConnected)d.react(name)})}
+function afterDoneCheck(){const it=computeItems();if(!it.today.length&&!it.burn.length){setTimeout(()=>{dosReact('dance');FX.confetti(innerWidth/2,innerHeight*.28,epColors(),120);if(DOSX.hero)DOSX.hero.setMood('proud');botSay('Всё закрыто! Танцую за нас обоих.',true)},500);setTimeout(()=>dosReact('salute'),3200)}}
+function bindDos(el,get){
+  let tm=null,long=false,x0=0,y0=0;
+  el.addEventListener('pointerdown',e=>{long=false;x0=e.clientX;y0=e.clientY;clearTimeout(tm);tm=setTimeout(()=>{long=true;FX.buzz(25);showFacts()},520)});
+  el.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-x0)+Math.abs(e.clientY-y0)>12)clearTimeout(tm)});
+  el.addEventListener('pointerup',()=>{clearTimeout(tm);if(long)return;const d=get();FX.askOrient();if(d&&d.mood==='sleep'){d.setMood(dosMood()==='sleep'?'idle':dosMood())}
+    if(S.tab!=='today'){S.tab='today';window.scrollTo(0,0);render();return}botNext();if(d)d.react(Math.random()<.3?'flip':'jump')});
+  el.addEventListener('pointercancel',()=>clearTimeout(tm));
+  el.addEventListener('contextmenu',e=>e.preventDefault());
+}
+function showFacts(){const c=window.EPOCHS.current(),ep=c.epoch,R=['I','II','III','IV','V','VI'];
+  const cards=[0,1].map(k=>({k:'Хроники · '+esc(ep.name),n:R[c.day*2+k],t:esc(ep.facts[c.day*2+k])})).concat([{k:'Урок эпохи',n:'✦',t:esc(ep.lessons[c.day])}]);
+  dosReact('think');FX.factDeck(cards)}
+function ensureHeroDos(){
+  const hero=document.querySelector('.hero.scene');if(!hero||!window.Dos)return;
+  if(!DOSX.heroEl){DOSX.heroEl=document.createElement('div');DOSX.heroEl.className='hero-dos';DOSX.heroEl.setAttribute('role','button');DOSX.heroEl.setAttribute('aria-label','Дос: следующая подсказка, удерживай — факты эпохи');
+    DOSX.hero=Dos.mount(DOSX.heroEl.appendChild(document.createElement('span')),{epoch:epId(),mood:dosMood()});bindDos(DOSX.heroEl,()=>DOSX.hero)}
+  if(DOSX.heroEl.parentNode!==hero)hero.appendChild(DOSX.heroEl);
+  DOSX.hero.setMood(dosMood());
+  if(!DOSX.alerted&&computeItems().burn.length){DOSX.alerted=true;setTimeout(()=>DOSX.hero&&DOSX.hero.react('pace'),1400)}
+  if(DOSX.partHost!==hero){if(DOSX.part)DOSX.part.stop();DOSX.partHost=hero;DOSX.part=FX.particles(hero,window.SCENES.particles(epId()))}
+  if(window.IntersectionObserver){if(DOSX.io)DOSX.io.disconnect();DOSX.io=new IntersectionObserver(es=>document.body.classList.toggle('hero-in-view',es[0].isIntersecting&&es[0].intersectionRatio>.25),{threshold:[0,.25,.5]});DOSX.io.observe(DOSX.heroEl)}
+  FX.parallax();
+}
+function ensureSportDos(){
+  const slot=document.getElementById('sportDosSlot');if(!slot||!window.Dos)return;
+  if(!DOSX.sportEl){DOSX.sportEl=document.createElement('span');DOSX.sport=Dos.mount(DOSX.sportEl,{epoch:epId(),mood:'happy',sport:true});bindDos(DOSX.sportEl,()=>DOSX.sport)}
+  slot.appendChild(DOSX.sportEl);const w=S.workouts[today()]||{};DOSX.sport.setMood(wfull(w)?'proud':'happy');
+}
+function countUp(root){if(FX.RM)return;root.querySelectorAll('.bt .num').forEach(el=>{const tn=el.firstChild;if(!tn||tn.nodeType!==3)return;const m=tn.nodeValue.match(/^(\d+)(.*)$/);if(!m)return;const to=+m[1],rest=m[2],t0=performance.now();
+  const step=now=>{const k=Math.min(1,(now-t0)/900),e=1-Math.pow(1-k,3);tn.nodeValue=Math.round(to*e)+rest;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
+function motionAfterRender(){
+  const ready=S.offline||Object.values(S.ready).every(Boolean);if(!ready)return;
+  if(S.tab==='today')ensureHeroDos();else document.body.classList.remove('hero-in-view');
+  if(S.tab==='sport')ensureSportDos();
+  const sc=document.getElementById('screen');
+  if(DOSX.lastTab!==S.tab){DOSX.lastTab=S.tab;FX.enter(sc);countUp(sc);FX.counters(sc)}
+  if(DOSX.mini)DOSX.mini.setMood(dosMood());
+}
+function vtOpenProject(id,card){
+  if(!document.startViewTransition||FX.RM||!card){openProjectPage(id);return}
+  card.style.viewTransitionName='ppx';const p=$('#panel');
+  const tr=document.startViewTransition(()=>{card.style.viewTransitionName='';p.style.animation='none';openProjectPage(id);const c=document.querySelector('.pp-cover');if(c)c.style.viewTransitionName='ppx'});
+  tr.finished.finally(()=>{const c=document.querySelector('.pp-cover');if(c)c.style.viewTransitionName='';p.style.animation=''});
+}
+function epochIntroMaybe(){
+  const ep=window.EPOCHS.current().epoch;let seen=null;try{seen=localStorage.getItem('shtab_epoch_seen')}catch(_){}
+  if(seen===ep.id)return;try{localStorage.setItem('shtab_epoch_seen',ep.id)}catch(_){}
+  const old=seen&&window.EPOCHS.list.find(e=>e.id===seen);
+  FX.epochIntro(old?window.EPOCHS.art(old):null,ep,window.EPOCHS.art(ep),el=>window.Dos?Dos.mount(el,{epoch:ep.id,mood:'happy'}):null).then(()=>{dosReact('wave')});
 }
 function renderToday(){
   const it=computeItems(),w=weekInfo(),t=today();
@@ -1116,7 +1224,7 @@ function renderToday(){
   const md=S.moods[t]&&S.moods[t].mood;const MF={fire:'happy',ok:'idle',meh:'idle',tired:'sleep',stress:'alert'};
   const mood=md?MF[md]:new Date().getHours()<6?'sleep':it.burn.length?'alert':!left?'happy':'idle';
   const EPc=window.EPOCHS.current(),EP=EPc.epoch;
-  h+='<section class="hero scene epoch" style="--hero-ground:'+EP.art.near+'">'+window.EPOCHS.art()+'<div class="hero-row"><div class="hero-text"><span class="ep-tag"><i></i>'+esc(EP.name)+' · день '+(EPc.day+1)+'/3</span>'+
+  h+='<section class="hero scene epoch" style="--hero-ground:'+EP.art.near+'">'+window.EPOCHS.art()+'<div class="tod tod-'+phaseNow()+'"></div><div class="hero-row"><div class="hero-text"><span class="ep-tag"><i></i>'+esc(EP.name)+' · день '+(EPc.day+1)+'/3</span>'+
     '<p class="hero-hi">'+greet()+(S.settings.name?', '+esc(S.settings.name):'')+'</p>'+
     '<p class="hero-big">'+(left?(it.burn.length?it.burn.length+' горит, ':'')+'осталось '+left+' '+plural(left,'дело','дела','дел'):'День закрыт')+'</p></div>'+
     '</div>'+
@@ -1270,13 +1378,13 @@ function botSay(text,force){
   BOT.shown=text;clearInterval(BOT.typing);
   if(RM){el.textContent=text;return}
   let k=0;el.textContent='';el.parentNode.classList.add('typing');
-  BOT.typing=setInterval(()=>{const e2=document.getElementById('botSay');if(!e2){clearInterval(BOT.typing);return}k+=2;e2.textContent=text.slice(0,k);if(k>=text.length){clearInterval(BOT.typing);e2.parentNode.classList.remove('typing')}},28);
+  BOT.typing=setInterval(()=>{const e2=document.getElementById('botSay');if(!e2){clearInterval(BOT.typing);return}k+=2;e2.textContent=text.slice(0,k);if(k%6===0&&window.Dos&&S.user)Dos.beep(k);if(k>=text.length){clearInterval(BOT.typing);e2.parentNode.classList.remove('typing')}},28);
 }
 function botNext(){BOT.lines=jarvisLines();BOT.i=(BOT.i+1)%BOT.lines.length;botSay(BOT.lines[BOT.i],true);botBounce('wave')}
-function botBounce(cls){document.querySelectorAll('.robot').forEach(r=>{r.classList.remove('yay','wave');void r.getBoundingClientRect();r.classList.add(cls||'yay')})}
+function botBounce(cls){dosReact({yay:'jump',wave:'wave'}[cls]||cls||'jump')}
 function afterRender(){
   {const dd=document.getElementById('days');if(dd&&!dd.dataset.init){dd.dataset.init=1;const a=dd.querySelector('.today');if(a&&!dd.scrollLeft)dd.scrollLeft=Math.max(0,a.offsetLeft-dd.clientWidth/2+a.offsetWidth/2)}}
-  const mini=document.getElementById('askBtn');if(mini&&!mini.firstChild)mini.innerHTML=robotSVG('idle','botMini');
+  const mini=document.getElementById('askBtn');if(mini&&!mini.firstChild&&window.Dos){DOSX.mini=Dos.mount(mini.appendChild(document.createElement('span')),{epoch:epId(),mood:'idle'})}
   if(S.tab!=='today')return;
   if(!BOT.lines.length){BOT.lines=jarvisLines();BOT.i=0}
   const md=S.moods[today()]&&S.moods[today()].mood;
@@ -1869,6 +1977,7 @@ function render(){
   if(keep)restoreFields(keep);
   if(S.sheet&&S.sheet.refresh)S.sheet.refresh();
   afterRender();
+  motionAfterRender();
 }
 
 /* ---------- sheets ---------- */
@@ -2285,6 +2394,8 @@ function setWorkout(day,patch,msg){
   const prev=S.workouts[day]?clone(S.workouts[day]):null;
   const n={...(prev||{}),...patch};delete n.done;
   if(!n.cardio&&!n.squats)del('workouts',day);else put('workouts',day,n);
+  if(patch.cardio){dosReact('run');FX.buzz(20)}else if(patch.squats){dosReact('jump');FX.confetti(innerWidth/2,innerHeight*.35,epColors(),40)}
+  if(day===today()&&wfull(n)&&!wfull(prev)){setTimeout(()=>{dosReact('dance');FX.confetti(innerWidth/2,innerHeight*.3,epColors(),90)},700)}
   toast(msg,()=>{prev?put('workouts',day,prev):del('workouts',day)});
 }
 function sportStreak(){let n=0,d=today();if(!wdone(S.workouts[d]))d=addDays(d,-1);while(wdone(S.workouts[d])){n++;d=addDays(d,-1)}return n}
@@ -2298,7 +2409,8 @@ function renderSport(){
     cells.push('<button class="sday sd-'+st+'" data-sday="'+d+'" '+(d>t?'disabled':'')+' aria-label="'+DAYS[i]+', '+fmtD(d)+': '+(c?(CARDIO[w.cardio]||'кардио')+(w.min?' '+w.min+' мин':''):'кардио нет')+', '+(q?'приседания сделаны':'приседаний нет')+'"><span>'+DSH[i]+'</span><b>'+lbl+'</b></button>')}
   const streak=sportStreak();
   const chip=(k)=>'<button type="button" class="chip" data-cardio="'+k+'" aria-pressed="'+(x.cardio===k)+'" style="min-height:48px;flex:1;font-size:16px">'+(k==='run'?'🏃 Бег':'🚲 Велик')+'</button>';
-  let h='<section><div class="card goal"><div class="kicker"><h2>Сегодня</h2>'+(wfull(x)?'<span class="tag ok">всё сделано</span>':'')+'</div>'+
+  let h='<section class="card sport-dos"><div class="slot" id="sportDosSlot"></div><div><b>'+(wfull(x)?'Сегодня всё. Уважение.':x.cardio?'Кардио есть. Осталось 100 приседаний.':x.squats?'Приседания есть. Теперь бег или велик.':'Ну что, бег или велик?')+'</b><p>'+(wfull(x)?'Отдыхай, дос. Завтра повторим.':'Я уже размялся. Отметь, когда сделаешь — порадуюсь вместе с тобой.')+'</p></div></section>';
+  h+='<section><div class="card goal"><div class="kicker"><h2>Сегодня</h2>'+(wfull(x)?'<span class="tag ok">всё сделано</span>':'')+'</div>'+
     '<span class="flabel">Кардио: что сегодня?</span><div class="chips" style="flex-wrap:nowrap">'+chip('run')+chip('bike')+'</div>'+
     (x.cardio?'<div class="inline"><label class="sr" for="sp_min">Минут</label><input id="sp_min" inputmode="numeric" placeholder="Сколько минут" value="'+esc(x.min||'')+'" style="flex:1;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--surface);font-size:16px"><button class="btn sm ghost" data-spmin>Записать</button></div>':'')+
     '<button class="btn '+(x.squats?'plain':'')+'" data-squats style="width:100%">'+(x.squats?'✓ 100 приседаний сделано · отменить':'100 приседаний · отметить')+'</button>'+
@@ -2388,6 +2500,7 @@ function openSettings(){
     '<div class="form" style="margin-top:22px"><div>'+flabel('Экспорт в CSV')+'<div class="actions">'+(full?'<button class="btn ghost" id="expC">Проекты и платежи</button>':'')+'<button class="btn ghost" id="expT">Все задачи</button>'+(full?'<button class="btn ghost" id="expV">Ролики и метрики</button>':'')+'</div></div>'+
     '<div>'+flabel('Резервная копия')+'<div class="actions"><button class="btn ghost" id="bkSave">Скачать всё (JSON)</button><input type="file" id="bkFile" accept=".json,application/json" hidden><button class="btn ghost" id="bkLoad">Загрузить из файла</button></div><p class="note" style="margin-top:6px">Загрузка добавит записи из файла к твоим. Совпадающие заменит.</p></div>'+
     (exCount?'<div>'+flabel('Примеры')+'<div class="actions"><button class="btn danger" id="delEx">Удалить все примеры ('+exCount+')</button></div><p class="note" style="margin-top:6px">Твои настоящие проекты и ролики останутся.</p></div>':'')+
+    '<div>'+flabel('Дос')+'<div class="group"><div class="field"><label class="inline" style="min-height:44px;color:var(--ink);font-size:15px;font-weight:500"><input type="checkbox" id="s_sound" style="width:22px;height:22px;flex:none" '+(soundOn()?'checked':'')+'> Звук, когда Дос печатает</label></div></div></div>'+
     '<div>'+flabel('Аккаунт')+'<div class="group"><div class="field acct"><span>'+esc(S.user?S.user.email:'')+'</span><button class="btn sm danger" type="button" id="signOut">Выйти</button></div></div>'+
     '<p class="note" style="margin-top:6px">Твои данные видишь только ты. Ссылкой на приложение можно делиться: у каждого свой аккаунт и свой штаб.</p></div></div>';
   openSheet(h);
@@ -2396,6 +2509,7 @@ function openSettings(){
     n.name=val('s_name').slice(0,40);const ws0=toNum(val('s_wStart')),wg0=toNum(val('s_wGoal'));n.wStart=ws0&&ws0>20&&ws0<400?ws0:null;n.wGoal=wg0&&wg0>20&&wg0<400?wg0:null;n.mode=$('#s_full').checked?'full':'personal';put('settings','main',n);toast('Настройки сохранены');closeSheet()};
   if($('#expC'))$('#expC').onclick=()=>exportCSV('clients');if($('#expV'))$('#expV').onclick=()=>exportCSV('videos');$('#expT').onclick=()=>exportCSV('tasks');
   $('#bkSave').onclick=backupSave;$('#bkLoad').onclick=()=>$('#bkFile').click();$('#bkFile').onchange=backupLoad;
+  $('#s_sound').onchange=e=>{try{localStorage.setItem('shtab_sound',e.target.checked?'1':'0')}catch(_){}if(e.target.checked&&window.Dos)Dos.beep(3)};
   $('#signOut').onclick=e=>{const b=e.currentTarget;if(!b.dataset.sure){b.dataset.sure=1;b.textContent='Точно выйти?';return}S.backend&&S.backend.signOut()};
   const d=$('#delEx');if(d)d.onclick=()=>{if(!d.dataset.sure){d.dataset.sure=1;d.textContent='Точно? Нажми ещё раз';return}
     ['videos','clients','hooks'].forEach(k=>Object.entries(S[k]).forEach(([id,x])=>{if(x.example)del(k,id)}));closeSheet();toast('Примеры удалены. Теперь всё по-настоящему.')};
@@ -2448,11 +2562,14 @@ document.addEventListener('click',e=>{
   if(t.hasAttribute('data-close')){closeSheet();return}
   if(d.tab){S.tab=d.tab;S.month=null;window.scrollTo(0,0);render();if(d.tab==='content')autoSync();return}
   if(d.go){S.tab=d.go;window.scrollTo(0,0);render();if(d.go==='content')autoSync();return}
-  if(d.done){const it=S.items[d.done];if(it&&it.done){const r=t.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);BOT.shown='';BOT.lines=[];const msg=PRAISE[Math.floor(Math.random()*PRAISE.length)];it.done();setTimeout(()=>{botSay(msg,true);botBounce('yay')},30)}return}
+  if(d.done){const it=S.items[d.done];if(it&&it.done&&!t.dataset.busy){t.dataset.busy=1;const r=t.getBoundingClientRect();const row=t.closest('.row');FX.buzz(15);
+    if(row&&!FX.RM){t.insertAdjacentHTML('beforeend','<svg class="fx-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>');row.classList.add('fx-done')}
+    FX.confetti(r.left+r.width/2,r.top+r.height/2,epColors(),55);BOT.shown='';BOT.lines=[];const msg=PRAISE[Math.floor(Math.random()*PRAISE.length)];
+    setTimeout(()=>{it.done();setTimeout(()=>{botSay(msg,true);dosReact('flip');afterDoneCheck()},40)},FX.RM?0:430)}return}
   if(d.item){const it=S.items[d.item];if(it)it.open();return}
   if(d.video){openVideo(d.video);return}
   if(d.next){advanceVideo(d.next);return}
-  if(d.proj){openProjectPage(d.proj);return}
+  if(d.proj){vtOpenProject(d.proj,t.classList.contains('pcard')?t:null);return}
   if(d.pfilter){S.projFilter=d.pfilter;render();return}
   if(d.pptab){PP.tab=d.pptab;PP.edit=null;renderPP();return}
   if(d.ppdate){PP.date=d.ppdate;if(d.ppdate==='pick'){const e2=$('#pp_date');if(e2){e2.hidden=false;e2.focus();try{e2.showPicker()}catch(_){}}}renderPPChips();return}
@@ -2480,7 +2597,7 @@ document.addEventListener('click',e=>{
   if(t.hasAttribute('data-newincome')){openIncome();return}
   if(d.review){openReview(d.review);return}
   if(t.hasAttribute('data-calreload')){loadCal(true);toast('Обновляю календарь…');return}
-  if(d.mood){const r=t.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);setMood(d.mood);return}
+  if(d.mood){const r=t.getBoundingClientRect();FX.confetti(r.left+r.width/2,r.top+r.height/2,epColors(),26);setMood(d.mood);setTimeout(()=>{if(DOSX.hero)DOSX.hero.setMood(dosMood())},60);return}
   if(t.hasAttribute('data-remood')){const x=S.moods[today()];if(x){del('moods',today());BOT.shown='';}return}
   if(t.hasAttribute('data-qnext')){BOT.qShift++;render();return}
   if(t.hasAttribute('data-ask')||t.id==='askBtn'){if(!S.sample){if(S.tab!=='today'){S.tab='today';window.scrollTo(0,0);render()}else botNext();return}openAsk();return}
@@ -2538,6 +2655,10 @@ render();
 (async()=>{
   let B;
   try{B=await window.SHTAB.start()}catch(e){console.error(e);S.offline=true;render();toast('Не удалось подключиться. Проверь интернет и обнови.');return}
+  FX.tabIndicator();FX.sheetDrag($('#panel'),closeSheet);
+  FX.pullToRefresh(()=>S.db&&S.db.refresh?S.db.refresh().then(()=>{toast('Свежие данные на месте');dosReact('jump')}).catch(()=>toast('Нет связи')):null,el=>window.Dos?Dos.mount(el,{epoch:epId(),mood:'happy'}):null);
+  addEventListener('touchend',()=>FX.askOrient(),{once:true});
+  setTimeout(epochIntroMaybe,300);
   S.backend=B;S.user=B.user;S.downloads=B.downloads;S.assets=B.assets;S.mcp=null;S.sample=null;
   const db=B.db;S.db=db;
   const sub=col=>db.collection(col).onSnapshot(snap=>{const o={};snap.docs.forEach(d=>{if(d.exists)o[d.id]=d.data()});S[col]=o;S.ready[col]=true;render()});

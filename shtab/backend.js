@@ -239,6 +239,7 @@
       collection: col => ({ doc: id => docRef(col, id), onSnapshot: (cb) => subCol(col, cb) }),
       doc: path => { const [c, i] = path.split('/'); return docRef(c, i); },
       all: () => JSON.parse(JSON.stringify(cache)),
+      refresh: () => loadAll(),
       async importAll(dump, onProgress) {
         const rows = [];
         for (const col in dump) for (const id in dump[col]) rows.push({ user_id: uid, col, id, data: dump[col][id], updated_at: new Date().toISOString() });
