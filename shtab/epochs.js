@@ -380,10 +380,10 @@
       t.map((c, i) => '--b' + (i + 1) + ':color-mix(in srgb,' + c + ' ' + (dark ? '30%' : '16%') + ',' + p.bg + ');--t' + (i + 1) + ':' + c).join(';') + ';' +
       '--b5:var(--b1);--b6:var(--b2);--bento-ink:' + p.ink + ';--dock:' + (dark ? 'color-mix(in srgb,#fff 8%,' + p.bg + ')' : p.ink) + ';--dock-ink:' + (dark ? 'color-mix(in srgb,' + p.ink + ' 60%,transparent)' : 'color-mix(in srgb,' + p.bg + ' 62%,transparent)') + ';' +
       '--dock-on:' + (dark ? p.ink : p.bg) + ';--dock-on-ink:' + (dark ? p.bg : p.ink) + ';' +
-      '--f-display:"' + ep.font + '",Georgia,serif;--fw-d:' + (FW[ep.font] || 400) + ';--shadow:0 1px 2px rgba(0,0,0,' + (dark ? '.3' : '.04') + '),0 8px 26px rgba(0,0,0,' + (dark ? '.28' : '.06') + ')';
+      '--f-display:"Dela Gothic One","Onest",system-ui,sans-serif;--fw-d:400;--shadow:0 1px 2px rgba(0,0,0,' + (dark ? '.3' : '.04') + '),0 8px 26px rgba(0,0,0,' + (dark ? '.28' : '.06') + ')';
   }
   function apply(ep) {
-    ep = ep || current().epoch; loadFont(ep.font);
+    ep = ep || current().epoch;
     let st = document.getElementById('epochStyle');
     if (!st) { st = document.createElement('style'); st.id = 'epochStyle'; document.head.appendChild(st); }
     st.textContent = 'html:root{' + vars(ep.L, false, ep) + '}@media (prefers-color-scheme: dark){html:root:not([data-theme="light"]){' + vars(ep.D, true, ep) + ';color-scheme:dark}}html:root[data-theme="dark"]{' + vars(ep.D, true, ep) + '}';
