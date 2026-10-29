@@ -18,6 +18,7 @@ body.personal .wtiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
 <script src="epochs.js"></script>
 <script src="scenes.js"></script>
+<script src="dos-art.js"></script>
 <script src="dos.js"></script>
 <script src="fx.js"></script>
 </head><body>
@@ -1170,6 +1171,15 @@ body.tab-today .ava,body.tab-today .ava b{background:#fff!important;color:#0A0B0
 .sum.ai-card .face .dos{width:64px!important;margin:-6px 0 0!important}
 .faces button .mf{width:48px!important;height:44px!important;border-radius:14px;background:linear-gradient(160deg,#1C2236,#2B3A5E);place-items:start center!important;overflow:hidden}
 .faces button .dos{width:58px!important;margin-top:-6px!important}
+.faces button .mf.pic{width:48px!important;height:44px!important;aspect-ratio:auto;margin-top:0!important;position:relative}
+.faces button .mf.pic .d-all{inset:auto;left:50%;top:-9px;width:98px;height:109px;transform:translateX(-50%)}
+.sum.ai-card .face.pic{position:relative;aspect-ratio:auto;display:block!important}
+.sum.ai-card .face.pic .d-all{inset:auto;left:50%;top:-9px;width:104px;height:116px;transform:translateX(-50%)}
+.hero.neo .hero-dos .dos.pic{width:190px!important}
+.hero.neo .hero-dos:has(.pic){width:190px!important;right:-10px!important;bottom:0!important}
+.hero.neo .hero-dos:has(.pic)::before{bottom:-6px;height:60px;left:8%;right:8%}
+.sport-dos .slot:has(.pic){width:96px;align-self:flex-end;margin-bottom:-12px}
+.sport-dos .slot .dos.pic{width:96px}
 .qt .ic{background:var(--accent-soft)!important;color:var(--accent)!important}
 .qt{transition:transform .3s var(--spring),border-color .2s}
 .qt:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))!important}

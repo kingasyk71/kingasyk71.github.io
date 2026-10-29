@@ -328,6 +328,31 @@
   @keyframes girlShake{0%,100%{transform:translateX(0)}50%{transform:translateX(1.2px)}}
   .dos.girl .d-zz text{fill:var(--dg);font:700 16px system-ui}
   .dos.girl .d-dots circle,.dos.girl .d-core{fill:var(--dg)}
+  .dos.pic{--dg:var(--accent,#2EE6C9);position:relative;aspect-ratio:466/520;display:block}
+  .dos.pic .d-all,.dos.pic .d-float,.dos.pic .d-react,.dos.pic .d-tilt{position:absolute;inset:0}
+  .dos.pic .d-float{animation:picBreath 4.2s ease-in-out infinite;transform-origin:50% 100%}
+  .dos.pic .d-react{transform-origin:50% 80%}
+  .dos.pic .d-tilt{transform-origin:50% 100%;transform:rotate(calc(var(--lx,0) * 2.2deg));transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+  .dos.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .38s ease,filter .5s;user-select:none;-webkit-user-drag:none;pointer-events:none;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 9%,#000 80%,transparent);mask-image:linear-gradient(to bottom,transparent 0,#000 9%,#000 80%,transparent)}
+  .dos.pic .p-idle{opacity:1}
+  .dos.pic.e-think .p-idle,.dos.pic.e-alert .p-idle,.dos.pic.e-cry .p-idle{opacity:0}
+  .dos.pic.e-think .p-think,.dos.pic.e-alert .p-alert,.dos.pic.e-cry .p-alert{opacity:1}
+  .dos.pic.e-sleep img{filter:brightness(.82) saturate(.8)}
+  .dos.pic.e-sleep .d-float{animation-duration:6.5s}
+  .dos.pic.e-happy .d-float,.dos.pic.e-proud .d-float{animation:picBounce 2.2s ease-in-out infinite}
+  .dos.pic.e-cry .d-react{animation:girlShake .22s linear infinite}
+  .dos.pic .p-zz,.dos.pic .p-dots{position:absolute;right:6%;top:4%;display:none;gap:3px;align-items:flex-end;pointer-events:none}
+  .dos.pic.e-sleep .p-zz,.dos.pic.e-think .p-dots{display:flex}
+  .dos.pic .p-zz i{font:italic 800 clamp(10px,9cqw,20px)/1 system-ui;color:var(--dg);animation:dosZz 2.4s infinite;text-shadow:0 0 8px var(--dg)}
+  .dos.pic .p-zz i+i{animation-delay:1.2s;font-size:clamp(8px,7cqw,15px)}
+  .dos.pic .p-dots i{width:clamp(3px,3.4cqw,7px);aspect-ratio:1;border-radius:50%;background:var(--dg);box-shadow:0 0 8px var(--dg);animation:dosDot 1.2s infinite}
+  .dos.pic .p-dots i:nth-child(2){animation-delay:.2s} .dos.pic .p-dots i:nth-child(3){animation-delay:.4s}
+  .dos.pic{container-type:inline-size}
+  @keyframes picBreath{0%,100%{transform:scale(1)}50%{transform:scale(1.014,1.008)}}
+  @keyframes picBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3%) scale(1.01)}}
+  .dos.pic.r-flip .d-react{animation:picHop .9s cubic-bezier(.3,1.5,.5,1)}
+  @keyframes picHop{0%,100%{transform:translateY(0)}35%{transform:translateY(-12%) rotate(-4deg)}65%{transform:translateY(-6%) rotate(3deg)}}
   @media (prefers-reduced-motion:reduce){.dos *{animation:none!important;transition:none!important}}`;
 
   const all = new Set();
@@ -338,8 +363,16 @@
     const id = ++N;
     el.classList.add('dos', 'e-' + (opt.mood || 'idle'));
     if (opt.sport) el.classList.add('sport');
-    el.classList.add('girl');
-    el.innerHTML = svgGirl(id);
+    const ART = window.DOS_ART;
+    if (ART && ART.idle) {
+      el.classList.add('pic');
+      const im = k => '<img class="p-' + k + '" src="' + (ART[k] || ART.idle) + '" alt="" draggable="false" decoding="async">';
+      el.innerHTML = '<div class="d-all"><div class="d-float"><div class="d-react"><div class="d-tilt">' + im('idle') + im('think') + im('alert') +
+        '</div></div></div><div class="p-zz"><i>z</i><i>z</i></div><div class="p-dots"><i></i><i></i><i></i></div></div>';
+    } else {
+      el.classList.add('girl');
+      el.innerHTML = svgGirl(id);
+    }
     if (opt.glow) el.style.setProperty('--dg', opt.glow);
     const inst = {
       el, mood: opt.mood || 'idle', busy: false,
