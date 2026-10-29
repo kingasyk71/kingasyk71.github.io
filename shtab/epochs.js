@@ -386,7 +386,7 @@
     ep = ep || current().epoch;
     let st = document.getElementById('epochStyle');
     if (!st) { st = document.createElement('style'); st.id = 'epochStyle'; document.head.appendChild(st); }
-    st.textContent = 'html:root{' + vars(ep.L, false, ep) + '}@media (prefers-color-scheme: dark){html:root:not([data-theme="light"]){' + vars(ep.D, true, ep) + ';color-scheme:dark}}html:root[data-theme="dark"]{' + vars(ep.D, true, ep) + '}';
+    st.textContent = ''; if (false) st.textContent = 'html:root{' + vars(ep.L, false, ep) + '}@media (prefers-color-scheme: dark){html:root:not([data-theme="light"]){' + vars(ep.D, true, ep) + ';color-scheme:dark}}html:root[data-theme="dark"]{' + vars(ep.D, true, ep) + '}';
     document.documentElement.dataset.epoch = ep.id;
     document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', /dark/.test(m.media || '') ? ep.D.bg : ep.L.bg));
     return ep;

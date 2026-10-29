@@ -54,6 +54,59 @@
     '</g>' +
     '<g class="d-mouth"><path class="m m-idle" d="M55 70 q5 4 10 0"/><path class="m m-happy" d="M52 68 q8 9 16 0z"/><path class="m m-alert" d="M54 72 q6 -5 12 0"/><path class="m m-sleep" d="M57 71 h6"/><path class="m m-think" d="M58 71 h5"/><path class="m m-proud" d="M52 68 q8 9 16 0z"/></g>';
 
+
+  /* Чиби-Асылбек: тёмный квифф с фейдом, миндалевидные глаза, чёрный пуховик с высоким воротом */
+  function svgChibi(id) {
+    const I = 'dos' + id;
+    const brows = (a) => '<path class="ln br" d="' + (a ? 'M35 27 L52 32 M85 27 L68 32' : 'M35 29 Q43 25 52 28 M68 28 Q77 25 85 29') + '"/>';
+    const iris = (dx, dy) => [44, 76].map(cx => '<ellipse cx="' + (cx + dx) + '" cy="' + (41 + dy) + '" rx="6.2" ry="7.4" fill="url(#' + I + '-iris)"/>' +
+      '<circle cx="' + (cx + dx + 2.2) + '" cy="' + (37.6 + dy) + '" r="2.3" fill="#fff"/><circle cx="' + (cx + dx - 2) + '" cy="' + (44 + dy) + '" r="1.1" fill="#fff" opacity=".85"/>').join('') +
+      '<path class="ln lid" d="M35.5 36.5 Q44 30.5 53 35.5 M67 35.5 Q76 30.5 84.5 36.5"/>';
+    const eyes =
+      '<g class="d-eyes">' +
+      '<g class="ey ey-idle">' + brows(0) + iris(0, 0) + '</g>' +
+      '<g class="ey ey-happy">' + brows(0) + '<path class="ln" d="M37 42 Q44 34 51 42 M69 42 Q76 34 83 42"/></g>' +
+      '<g class="ey ey-alert">' + brows(1) + iris(0, 1) + '<path d="M95 18 q4 7 0 10 q-4 -3 0 -10z" fill="#8FD3FF" opacity=".9"/></g>' +
+      '<g class="ey ey-sleep">' + brows(0) + '<path class="ln" d="M37 41 Q44 46 51 41 M69 41 Q76 46 83 41"/></g>' +
+      '<g class="ey ey-think">' + '<path class="ln br" d="M35 27 Q43 23 52 27 M68 28 Q77 26 85 29"/>' + iris(-2.2, -2.4) + '</g>' +
+      '<g class="ey ey-proud">' + brows(0) + '<path class="ln" d="M37 41 Q44 37 51 41 M69 41 Q76 37 83 41"/><path d="M96 10 l1.6 3.6 3.8.4-2.9 2.5.9 3.8-3.4-2-3.4 2 .9-3.8-2.9-2.5 3.8-.4z" fill="#F5C451"/></g>' +
+      '</g>' +
+      '<g class="d-mouth"><path class="m m-idle" d="M55 58 q5 3.5 10 0"/><path class="m m-happy fillm" d="M53 56 q7 9 14 0z"/><path class="m m-alert" d="M55 60 q5 -3 10 0"/>' +
+      '<path class="m m-sleep" d="M57 59 h6"/><path class="m m-think" d="M57 59 q3 -1.5 6 0"/><path class="m m-proud" d="M54 57 q7 5 13 -1"/></g>';
+    return '<svg class="dos-svg" viewBox="-6 -24 132 166" aria-hidden="true"><defs>' +
+      '<radialGradient id="' + I + '-skin" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#FAD7B5"/><stop offset=".7" stop-color="#EDB68E"/><stop offset="1" stop-color="#D99A72"/></radialGradient>' +
+      '<linearGradient id="' + I + '-hair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B2E31"/><stop offset=".55" stop-color="#1E1719"/><stop offset="1" stop-color="#120E10"/></linearGradient>' +
+      '<linearGradient id="' + I + '-jk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C2F37"/><stop offset="1" stop-color="#121418"/></linearGradient>' +
+      '<radialGradient id="' + I + '-iris" cx=".45" cy=".35" r=".75"><stop offset="0" stop-color="#7A4E36"/><stop offset=".55" stop-color="#3A2219"/><stop offset="1" stop-color="#160C08"/></radialGradient>' +
+      '<radialGradient id="' + I + '-shadow"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>' +
+      '</defs>' +
+      '<ellipse class="d-shadow" cx="60" cy="136" rx="34" ry="6" fill="url(#' + I + '-shadow)"/>' +
+      '<g class="d-all"><g class="d-float"><g class="d-react">' +
+      '<g class="d-arm l"><rect x="17" y="86" width="17" height="36" rx="8.5" fill="url(#' + I + '-jk)"/><path d="M19 100 h13 M19 111 h13" stroke="#363A44" stroke-width="1.2"/><circle cx="25.5" cy="124" r="5.6" fill="url(#' + I + '-skin)"/></g>' +
+      '<g class="d-arm r"><rect x="86" y="86" width="17" height="36" rx="8.5" fill="url(#' + I + '-jk)"/><path d="M88 100 h13 M88 111 h13" stroke="#363A44" stroke-width="1.2"/><circle cx="94.5" cy="124" r="5.6" fill="url(#' + I + '-skin)"/>' +
+      '<g class="d-bell"><rect x="84" y="122" width="22" height="4" rx="2" fill="#3A3F4E"/><rect x="80" y="116" width="6" height="16" rx="2" fill="#20242E"/><rect x="104" y="116" width="6" height="16" rx="2" fill="#20242E"/></g></g>' +
+      '<rect x="52" y="64" width="16" height="14" rx="4" fill="#D99A72"/>' +
+      '<path d="M30 94 Q31 78 60 76 Q89 78 90 94 L92 132 Q60 141 28 132Z" fill="url(#' + I + '-jk)"/>' +
+      '<path d="M31 106 Q60 113 89 106 M30 120 Q60 127 90 120" stroke="#363A44" stroke-width="1.4" fill="none"/><path d="M60 82 V136" stroke="#0B0C0F" stroke-width="1.6"/>' +
+      '<path d="M71 126 q3 -3 5 0 q2 3 5 -1" stroke="#E9ECF2" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+      '<path d="M40 70 Q60 82 80 70 L82 88 Q60 99 38 88Z" fill="#1E2127"/><path d="M40 70 Q60 82 80 70" stroke="#3A3F4A" stroke-width="1.6" fill="none"/>' +
+      '<circle class="d-core" cx="49" cy="92" r="2.4"/>' +
+      '<g class="d-head">' +
+      '<ellipse cx="25.5" cy="42" rx="6" ry="8" fill="url(#' + I + '-skin)"/><ellipse cx="94.5" cy="42" rx="6" ry="8" fill="url(#' + I + '-skin)"/>' +
+      '<path d="M26 34 Q26 6 60 6 Q94 6 94 34 Q94 62 60 70 Q26 62 26 34Z" fill="url(#' + I + '-skin)"/>' +
+            '<ellipse class="d-cheek" cx="36" cy="51" rx="5.5" ry="3"/><ellipse class="d-cheek" cx="84" cy="51" rx="5.5" ry="3"/>' +
+      '<g class="d-face">' + eyes + '<path d="M60.5 44 q-2.6 5.6 .8 6.6" stroke="#C98763" stroke-width="1.6" fill="none" stroke-linecap="round"/></g>' +
+      '<g class="d-hair"><path d="M22 34 Q14 10 30 -4 Q46 -20 70 -18 Q96 -18 104 2 Q110 18 98 34 Q96 24 90 19 Q90 12 84 9 Q76 16 64 13 Q66 5 58 3 Q50 13 39 15 Q30 20 28 32Z" fill="url(#' + I + '-hair)"/>' +
+      '<path d="M34 2 Q38 -26 66 -30 Q58 -22 58 -12Z M50 -10 Q64 -36 92 -26 Q78 -22 72 -12Z M68 -14 Q90 -32 110 -12 Q96 -14 88 -4Z M24 18 Q20 -2 36 -12 Q30 0 34 10Z" fill="url(#' + I + '-hair)"/>' +
+      '<path d="M26 24 Q24.5 34 27.5 42 Q29 36 31 29Z M94 24 Q95.5 34 92.5 42 Q91 36 89 29Z" fill="#241B1E" opacity=".9"/>' +
+      '<path d="M44 -10 Q56 -28 80 -24 M62 -12 Q80 -26 100 -14 M36 0 Q40 -14 54 -18" stroke="#6A5559" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".75"/></g>' +
+      '</g>' +
+      '</g></g></g>' +
+      '<g class="d-zz"><text x="96" y="6">z</text><text x="106" y="-6">z</text></g>' +
+      '<g class="d-dots"><circle cx="98" cy="10" r="3"/><circle cx="108" cy="4" r="3"/><circle cx="118" cy="-2" r="3"/></g>' +
+      '</svg>';
+  }
+
   function svg(id, skin, epoch) {
     const k = SKINS[skin] || SKINS.pearl, I = 'dos' + id;
     const acc = (ACC[epoch] || '').replace(/ID-/g, I + '-');
@@ -155,6 +208,20 @@
   @keyframes dosSalute{0%,100%{transform:rotate(0)}25%,75%{transform:rotate(-155deg)}}
   @keyframes dosShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
   @keyframes dosPoof{0%{transform:scale(1)}30%{transform:scale(.6) rotate(-20deg);filter:blur(2px)}100%{transform:scale(1) rotate(0);filter:none}}
+
+  .dos.chibi{--dg:var(--accent,#2EE6C9)}
+  .dos.chibi .ln{fill:none;stroke:#1A1214;stroke-width:2.8;stroke-linecap:round}
+  .dos.chibi .lid{stroke-width:2.6}
+  .dos.chibi .br{stroke-width:3.4}
+  .dos.chibi .m{fill:none;stroke:#6B2E24;stroke-width:2.2;stroke-linecap:round}
+  .dos.chibi .fillm{fill:#8C3A2E;stroke:#6B2E24}
+  .dos.chibi .d-cheek{fill:#FF8F80}
+  .dos.chibi .d-face{filter:none!important}
+  .dos.chibi .d-head{transform-origin:50% 95%}
+  .dos.chibi .d-hair{transform-box:fill-box;transform-origin:50% 100%;animation:hairBob 3.6s ease-in-out infinite}
+  @keyframes hairBob{0%,100%{transform:skewX(0)}50%{transform:skewX(-1.5deg)}}
+  .dos.chibi .d-dots circle,.dos.chibi .d-zz text{fill:var(--dg)}
+  .dos.chibi .d-core{fill:var(--dg)}
   @media (prefers-reduced-motion:reduce){.dos *{animation:none!important;transition:none!important}}`;
 
   const all = new Set();
@@ -165,7 +232,8 @@
     const id = ++N;
     el.classList.add('dos', 'e-' + (opt.mood || 'idle'));
     if (opt.sport) el.classList.add('sport');
-    el.innerHTML = svg(id, opt.skin || 'pearl', opt.epoch || '');
+    el.classList.add('chibi');
+    el.innerHTML = svgChibi(id);
     if (opt.glow) el.style.setProperty('--dg', opt.glow);
     const inst = {
       el, mood: opt.mood || 'idle', busy: false,
@@ -175,7 +243,7 @@
         const cls = 'r-' + name; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
         clearTimeout(this._rt); this._rt = setTimeout(() => el.classList.remove(cls), ms || { flip: 950, jump: 1250, run: 2000, dance: 2600, pace: 2500, wave: 1450, salute: 1450, shake: 520, poof: 720 }[name] || 1200);
       },
-      setEpoch(ep) { const acc = el.querySelector('.d-acc'); if (acc) acc.innerHTML = (ACC[ep] || '').replace(/ID-/g, 'dos' + id + '-'); },
+      setEpoch(ep) { return; const acc = el.querySelector('.d-acc'); if (acc) acc.innerHTML = (ACC[ep] || '').replace(/ID-/g, 'dos' + id + '-'); },
       destroy() { this.dead = true; all.delete(this); clearTimeout(this._bt); }
     };
     // моргание

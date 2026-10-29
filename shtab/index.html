@@ -24,7 +24,7 @@ body.personal .wtiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 <title>Штаб</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap">
 <style>
 /* Layout: iOS-style single column, large title, inset grouped lists, fixed bottom tab bar; content board scrolls sideways */
 :root{
@@ -1033,6 +1033,130 @@ h1[data-jp]::after{display:none!important}
 .colors button[aria-pressed="true"] i{box-shadow:0 0 0 3px var(--bg),0 0 0 5px currentColor}
 .step-k{font:800 12px "Onest",sans-serif;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
 @media (max-width:360px){.qt b{font-size:13px}.hero-hi2{font-size:26px}}
+
+/* ===== v22 «Нейро»: графит, перламутр, чиби-Асылбек ===== */
+html:root:root{
+  --bg:#F3F4F6;--surface:#FFFFFF;--surface-2:#EEF0F3;--ink:#0E1014;--muted:#6B7180;--line:#E3E6EB;--track:#E7E9EE;
+  --accent:#0FB5A0;--accent-ink:#FFFFFF;--accent-soft:#E2F6F2;--gold:#E7A93B;--burn:#E5483A;--ok:#159E6A;
+  --iri:linear-gradient(110deg,#2EE6C9 0%,#7AA7FF 45%,#C59BFF 70%,#FF9EC7 100%);
+  --glass:color-mix(in srgb,var(--surface) 78%,transparent);
+  --f-ui:"Geist","Onest",system-ui,sans-serif;--f-mono:"Geist Mono",ui-monospace,monospace;
+  --b1:var(--surface-2);--b2:var(--surface-2);--b3:var(--surface-2);--b4:var(--surface-2);--b5:var(--surface-2);--b6:var(--surface-2);
+  --dock:#0E1014;--dock-on:#FFFFFF;--dock-on-ink:#0E1014;--dock-ink:rgba(255,255,255,.62);color-scheme:light}
+@media (prefers-color-scheme: dark){html:root:root:not([data-theme="light"]){
+  --bg:#0A0B0F;--surface:#13151B;--surface-2:#1A1D25;--ink:#ECEEF2;--muted:#8B91A1;--line:#232733;--track:#232733;
+  --accent:#2EE6C9;--accent-ink:#06120F;--accent-soft:rgba(46,230,201,.12);--gold:#F5B544;--burn:#FF6B5E;--ok:#3DDC97;
+  --dock:#1A1D25;--dock-on:#ECEEF2;--dock-on-ink:#0A0B0F;color-scheme:dark}}
+html:root:root[data-theme="dark"]{
+  --bg:#0A0B0F;--surface:#13151B;--surface-2:#1A1D25;--ink:#ECEEF2;--muted:#8B91A1;--line:#232733;--track:#232733;
+  --accent:#2EE6C9;--accent-ink:#06120F;--accent-soft:rgba(46,230,201,.12);--gold:#F5B544;--burn:#FF6B5E;--ok:#3DDC97;
+  --dock:#1A1D25;--dock-on:#ECEEF2;--dock-on-ink:#0A0B0F;color-scheme:dark}
+body{font-family:var(--f-ui)!important;background:var(--bg)!important;color:var(--ink)}
+body::after{opacity:.03!important}
+h1,h2,.hero-big,.pc2-name,.big,.sheet-top h3,.pp-name,.ntitle,.chr-title,.ep-name,.q-kz,.ei-name,.wk-v,.sum-t,.qt b,.hb b,.acc>summary,.add-grid b,.hero-hi2{font-family:var(--f-ui)!important;font-weight:700!important;letter-spacing:-.025em!important}
+h1{font-size:30px!important}
+.eyebrow{font-family:var(--f-mono)!important;font-size:12px!important;letter-spacing:.06em!important;text-transform:uppercase!important;font-weight:500!important}
+.ava,.ava b{background:var(--ink)!important;color:var(--bg)!important}
+body.tab-today .ava,body.tab-today .ava b{background:#fff!important;color:#0A0B0F!important}
+.btn{font-family:var(--f-ui)}
+.btn:not(.plain):not(.ghost):not(.danger):not(.glass){background:var(--ink)!important;color:var(--bg)!important}
+.btn.ghost{background:var(--accent-soft)!important;color:var(--accent)!important}
+/* ---- герой: нейро-сфера ---- */
+.hero.neo{position:relative;overflow:hidden;background:#07080C!important;color:#fff;border-radius:0 0 34px 34px!important;padding:92px 22px 26px!important;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;box-shadow:none!important;margin-top:0}
+@media (max-width:760px){.hero.neo{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)))}}
+.orb{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.orb i{position:absolute;border-radius:50%;filter:blur(38px);opacity:.85;mix-blend-mode:screen;will-change:transform}
+.orb .o1{width:260px;height:260px;right:-40px;top:40px;background:radial-gradient(circle at 40% 40%,#2EE6C9,transparent 65%);animation:o1 16s ease-in-out infinite alternate}
+.orb .o2{width:300px;height:300px;right:30px;top:120px;background:radial-gradient(circle at 50% 50%,#6D8DFF,transparent 65%);animation:o2 19s ease-in-out infinite alternate}
+.orb .o3{width:220px;height:220px;left:-60px;top:-40px;background:radial-gradient(circle at 50% 50%,#FF8FC1,transparent 65%);opacity:.5;animation:o3 22s ease-in-out infinite alternate}
+@keyframes o1{to{transform:translate(-60px,40px) scale(1.15)}}
+@keyframes o2{to{transform:translate(30px,-50px) scale(.9)}}
+@keyframes o3{to{transform:translate(80px,60px) scale(1.2)}}
+.gridl{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:28px 28px;
+  -webkit-mask-image:radial-gradient(120% 80% at 70% 40%,#000 20%,transparent 75%);mask-image:radial-gradient(120% 80% at 70% 40%,#000 20%,transparent 75%)}
+.hero.neo .fx-canvas{z-index:-1!important;height:100%!important}
+.hero.neo .hero-row{padding:0!important;min-height:0!important;position:relative;z-index:2}
+.hero.neo .hero-text{padding-right:118px;display:flex;flex-direction:column;gap:8px}
+.ai-chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font:500 12px var(--f-mono);letter-spacing:.04em;color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:6px 11px;border-radius:999px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer}
+.ai-chip i{width:7px;height:7px;border-radius:50%;background:#2EE6C9;box-shadow:0 0 0 0 rgba(46,230,201,.6);animation:aiPing 2s infinite}
+@keyframes aiPing{0%{box-shadow:0 0 0 0 rgba(46,230,201,.55)}100%{box-shadow:0 0 0 9px rgba(46,230,201,0)}}
+.hero.neo .hero-hi2{font-size:17px!important;font-weight:500!important;color:rgba(255,255,255,.72);text-shadow:none;margin:6px 0 0}
+.neo-big{margin:0;font:700 44px/1 var(--f-ui);letter-spacing:-.04em}
+.neo-big .grad{background:var(--iri);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:iri 8s ease-in-out infinite alternate}
+.neo-big small{display:block;font:500 17px var(--f-ui);letter-spacing:-.01em;color:rgba(255,255,255,.75);margin-top:6px}
+@keyframes iri{to{background-position:100% 0}}
+.neo-sub{margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.neo-sub span{font:500 12px var(--f-mono);color:rgba(255,255,255,.8);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:4px 9px;border-radius:8px}
+.neo-sub span.late{color:#FFB3AA;border-color:rgba(255,107,94,.35);background:rgba(255,107,94,.12)}
+.hero.neo .hero-dos{position:absolute;right:6px!important;bottom:0!important;top:auto!important;width:142px!important;z-index:1}
+.hero.neo .hero-dos .dos{width:142px!important}
+.hero.neo .hero-dos::before{content:"";position:absolute;left:10%;right:10%;bottom:4px;height:40px;border-radius:50%;background:radial-gradient(closest-side,rgba(46,230,201,.45),transparent);filter:blur(6px)}
+/* ---- карточка Доса ---- */
+.sum.ai-card{display:flex!important;flex-direction:column;gap:14px;margin-top:14px!important;padding:16px!important;border-radius:24px!important;background:var(--surface)!important;border:1px solid var(--line)!important;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 16px 40px -30px rgba(0,0,0,.5)!important;position:relative;overflow:hidden}
+.sum.ai-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--iri);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none}
+.sum.ai-card .sum-say{border:0!important;padding:0!important;margin:0!important;align-items:center}
+.sum.ai-card .face{width:46px;height:46px;border-radius:50%;background:var(--surface-2);overflow:hidden;display:grid;place-items:end center}
+.sum.ai-card .face .dos{width:58px!important;margin-bottom:-14px}
+.sum.ai-card .ai-k{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:3px}
+.sum.ai-card .bubble.vn{font-size:15px!important;line-height:1.5}
+.faces{gap:8px!important}
+.faces button{border-radius:16px!important;background:var(--surface-2)!important;border:1px solid transparent!important;font:500 11px var(--f-ui)!important;color:var(--muted)!important;padding:8px 2px 8px!important;overflow:hidden}
+.faces button .mf{width:44px;height:40px;display:grid;place-items:start center;overflow:hidden}
+.faces button .dos{width:46px!important;margin-top:-2px}
+.faces button:hover{border-color:var(--accent)!important;color:var(--ink)!important}
+/* ---- плитки, командная строка ---- */
+.qt{border-radius:20px!important;background:var(--surface)!important;border:1px solid var(--line)!important;gap:6px!important;padding:14px 6px 12px!important}
+.qt .ic{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--ink);height:36px!important}
+.qt .ic svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qt b{font-size:13.5px!important;font-weight:600!important}
+.qt small{font:500 11px var(--f-mono)!important}
+.quick-add{border-radius:18px!important;background:var(--surface)!important;padding:5px 5px 5px 14px!important;position:relative}
+.quick-add::before{content:"✦";color:var(--accent);font-size:15px;margin-right:2px}
+.quick-add input{font-family:var(--f-ui)!important;font-size:15.5px!important}
+.quick-add button{background:var(--ink)!important;color:var(--bg)!important;border-radius:13px!important;font-size:20px!important}
+/* ---- аккордеоны и списки ---- */
+.acc>summary{border-radius:18px!important;font-size:16px!important;font-weight:600!important;background:var(--surface)!important}
+.acc>summary .ai{width:30px!important;height:30px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:14px!important;color:var(--accent)}
+.acc>summary .an{font-family:var(--f-mono)!important;font-weight:500!important;font-size:12px!important}
+.list{border-radius:20px!important}
+.row-title{font-weight:600!important;letter-spacing:-.01em}
+.row-sub{font-size:13.5px!important}
+.chip-late{font-family:var(--f-mono)!important;font-weight:500!important;font-size:11px!important;color:var(--burn)!important;background:color-mix(in srgb,var(--burn) 12%,transparent)!important}
+.check span{width:26px!important;height:26px!important;border-color:color-mix(in srgb,var(--ink) 22%,transparent)!important}
+.check:hover span{background:var(--accent-soft)!important;border-color:var(--accent)!important}
+.hb{border-radius:20px!important;background:var(--surface)!important}
+.hb .ic{width:40px;height:40px;border-radius:13px;background:var(--surface-2);display:grid;place-items:center}
+.hb .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hb.on{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))!important;background:color-mix(in srgb,var(--accent) 6%,var(--surface))!important}
+.hb.on .ic{background:var(--accent);color:var(--accent-ink)}
+.hb.on .st{color:var(--accent)!important}
+.dots7b i.on{background:var(--accent)!important}.dots7b i.now{box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--accent)!important}
+.hb .st{font-family:var(--f-mono)!important;font-weight:500!important;font-size:11.5px!important}
+.dpill b{font-family:var(--f-ui)!important;font-weight:600!important}
+.dpill span{font:500 11px var(--f-mono)}
+.dpill.today:not([aria-pressed="true"]) b{color:var(--accent)!important}
+.dpill.has i{background:var(--accent)!important}
+.wk-v{font-family:var(--f-mono)!important;font-weight:600!important;font-size:24px!important;letter-spacing:-.02em!important}
+.wk-b i{background:var(--accent)!important}
+.cm-k{color:var(--accent)!important;font-family:var(--f-mono)!important;font-weight:500!important}
+.chr-mini{border-radius:20px!important}
+.count{font-family:var(--f-mono)}
+.pcard{background:var(--surface)!important;border:1px solid var(--line)!important}
+.pc2-b{background:var(--ink)!important;color:var(--bg)!important}
+.pc2-emo{background:var(--surface-2)!important}
+.bt{background:var(--surface)!important;border:1px solid var(--line)!important}
+/* ---- док и кнопка ---- */
+.tabbar{background:var(--glass)!important;border:1px solid var(--line)!important;box-shadow:0 20px 40px -20px rgba(0,0,0,.45)!important;backdrop-filter:blur(20px) saturate(1.4)!important;-webkit-backdrop-filter:blur(20px) saturate(1.4)!important}
+.tab{flex-direction:row!important;color:var(--muted)!important;font-size:12.5px!important}
+.tab .tl{display:none!important}
+.tab[aria-current="page"]{color:var(--bg)!important;flex-grow:2.2!important}
+.tab[aria-current="page"] .tl{display:inline!important;font-weight:600}
+.tab-ind{background:var(--ink)!important;border-radius:999px!important;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)!important}
+.fab{background:var(--ink)!important;color:var(--bg)!important;font:600 15.5px var(--f-ui)!important;min-height:52px!important;padding:0 20px 0 16px!important;box-shadow:0 16px 34px -14px rgba(0,0,0,.6)!important}
+.fab::before{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;background:var(--iri);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.fab span{color:var(--accent)}
+.colors i{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)!important}
+@media (prefers-reduced-motion:reduce){.orb i,.neo-big .grad,.ai-chip i{animation:none!important}}
 </style>
 
 <header class="top">
@@ -1458,7 +1582,7 @@ function epColors(){const e=window.EPOCHS.current().epoch;return [...e.tones,e.L
 function soundOn(){try{return localStorage.getItem('shtab_sound')!=='0'}catch(_){return true}}
 function dosMood(){
   const t=today(),hr=new Date().getHours(),it=computeItems();const md=S.moods[t]&&S.moods[t].mood;
-  if(hr<6)return 'sleep';if(it.burn.length)return 'alert';if(!it.today.length&&doneTodayCount()>0)return 'proud';
+  if(hr<6)return 'sleep';if(it.burn.length>=4)return 'alert';if(!it.today.length&&doneTodayCount()>0)return 'proud';
   return {fire:'happy',ok:'idle',meh:'think',tired:'sleep',stress:'alert'}[md]||'idle';
 }
 function dosReact(name){[DOSX.hero,DOSX.mini,DOSX.sport].forEach(d=>{if(d&&d.el.isConnected)d.react(name)})}
@@ -1482,7 +1606,7 @@ function ensureHeroDos(){
   if(DOSX.heroEl.parentNode!==hero)hero.appendChild(DOSX.heroEl);
   DOSX.hero.setMood(dosMood());
   if(!DOSX.alerted&&computeItems().burn.length){DOSX.alerted=true;setTimeout(()=>DOSX.hero&&DOSX.hero.react('pace'),1400)}
-  if(DOSX.partHost!==hero){if(DOSX.part)DOSX.part.stop();DOSX.partHost=hero;DOSX.part=FX.particles(hero,window.SCENES.particles(epId()))}
+  if(DOSX.partHost!==hero){if(DOSX.part)DOSX.part.stop();DOSX.partHost=hero;DOSX.part=FX.particles(hero,hero.classList.contains('neo')?{kind:'sparkle',color:'#D8FFF8',n:22}:window.SCENES.particles(epId()))}
   if(window.IntersectionObserver){if(DOSX.io)DOSX.io.disconnect();DOSX.io=new IntersectionObserver(es=>document.body.classList.toggle('hero-in-view',es[0].isIntersecting&&es[0].intersectionRatio>.25),{threshold:[0,.25,.5]});DOSX.io.observe(DOSX.heroEl)}
   FX.parallax();
 }
@@ -1536,19 +1660,21 @@ function ring2(v,m){const p=m?Math.min(1,v/m):0,r=36,c=2*Math.PI*r;return'<svg v
 function accState(k,def){try{const v=JSON.parse(localStorage.getItem('shtab_acc')||'{}');return k in v?v[k]:def}catch(_){return def}}
 function accOpen(k,ic,title,n){return'<details class="acc" data-acc="'+k+'"'+(accState(k,k==='today'||k==='habits')?' open':'')+'><summary><span class="ai" aria-hidden="true">'+ic+'</span>'+title+(n!==''?'<span class="an">'+n+'</span>':'')+'</summary>'}
 addEventListener('toggle',e=>{const d=e.target;if(!d.matches||!d.matches('details.acc'))return;try{const v=JSON.parse(localStorage.getItem('shtab_acc')||'{}');v[d.dataset.acc]=d.open;localStorage.setItem('shtab_acc',JSON.stringify(v))}catch(_){}},true);
+const ICS={"content": "<path d=\"M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 17.5z\"/><path d=\"m10.5 9.5 4 2.5-4 2.5z\"/>", "sport": "<circle cx=\"15\" cy=\"4.5\" r=\"2\"/><path d=\"M8 21l3-6 3 2 1 4M11 15l1-5 4 2 2 3M12 10l-4 1-2 3\"/>", "notes": "<path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z\"/>", "money": "<circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.6 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1.1 0-2.1-.5-2.6-1.5M12 6.5V8m0 8v1.5\"/>", "projects": "<path d=\"M3 7.5A2.5 2.5 0 0 1 5.5 5h3.6l2 2.2h7.4A2.5 2.5 0 0 1 21 9.7v7.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z\"/>", "epochs": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M3.5 12h17M12 3.5c2.5 2.6 3.6 5.4 3.6 8.5S14.5 17.9 12 20.5c-2.5-2.6-3.6-5.4-3.6-8.5S9.5 6.1 12 3.5z\"/>", "run": "<circle cx=\"15\" cy=\"4.5\" r=\"2\"/><path d=\"M8 21l3-6 3 2 1 4M11 15l1-5 4 2 2 3M12 10l-4 1-2 3\"/>", "squat": "<path d=\"M5 9h14M7 7v4M17 7v4\"/><path d=\"M12 9v4l-3 4 1 3M12 13l3 4-1 3\"/>"};
+function IC(k){return'<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICS[k]||'')+'</svg>'}
 function quickTiles(w){
   const t=today(),x=S.workouts[t]||{},ws=weekStart(t);let wk=0;for(let i=0;i<7;i++)if(wdone(S.workouts[addDays(ws,i)]))wk++;
   const nn=Object.keys(S.notes||{}).length,vw=Object.values(S.videos).filter(v=>!v.example&&['script','shot','edit'].includes(v.stage)).length;
   const T=(go,ic,b,s)=>'<button class="qt" data-go="'+go+'"><span class="ic" aria-hidden="true">'+ic+'</span><b>'+b+'</b><small>'+s+'</small></button>';
-  return'<section class="qtiles" aria-label="Разделы">'+(FULL()?T('content','🎬','Контент',vw+' в работе'):T('projects','🗂','Проекты',Object.values(S.clients).filter(isActive).length+' активных'))+
-    T('sport','🏃','Спорт',wk+'/7 кардио')+T('notes','💡','Заметки',nn?nn+' '+plural(nn,'запись','записи','записей'):'пусто')+(FULL()?T('money','💰','Деньги','за месяц'):'<button class="qt" data-epochs><span class="ic" aria-hidden="true">✦</span><b>Эпохи</b><small>все 12</small></button>')+'</section>';
+  return'<section class="qtiles" aria-label="Разделы">'+(FULL()?T('content',IC('content'),'Контент',vw+' в работе'):T('projects',IC('projects'),'Проекты',Object.values(S.clients).filter(isActive).length+' активных'))+
+    T('sport',IC('sport'),'Спорт',wk+'/7 кардио')+T('notes',IC('notes'),'Заметки',nn?nn+' '+plural(nn,'запись','записи','записей'):'пусто')+(FULL()?T('money',IC('money'),'Деньги','за месяц'):'<button class="qt" data-epochs><span class="ic" aria-hidden="true">'+IC('epochs')+'</span><b>Эпохи</b><small>все 12</small></button>')+'</section>';
 }
 function habitsCount(){const x=S.workouts[today()]||{};return (wdone(x)?1:0)+(x.squats?1:0)+'/2'}
 function habitsBlock(){
   const t=today(),ws=weekStart(t),x=S.workouts[t]||{};
   const dots=f=>{let s='';for(let i=0;i<7;i++){const d=addDays(ws,i);s+='<i class="'+(f(S.workouts[d])?'on':'')+(d===t?' now':'')+'"></i>'}return'<span class="dots7b">'+s+'</span>'};
-  return'<section class="habits"><button class="hb'+(wdone(x)?' on':'')+'" data-go="sport"><span class="ic" aria-hidden="true">'+(x.cardio==='bike'?'🚲':'🏃')+'</span><b>Кардио</b><span class="st">'+(wdone(x)?(x.cardio==='bike'?'велик':'бег')+(x.min?' · '+x.min+' мин':''):'бег или велик')+'</span>'+dots(wdone)+'</button>'+
-    '<button class="hb'+(x.squats?' on':'')+'" data-squats><span class="ic" aria-hidden="true">🦵</span><b>100 приседаний</b><span class="st">'+(x.squats?'сделано':'нажми, когда сделал')+'</span>'+dots(w=>!!(w&&w.squats))+'</button></section>';
+  return'<section class="habits"><button class="hb'+(wdone(x)?' on':'')+'" data-go="sport"><span class="ic" aria-hidden="true">'+IC('run')+'</span><b>Кардио</b><span class="st">'+(wdone(x)?(x.cardio==='bike'?'велик':'бег')+(x.min?' · '+x.min+' мин':''):'бег или велик')+'</span>'+dots(wdone)+'</button>'+
+    '<button class="hb'+(x.squats?' on':'')+'" data-squats><span class="ic" aria-hidden="true">'+IC('squat')+'</span><b>100 приседаний</b><span class="st">'+(x.squats?'сделано':'нажми, когда сделал')+'</span>'+dots(w=>!!(w&&w.squats))+'</button></section>';
 }
 function openAdd(){
   openSheet(sheetTop('Добавить')+'<div class="add-grid">'+
@@ -1568,12 +1694,12 @@ function mountFaces(){
   document.querySelectorAll('[data-mf]').forEach(el=>{if(el.firstChild)return;Dos.mount(el,{epoch:'',mood:MF[el.dataset.mf]})});
   const f=document.getElementById('sayFace');if(f&&!f.firstChild){DOSX.face=Dos.mount(f,{epoch:'',mood:'happy'})}
 }
-const COLORS=[['epoch','Эпоха',null],['royal','Королевский','#2747D6'],['mint','Мята','#2F8A6E'],['sky','Небо','#3D7BD9'],['coral','Коралл','#D9573F'],['rose','Роза','#B9507A'],['honey','Мёд','#B7862A'],['graphite','Графит','#3A3A48']];
+const COLORS=[['aurora','Аврора',null],['ice','Лёд','#38BDF8'],['lime','Лайм','#84CC16'],['amber','Янтарь','#F59E0B'],['coral','Коралл','#FB6F5B'],['violet','Фиалка','#8B7CF6']];
 function applyColor(){let st=document.getElementById('colorStyle');if(!st){st=document.createElement('style');st.id='colorStyle';document.head.appendChild(st)}
   const c=COLORS.find(x=>x[0]===S.settings.color);st.textContent=c&&c[2]?'html:root,html:root:not([data-theme="light"]),html:root[data-theme="dark"]{--accent:'+c[2]+';--accent-soft:color-mix(in srgb,'+c[2]+' 14%,var(--bg))}':''}
-function colorPicker(cur){return'<div class="colors" role="radiogroup" aria-label="Цвет приложения">'+COLORS.map(([k,l,c])=>'<button type="button" role="radio" data-color="'+k+'" aria-pressed="'+((cur||'epoch')===k)+'" aria-checked="'+((cur||'epoch')===k)+'" style="color:'+(c||'var(--gold)')+'"><i style="background:'+(c||'conic-gradient(#1E5AA8,#B5652B,#8E1F2A,#1C7A55,#1E5AA8)')+'"></i>'+l+'</button>').join('')+'</div>'}
+function colorPicker(cur){return'<div class="colors" role="radiogroup" aria-label="Цвет приложения">'+COLORS.map(([k,l,c])=>'<button type="button" role="radio" data-color="'+k+'" aria-pressed="'+((cur||'aurora')===k)+'" aria-checked="'+((cur||'aurora')===k)+'" style="color:'+(c||'var(--gold)')+'"><i style="background:'+(c||'linear-gradient(135deg,#2EE6C9,#7AA7FF,#FF9EC7)')+'"></i>'+l+'</button>').join('')+'</div>'}
 function openWelcome(){
-  let color=S.settings.color||'epoch';
+  let color=S.settings.color||'aurora';
   openSheet('<div class="welcome form"><span class="wl-dos" id="wlDos"></span><span class="step-k">Знакомство</span><h3 id="sheetTitle" style="margin:0;font:800 24px Nunito,sans-serif">Привет! Я Дос</h3>'+
     '<p class="note" style="font-size:15px;padding:0">Твой напарник в Штабе. Здесь всё в одном месте: дела, спорт, настроение, заметки, а каждые 3 дня — новая эпоха истории.</p>'+
     '<div>'+flabel('Как тебя зовут?')+'<div class="group">'+fld('w_name','Имя',S.settings.name||'','maxlength="40" autocomplete="given-name"')+'</div></div>'+
@@ -1592,29 +1718,27 @@ function renderToday(){
   const md=S.moods[t]&&S.moods[t].mood;const MF={fire:'happy',ok:'idle',meh:'idle',tired:'sleep',stress:'alert'};
   const mood=md?MF[md]:new Date().getHours()<6?'sleep':it.burn.length?'alert':!left?'happy':'idle';
   const EPc=window.EPOCHS.current(),EP=EPc.epoch;
-  const X=xpInfo();const dn=new Date(),hm=pad(dn.getHours())+':'+pad(dn.getMinutes());
-  h+='<section class="hero scene epoch ani mini" style="--hero-ground:'+EP.art.near+'">'+window.EPOCHS.art()+'<div class="tod tod-'+phaseNow()+'"></div>'+
-    '<div class="hero-row"><div class="hero-text"><button class="pill-ep" data-epochs>'+EPICON[EP.id]+' '+esc(EP.name)+' · день '+(EPc.day+1)+'/3</button>'+
-    '<p class="hero-hi2">'+greet()+(S.settings.name?',<br>'+esc(S.settings.name):'')+'</p>'+
-    '<button class="pill-lv" data-epochs><span class="r"><b>Ур. '+X.lvl+'</b><span>'+RANKS[Math.min(RANKS.length-1,X.lvl-1)]+'</span></span><span class="bar"><i style="width:'+(X.cur/X.need*100).toFixed(1)+'%"></i></span></button>'+
+  const X=xpInfo();
+  h+='<section class="hero scene neo"><div class="orb" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div><div class="gridl" aria-hidden="true"></div>'+
+    '<div class="hero-row"><div class="hero-text"><button class="ai-chip" data-epochs><i></i>'+esc(EP.name)+' · день '+(EPc.day+1)+'/3</button>'+
+    '<p class="hero-hi2">'+greet()+(S.settings.name?', '+esc(S.settings.name):'')+'</p>'+
+    '<p class="neo-big">'+(left?'<span class="grad">'+left+' '+plural(left,'дело','дела','дел')+'</span><small>на сегодня</small>':'<span class="grad">Всё чисто</span><small>день закрыт</small>')+'</p>'+
+    '<p class="neo-sub">'+(it.burn.length?'<span class="late">'+it.burn.length+' '+plural(it.burn.length,'горит','горят','горят')+'</span>':'')+'<span>'+done+'/'+tot+' сделано</span><span>ур. '+X.lvl+' · '+X.cur+'/'+X.need+' xp</span></p>'+
     '</div></div></section>'+
-    '<section class="sum"><div><div class="sum-d">'+esc(parse(t).toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'}).replace(/^./,c=>c.toUpperCase()))+' · '+hm+'</div>'+
-    '<div class="sum-t">'+(left?(it.burn.length?'<span class="late">'+it.burn.length+' '+plural(it.burn.length,'горит','горят','горят')+'</span> и ещё '+it.today.length+' на сегодня':left+' '+plural(left,'дело','дела','дел')+' на сегодня'):'<span class="ok">Всё закрыто. Время для себя.</span>')+'</div></div>'+
-    '<div class="ring2">'+ring2(done,tot)+'<b>'+done+'<small>из '+tot+'</small></b></div>'+
-    '<div class="sum-say"><span class="face" id="sayFace"></span><div class="bubble vn" aria-live="polite"><span class="bubble-name">Дос</span><span id="botSay"></span><span class="caret" aria-hidden="true"></span><span class="vn-next" aria-hidden="true"></span>'+
+    '<section class="sum ai-card"><div class="sum-say"><span class="face" id="sayFace"></span><div class="bubble vn" aria-live="polite"><span class="ai-k">Дос</span><span class="bubble-name">Дос</span><span id="botSay"></span><span class="caret" aria-hidden="true"></span><span class="vn-next" aria-hidden="true"></span>'+
     (md?'<button class="say-mood" data-remood aria-label="Сменить настроение">'+MOODS[md].e+'</button>':'')+'</div></div>'+
     (md?'':'<div class="faces" role="group" aria-label="Как настроение">'+Object.entries(MOODS).map(([k,m])=>'<button data-mood="'+k+'" aria-label="'+m.l+'"><span class="mf" data-mf="'+k+'"></span>'+m.l+'</button>').join('')+'</div>')+'</section>'+
     quickTiles(w)+
     '<form class="quick-add" id="quickAdd"><label class="sr" for="qa">Быстрая запись</label><input id="qa" placeholder="Быстро записать мысль или задачу…" autocomplete="off"><button type="submit" aria-label="Записать">+</button></form>';h+=dayStrip();
   const sel=S.selDay&&S.selDay!==t?S.selDay:null;
   if(sel){h+=dayPlan(sel)}else{
-  h+=accOpen('today','✓','Дела на сегодня',(it.today.filter(x=>x.kind!=='sport').length+it.burn.length)||'');
+  h+=accOpen('today','●','Дела на сегодня',(it.today.filter(x=>x.kind!=='sport').length+it.burn.length)||'');
   h+='<section><div class="sec-head"><h2>Сегодня'+(it.today.length?' <span class="count">'+it.today.length+'</span>':'')+'</h2><button class="btn sm ghost" data-newtask>+ Задача</button></div>';
   const tl=it.today.filter(x=>x.kind!=='sport');
   if(tl.length||it.burn.length)h+='<ul class="list">'+it.burn.map((x,i)=>rowHTML(x,i,true)).join('')+tl.map((x,i)=>rowHTML(x,i,false)).join('')+'</ul>';
   else if(!tl.length&&!it.burn.length)h+='<div class="card empty"><b>Всё чисто.</b>'+(it.tomorrow.length?'Завтра: '+esc(it.tomorrow.slice(0,3).map(x=>x.title).join(', '))+(it.tomorrow.length>3?' и ещё '+(it.tomorrow.length-3):'')+'.':'И на завтра пусто. Редкая роскошь.')+'</div>';
   h+='</section></details>';}
-  h+=accOpen('habits','◎','Привычки',habitsCount())+habitsBlock()+'</details>';
+  h+=accOpen('habits','◐','Привычки',habitsCount())+habitsBlock()+'</details>';
   {const cb=calBlock();if(cb)h+=accOpen('cal','▦','Календарь','')+cb+'</details>'}
   h+=accOpen('chr','✦','Хроника эпохи','')+chronicleMini()+'</details>';
   // week
