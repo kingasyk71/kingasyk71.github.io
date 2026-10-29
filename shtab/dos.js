@@ -107,6 +107,89 @@
       '</svg>';
   }
 
+
+  /* Оригинальный персонаж «Дос»: девушка-напарница. Тёмно-синее каре с бирюзовым окрашиванием снизу,
+     звёздная заколка, тёплые янтарные глаза, графитовое худи с бирюзовыми шнурками. Портрет по пояс. */
+  function svgGirl(id) {
+    const I = 'dos' + id, O = '#241A2A';
+    const eyeOpen = (cx, look) => {
+      const lx = look ? look[0] : 0, ly = look ? look[1] : 0;
+      return '<path d="M' + (cx - 14) + ' 102 Q' + cx + ' 86 ' + (cx + 14) + ' 101 L' + (cx + 13) + ' 113 Q' + cx + ' 122 ' + (cx - 13) + ' 113Z" fill="#FFFDFB"/>' +
+        '<ellipse cx="' + (cx + lx) + '" cy="' + (106 + ly) + '" rx="9.6" ry="12" fill="url(#' + I + '-iris)"/>' +
+        '<ellipse cx="' + (cx + lx) + '" cy="' + (108 + ly) + '" rx="4.6" ry="6" fill="#3A1608"/>' +
+        '<ellipse cx="' + (cx + lx + 3.6) + '" cy="' + (100.5 + ly) + '" rx="3.6" ry="4.2" fill="#fff"/>' +
+        '<circle cx="' + (cx + lx - 3.6) + '" cy="' + (112 + ly) + '" r="1.7" fill="#fff" opacity=".9"/>' +
+        '<path d="M' + (cx - 7) + ' ' + (114 + ly) + ' q7 3 14 0" stroke="#FFC48A" stroke-width="1.6" fill="none" opacity=".8"/>' +
+        '<path d="M' + (cx - 16) + ' 103 Q' + cx + ' 84 ' + (cx + 16) + ' 101 L' + (cx + 18) + ' 97 Q' + cx + ' 80 ' + (cx - 15) + ' 98Z" fill="' + O + '"/>' +
+        '<path d="M' + (cx + (cx < 100 ? -16 : 16)) + ' ' + (cx < 100 ? 103 : 101) + ' l' + (cx < 100 ? -4 : 4) + ' -3" stroke="' + O + '" stroke-width="2.4" stroke-linecap="round"/>' +
+        '<path d="M' + (cx - 9) + ' 120 Q' + cx + ' 123 ' + (cx + 9) + ' 120" stroke="' + O + '" stroke-width="1.3" fill="none" opacity=".7"/>';
+    };
+    const L = 80, R = 120;
+    const browN = '<path class="gl" d="M68 84 Q78 78 90 82 M110 82 Q122 78 132 84"/>';
+    const eyes =
+      '<g class="d-eyes">' +
+      '<g class="ey ey-idle">' + eyeOpen(L) + eyeOpen(R) + browN + '</g>' +
+      '<g class="ey ey-think">' + eyeOpen(L, [-3, -3]) + eyeOpen(R, [-3, -3]) + '<path class="gl" d="M68 82 Q78 77 90 81 M110 80 Q122 76 132 82"/></g>' +
+      '<g class="ey ey-happy"><path class="gl gk" d="M67 108 Q80 94 93 108 M107 108 Q120 94 133 108"/>' + browN + '</g>' +
+      '<g class="ey ey-proud"><path class="gl gk" d="M67 106 Q80 112 93 104 M107 104 Q120 112 133 106"/>' + browN + '<path d="M146 70 l2 5 5 .6-3.8 3.3 1.2 5-4.4-2.6-4.4 2.6 1.2-5-3.8-3.3 5-.6z" fill="#F5C451"/></g>' +
+      '<g class="ey ey-alert"><path d="M66 104 L94 104 L93 113 Q80 121 67 113Z" fill="#FFFDFB"/><path d="M106 104 L134 104 L133 113 Q120 121 107 113Z" fill="#FFFDFB"/>' +
+      '<ellipse cx="80" cy="110" rx="8" ry="7.5" fill="url(#' + I + '-iris)"/><ellipse cx="120" cy="110" rx="8" ry="7.5" fill="url(#' + I + '-iris)"/><circle cx="82" cy="108" r="2.4" fill="#fff"/><circle cx="122" cy="108" r="2.4" fill="#fff"/>' +
+      '<path d="M64 104 L95 103 M105 103 L136 104" stroke="' + O + '" stroke-width="4.2" stroke-linecap="round"/><path class="gl" d="M68 88 L90 95 M132 88 L110 95"/>' +
+      '<path d="M140 64 l6 6 M146 64 l-6 6 M137 67 h12" stroke="#E5483A" stroke-width="2.2" stroke-linecap="round" opacity=".85"/></g>' +
+      '<g class="ey ey-cry"><path class="gl gk" d="M68 98 L88 106 L68 114 M132 98 L112 106 L132 114"/><path class="gl" d="M68 88 L90 84 M132 88 L110 84"/>' +
+      '<path class="tear" d="M72 116 q-3 10 -1 22 M128 116 q3 10 1 22" stroke="#8FD8FF" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/>' +
+      '<g class="shiver" stroke="' + O + '" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M44 70 q3 -4 0 -8 q-3 -4 0 -8"/><path d="M158 70 q3 -4 0 -8 q-3 -4 0 -8"/><path d="M40 120 q3 -4 0 -8 q-3 -4 0 -8"/><path d="M162 120 q3 -4 0 -8 q-3 -4 0 -8"/><path d="M92 26 q4 -3 8 0 q4 3 8 0"/></g></g>' +
+      '<g class="ey ey-sleep"><path class="gl gk" d="M68 108 Q80 114 92 108 M108 108 Q120 114 132 108"/><path class="gl" d="M68 86 Q78 82 90 85 M110 85 Q122 82 132 86"/></g>' +
+      '</g>' +
+      '<g class="d-mouth">' +
+      '<path class="m m-idle" d="M95 136 Q100 139 105 136"/>' +
+      '<path class="m m-think" d="M96 137 Q100 135 104 137"/>' +
+      '<path class="m m-happy mf" d="M91 133 Q100 145 109 133Z"/>' +
+      '<path class="m m-proud" d="M93 135 Q100 140 108 133"/>' +
+      '<path class="m m-alert" d="M96 138 Q100 135 104 138"/>' +
+      '<path class="m m-cry mf" d="M88 134 q4 -4 8 0 q4 4 8 0 q4 -4 8 0 L110 144 Q100 150 90 144Z"/>' +
+      '<path class="m m-sleep" d="M97 137 h6"/>' +
+      '</g>';
+    return '<svg class="dos-svg" viewBox="20 -6 160 236" aria-hidden="true"><defs>' +
+      '<linearGradient id="' + I + '-hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E3A5E"/><stop offset=".55" stop-color="#1C2236"/><stop offset="1" stop-color="#151827"/></linearGradient>' +
+      '<linearGradient id="' + I + '-dye" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C2236" stop-opacity="0"/><stop offset=".45" stop-color="#1FB8A6"/><stop offset="1" stop-color="#6FF2DD"/></linearGradient>' +
+      '<linearGradient id="' + I + '-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEDE1"/><stop offset="1" stop-color="#FFDCC8"/></linearGradient>' +
+      '<radialGradient id="' + I + '-iris" cx=".5" cy=".75" r=".8"><stop offset="0" stop-color="#FFB25B"/><stop offset=".45" stop-color="#C9652A"/><stop offset="1" stop-color="#4A1C0C"/></radialGradient>' +
+      '<linearGradient id="' + I + '-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3E4A"/><stop offset="1" stop-color="#1E2028"/></linearGradient>' +
+      '<radialGradient id="' + I + '-shadow"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>' +
+      '</defs>' +
+      '<ellipse class="d-shadow" cx="100" cy="226" rx="58" ry="7" fill="url(#' + I + '-shadow)"/>' +
+      '<g class="d-all"><g class="d-float"><g class="d-react">' +
+      // задние волосы с окрашиванием
+      '<g class="d-hairback"><path d="M44 96 Q40 40 100 30 Q160 40 156 96 Q160 150 150 176 Q132 168 128 150 L72 150 Q68 168 50 176 Q40 150 44 96Z" fill="url(#' + I + '-hair)" stroke="' + O + '" stroke-width="2"/>' +
+      '<path d="M50 176 Q42 150 45 120 Q58 150 72 150 Q68 168 50 176Z M150 176 Q158 150 155 120 Q142 150 128 150 Q132 168 150 176Z" fill="url(#' + I + '-dye)"/></g>' +
+      // худи
+      '<path d="M28 236 Q30 192 62 180 Q80 172 100 172 Q120 172 138 180 Q170 192 172 236Z" fill="url(#' + I + '-hood)" stroke="' + O + '" stroke-width="2"/>' +
+      '<path d="M62 180 Q72 200 100 202 Q128 200 138 180 Q124 190 100 190 Q76 190 62 180Z" fill="#2B2F3A" stroke="' + O + '" stroke-width="1.6"/>' +
+      '<path d="M88 192 Q86 210 88 226 M112 192 Q114 210 112 226" stroke="#5FE6D2" stroke-width="2.6" stroke-linecap="round" fill="none"/><rect x="85.5" y="224" width="5" height="8" rx="1.5" fill="#C9D2DC"/><rect x="109.5" y="224" width="5" height="8" rx="1.5" fill="#C9D2DC"/>' +
+      '<g class="d-arm l"><path d="M36 236 Q38 214 52 204" stroke="#1E2028" stroke-width="2" fill="none" opacity=".5"/></g><g class="d-arm r"><path d="M164 236 Q162 214 148 204" stroke="#1E2028" stroke-width="2" fill="none" opacity=".5"/><g class="d-bell"></g></g>' +
+      '<circle class="d-core" cx="142" cy="214" r="3"/>' +
+      // шея
+      '<path d="M88 146 L88 176 Q100 184 112 176 L112 146Z" fill="#F6CDB8" stroke="' + O + '" stroke-width="1.6"/>' +
+      '<g class="d-head">' +
+      // лицо
+      '<path d="M58 92 Q58 50 100 48 Q142 50 142 92 Q142 126 116 148 Q100 160 84 148 Q58 126 58 92Z" fill="url(#' + I + '-skin)" stroke="' + O + '" stroke-width="2"/>' +
+      '<path d="M60 96 Q62 76 72 66 L64 120Z M140 96 Q138 76 128 66 L136 120Z" fill="#F7D2BF" opacity=".8"/>' +
+      '<g class="d-cheek"><ellipse cx="72" cy="126" rx="9" ry="5"/><ellipse cx="128" cy="126" rx="9" ry="5"/><path d="M66 124 l3 -5 M71 125 l3 -5 M76 125 l3 -5 M122 125 l3 -5 M127 125 l3 -5 M132 124 l3 -5" stroke="#F0727A" stroke-width="1.2" stroke-linecap="round"/></g>' +
+      '<g class="d-face">' + eyes + '<path d="M101 118 q1.5 3 -1 4" stroke="#D9967A" stroke-width="1.5" fill="none" stroke-linecap="round"/></g>' +
+      // чёлка и пряди
+      '<g class="d-hair"><path d="M54 98 Q50 52 82 40 Q100 34 120 40 Q150 50 146 98 Q143 84 135 75 Q134 87 129 95 Q126 80 119 69 Q117 84 111 93 Q107 76 100 65 Q97 81 92 93 Q89 77 82 67 Q79 83 73 92 Q71 81 66 75 Q59 85 54 98Z" fill="url(#' + I + '-hair)" stroke="' + O + '" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="M56 94 Q52 130 60 162 Q66 140 70 118 Q66 104 64 94Z M144 94 Q148 130 140 162 Q134 140 130 118 Q134 104 136 94Z" fill="url(#' + I + '-hair)" stroke="' + O + '" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="M60 162 Q62 150 64 140 M140 162 Q138 150 136 140" stroke="#5FE6D2" stroke-width="3" stroke-linecap="round" opacity=".9"/>' +
+      '<path d="M70 54 Q100 40 132 54" stroke="#7E8FC4" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".55"/><path d="M78 50 l4 6 M96 45 l2 7 M116 46 l-1 7" stroke="#9AA9DA" stroke-width="2" stroke-linecap="round" opacity=".6"/>' +
+      '<g transform="translate(130 64) rotate(12)"><path d="M0 -9 l2.6 5.6 6.2 .7 -4.6 4.2 1.3 6.1 -5.5 -3.2 -5.5 3.2 1.3 -6.1 -4.6 -4.2 6.2 -.7z" fill="#5FE6D2" stroke="' + O + '" stroke-width="1.4" stroke-linejoin="round"/></g></g>' +
+      '</g>' +
+      '</g></g></g>' +
+      '<g class="d-zz"><text x="150" y="40">z</text><text x="162" y="26">z</text></g>' +
+      '<g class="d-dots"><circle cx="150" cy="40" r="4"/><circle cx="162" cy="30" r="4"/><circle cx="174" cy="20" r="4"/></g>' +
+      '</svg>';
+  }
+
   function svg(id, skin, epoch) {
     const k = SKINS[skin] || SKINS.pearl, I = 'dos' + id;
     const acc = (ACC[epoch] || '').replace(/ID-/g, I + '-');
@@ -222,6 +305,29 @@
   @keyframes hairBob{0%,100%{transform:skewX(0)}50%{transform:skewX(-1.5deg)}}
   .dos.chibi .d-dots circle,.dos.chibi .d-zz text{fill:var(--dg)}
   .dos.chibi .d-core{fill:var(--dg)}
+
+  .dos.girl{--dg:var(--accent,#2EE6C9);aspect-ratio:160/236}
+  .dos.girl .gl{fill:none;stroke:#241A2A;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .dos.girl .gk{stroke-width:3.4}
+  .dos.girl .m{fill:none;stroke:#7A2E35;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .dos.girl .mf{fill:#B5404C;stroke:#5A1E26}
+  .dos.girl .d-cheek{opacity:.35;transition:opacity .3s}
+  .dos.girl .d-cheek ellipse{fill:#FF8FA0}
+  .dos.girl.e-happy .d-cheek,.dos.girl.e-proud .d-cheek,.dos.girl.e-cry .d-cheek,.dos.girl.e-alert .d-cheek{opacity:.9}
+  .dos.e-cry .ey-cry,.dos.e-cry .m-cry{display:inline}
+  .dos.girl .d-face{filter:none!important}
+  .dos.girl .d-head{transform-origin:50% 100%}
+  .dos.girl .d-hair,.dos.girl .d-hairback{transform-box:fill-box;transform-origin:50% 0;animation:girlHair 4s ease-in-out infinite}
+  .dos.girl .d-hairback{animation-delay:-.4s}
+  @keyframes girlHair{0%,100%{transform:rotate(0)}50%{transform:rotate(.8deg)}}
+  .dos.girl .tear{stroke-dasharray:4 6;animation:tear .5s linear infinite}
+  @keyframes tear{to{stroke-dashoffset:-20}}
+  .dos.girl .shiver{animation:shiver .18s steps(2) infinite}
+  @keyframes shiver{50%{transform:translateX(1.5px)}}
+  .dos.girl.e-cry .d-react{animation:girlShake .22s linear infinite}
+  @keyframes girlShake{0%,100%{transform:translateX(0)}50%{transform:translateX(1.2px)}}
+  .dos.girl .d-zz text{fill:var(--dg);font:700 16px system-ui}
+  .dos.girl .d-dots circle,.dos.girl .d-core{fill:var(--dg)}
   @media (prefers-reduced-motion:reduce){.dos *{animation:none!important;transition:none!important}}`;
 
   const all = new Set();
@@ -232,8 +338,8 @@
     const id = ++N;
     el.classList.add('dos', 'e-' + (opt.mood || 'idle'));
     if (opt.sport) el.classList.add('sport');
-    el.classList.add('chibi');
-    el.innerHTML = svgChibi(id);
+    el.classList.add('girl');
+    el.innerHTML = svgGirl(id);
     if (opt.glow) el.style.setProperty('--dg', opt.glow);
     const inst = {
       el, mood: opt.mood || 'idle', busy: false,
