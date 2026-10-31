@@ -376,6 +376,9 @@ body.no-tabs .savebar{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 .cal button.good .p{color:var(--gold-ink)}
 details.more summary .count:empty{display:none}
 
+.pushb{margin-top:14px;background:var(--surface);border:1px solid var(--night-line);border-left:4px solid var(--gold);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
+.pushb p{font-size:14px;color:var(--ink-2)}
+.pushb .btnrow .btn{flex:0 0 auto}
 .pwtxt{font-family:ui-monospace,Menlo,monospace;letter-spacing:.02em}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -1068,7 +1071,7 @@ function viewNow(){
     h('header',{class:'top'},h('span',{class:'mark',html:LOGO}),h('div',{class:'tt'},h('h1',{text:'Смена'}),h('div',{class:'sub',text:fmtLong(date)})),
       b?h('button',{class:'who','aria-label':'Вы: '+bName(b)+'. Сменить',onclick:whoSheet,text:bName(b)}):null));
   if(mgr&&cfg.points.length>1)hero.append(seg(cfg.points.map(p=>({v:p.id,l:shortP(p.name)})),pid,val=>{S.point=val;LS.set('point',val);schedule();},'Точка','dark'));
-  v.append(hero);
+  v.append(hero);{const pb=pushBanner();if(pb)v.append(pb);}
   const busyCk=cfg.points.find(p=>S.busy['ck'+p.id]);
   if(!pid){
     hero.append(h('p',{class:'me-line',text:'Начните смену: селфи у бара той точки, где вы сегодня. Кофемашина должна быть в кадре.'}));
@@ -1221,7 +1224,7 @@ function attention(){
   return out.sort((a,b)=>b.at-a.at);
 }
 function viewMon(){
-  const v=h('div',{});v.append(topBar('Мониторинг',fmtLong(S.today)));
+  const v=h('div',{});v.append(topBar('Мониторинг',fmtLong(S.today)));{const pb=pushBanner();if(pb)v.append(pb);}
   const cards=h('div',{class:'pcards'});
   for(const p of S.cfg.points){const doc=S.days[p.id];const plan=planOf(p.id,S.today,doc);const marks=doc?.marks||{};const st=pointStatus(p);
     cards.append(h('button',{class:'pcard','aria-label':`${p.name}: ${st.map(x=>x[1]).join(', ')}. Открыть день`,onclick:()=>daySheet(p.id,S.today)},
@@ -1595,8 +1598,8 @@ function viewLogin(){
 }
 function whoSheet(){
   openSheet(S.me.name,[h('p',{class:'hint',text:(ROLE[S.me.role]||'')+' · вход выполнен на этом телефоне.'}),
-    h('p',{class:'hint',text:'Забыли пароль — попросите владельца выдать новый в «Настройки → Сотрудники и пароли».'}),
-    h('button',{class:'btn ghost block',onclick:async()=>{closeSheet();await sb.auth.signOut();location.reload();}},'Выйти')]);
+    h('p',{class:'hint',text:'Забыли пароль — попросите владельца выдать новый в «Настройки → Сотрудники и пароли».'}),...pushRow(),
+    h('button',{class:'btn ghost block',onclick:async()=>{closeSheet();try{const r=await navigator.serviceWorker?.getRegistration();const sub=await r?.pushManager.getSubscription();if(sub){await rpc('push_unsubscribe',{p_endpoint:sub.endpoint});await sub.unsubscribe();}}catch(e){}await sb.auth.signOut();location.reload();}},'Выйти')]);
 }
 function pickSheet(){toast('Сначала войдите под своим именем.');}
 
@@ -1639,6 +1642,45 @@ function staffEdit(x){
     h('p',{class:'hint',text:'Пароль сейчас: '+(S.pw?.[x.login]||'—')+'. Новый пароль сразу отключит старый.'}),err,
     h('div',{class:'btnrow'},h('button',{class:'btn ghost',onclick:newPw},'Новый пароль'),h('button',{class:'btn gold',onclick:save},'Сохранить'))]);
 }
+
+/* ---------- push ---------- */
+const VAPID='BBj08zU9NRH3S_SgFzxDgURAgnWWRx0RsdLlA1RHrtHc26tSGz87fQM6zzMEW-0pXePxJZMwjxlI-uBLu6QDHas';
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isStandalone=()=>(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+const pushOk=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+function b64u(s){const p='='.repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(b,c=>c.charCodeAt(0));}
+async function pushSub(){const reg=await navigator.serviceWorker.register('sw.js');await navigator.serviceWorker.ready;
+  let sub=await reg.pushManager.getSubscription();if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(VAPID)});
+  await rpc('push_subscribe',{p_sub:sub.toJSON(),p_ua:navigator.userAgent});S.pushOn=true;schedule();}
+async function enablePush(){
+  if(!pushOk()){toast(isIOS()&&!isStandalone()?'На iPhone: «Поделиться» → «На экран Домой», затем откройте трекер с иконки и включите уведомления.':'Этот браузер не умеет уведомления. Откройте трекер в Chrome или Safari.');return;}
+  try{const perm=await Notification.requestPermission();
+    if(perm!=='granted'){toast('Уведомления запрещены. Разрешите их для этого сайта в настройках телефона.');schedule();return;}
+    await pushSub();LS.set('pushHide','1');toast('Уведомления включены');}
+  catch(e){toast('Не получилось включить уведомления: '+(e.message||e.code||e));}
+}
+async function syncPush(){if(!pushOk()||Notification.permission!=='granted')return;try{await pushSub();}catch(e){}}
+async function testPush(){
+  try{const {data:{session}}=await sb.auth.getSession();
+    const r=await fetch(SB_URL+'/functions/v1/push?test=1',{method:'POST',headers:{Authorization:'Bearer '+session.access_token,apikey:SB_KEY}});
+    const j=await r.json();toast(j.sent?'Отправлено — уведомление придёт через пару секунд':'На этом телефоне уведомления не включены. Нажмите «Включить».');}
+  catch(e){toast('Не получилось отправить проверку. Проверьте интернет.');}
+}
+function pushState(){if(!pushOk())return isIOS()&&!isStandalone()?'ios':'none';return S.pushOn&&Notification.permission==='granted'?'on':Notification.permission;}
+function pushBanner(){
+  const st=pushState();if(st==='on'||st==='denied'||st==='none'||LS.get('pushHide')==='1')return null;
+  const hide=()=>{LS.set('pushHide','1');schedule();};
+  if(st==='ios')return h('div',{class:'pushb'},h('b',{text:'Уведомления на iPhone'}),
+    h('p',{text:'Нажмите «Поделиться» внизу Safari → «На экран Домой». Откройте трекер с новой иконки и включите уведомления.'}),
+    h('div',{class:'btnrow'},h('button',{class:'btn ghost sm',onclick:hide},'Понятно')));
+  return h('div',{class:'pushb'},h('b',{text:'Включите уведомления'}),
+    h('p',{text:isMgr()?'Приходы, опоздания, проблемы, запросы без ответа и итог дня — сразу на телефон.':'Напомним о сроках, отчётах в 12, 16 и 20 и о запросах владельца.'}),
+    h('div',{class:'btnrow'},h('button',{class:'btn gold sm',onclick:enablePush},'Включить'),h('button',{class:'btn ghost sm',onclick:hide},'Позже')));
+}
+function pushRow(){const st=pushState();
+  const txt=st==='on'?'Уведомления включены на этом телефоне':st==='denied'?'Уведомления запрещены в настройках телефона для этого сайта':st==='ios'?'На iPhone уведомления работают, если трекер добавлен на экран Домой':st==='none'?'Этот браузер не поддерживает уведомления':'Уведомления выключены';
+  return [h('p',{class:'hint',text:txt}),h('div',{class:'btnrow'},st==='default'||st==='ios'?h('button',{class:'btn gold',onclick:()=>{closeSheet();enablePush();}},'Включить уведомления'):null,
+    st==='on'?h('button',{class:'btn ghost',onclick:()=>{closeSheet();testPush();}},'Проверить уведомление'):null)];}
 
 /* ---------- корень ---------- */
 function goTab(k){S.tab=k;if(k==='set'){S.draft=clone(S.cfg);S.setBuilt=false;S.setSec=null;}closeSheet();render();window.scrollTo(0,0);}
@@ -1713,6 +1755,7 @@ async function boot(){
   DB.collection('problems').where('status','==','open').onSnapshot(q=>{S.problems=q.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.at-a.at);schedule();},()=>{});
   DB.doc('state/buy').onSnapshot(s=>{S.buy=s.exists?s.data():{};schedule();},()=>{});
   sb.auth.onAuthStateChange(ev=>{if(ev==='SIGNED_OUT')location.reload();});
+  syncPush();if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.type==='refresh')refreshAll();});
   setInterval(tick,30000);setInterval(refreshAll,60000);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){tick();refreshAll();}});
 }
