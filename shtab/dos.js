@@ -335,10 +335,8 @@
   .dos.pic .d-tilt{transform-origin:50% 100%;transform:rotate(calc(var(--lx,0) * 2.2deg));transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
   .dos.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .38s ease,filter .5s;user-select:none;-webkit-user-drag:none;pointer-events:none;
     -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 9%,#000 80%,transparent);mask-image:linear-gradient(to bottom,transparent 0,#000 9%,#000 80%,transparent)}
-  .dos.pic .p-idle{opacity:1}
-  .dos.pic.e-think .p-idle,.dos.pic.e-alert .p-idle,.dos.pic.e-cry .p-idle{opacity:0}
-  .dos.pic.e-think .p-think,.dos.pic.e-alert .p-alert,.dos.pic.e-cry .p-alert{opacity:1}
-  .dos.pic.e-sleep img{filter:brightness(.82) saturate(.8)}
+  .dos.pic.e-idle .p-idle,.dos.pic.e-happy .p-happy,.dos.pic.e-proud .p-proud,.dos.pic.e-think .p-think,.dos.pic.e-alert .p-alert,.dos.pic.e-cry .p-cry,.dos.pic.e-sleep .p-sleep{opacity:1}
+  
   .dos.pic.e-sleep .d-float{animation-duration:6.5s}
   .dos.pic.e-happy .d-float,.dos.pic.e-proud .d-float{animation:picBounce 2.2s ease-in-out infinite}
   .dos.pic.e-cry .d-react{animation:girlShake .22s linear infinite}
@@ -366,8 +364,9 @@
     const ART = window.DOS_ART;
     if (ART && ART.idle) {
       el.classList.add('pic');
-      const im = k => '<img class="p-' + k + '" src="' + (ART[k] || ART.idle) + '" alt="" draggable="false" decoding="async">';
-      el.innerHTML = '<div class="d-all"><div class="d-float"><div class="d-react"><div class="d-tilt">' + im('idle') + im('think') + im('alert') +
+      const FB = { happy: 'idle', proud: 'idle', sleep: 'idle', cry: 'alert' };
+      const im = k => '<img class="p-' + k + '" src="' + (ART[k] || ART[FB[k]] || ART.idle) + '" alt="" draggable="false" decoding="async">';
+      el.innerHTML = '<div class="d-all"><div class="d-float"><div class="d-react"><div class="d-tilt">' + ['idle', 'happy', 'proud', 'think', 'alert', 'cry', 'sleep'].map(im).join('') +
         '</div></div></div><div class="p-zz"><i>z</i><i>z</i></div><div class="p-dots"><i></i><i></i><i></i></div></div>';
     } else {
       el.classList.add('girl');
