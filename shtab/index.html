@@ -3467,10 +3467,13 @@ html body .fab::before,html body .fab::after{display:none!important}
   let waitN = 0;
   function load3D() {
     if (h3state !== 'idle') return;
-    if (!H3()) { if (++waitN > 60) { h3state = 'fail'; attachStage(); } else setTimeout(load3D, 250); return; }
+    const inl = window.SHTAB_VRM === 'inline'; // в артефакте модель лежит в скрипте base64
+    if (!H3() || (inl && !window.SHTAB_VRM_B64)) { if (++waitN > 120) { h3state = 'fail'; attachStage(); } else setTimeout(load3D, 250); return; }
     if (!H3().ok()) { h3state = 'fail'; attachStage(); return; }
     h3state = 'loading';
-    H3().load(VRM_URL).then(() => {
+    let src = VRM_URL;
+    if (inl) { try { const b = atob(window.SHTAB_VRM_B64), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); src = u.buffer; window.SHTAB_VRM_B64 = null; } catch (e) { h3state = 'fail'; attachStage(); return; } }
+    H3().load(src).then(() => {
       h3state = 'ready';
       const h = hero(); if (h) H3().setLook(h);
       H3().setMood(typeof dosMood === 'function' ? dosMood() : 'idle');
