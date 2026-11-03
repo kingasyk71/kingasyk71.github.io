@@ -1,6 +1,6 @@
 /* Офлайн-оболочка Штаба: свои файлы берём из сети, без сети — из кэша. Данные Supabase не кэшируются здесь. */
-const V = 'shtab-v10';
-const SHELL = ['./', './index.html', './backend.js', './epochs.js', './scenes.js', './dos-art.js', './dos.js', './fx.js', './hero3d.js', './config.js', './vendor/supabase-2.89.0.js', './manifest.webmanifest',
+const V = 'shtab-v11';
+const SHELL = ['./', './index.html', './backend.js', './epochs.js', './scenes.js', './dos-art.js', './dos.js', './fx.js', './hero2d.js', './config.js', './vendor/supabase-2.89.0.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
@@ -11,7 +11,7 @@ self.addEventListener('fetch', e => {
   const u = new URL(r.url);
   const fonts = u.host === 'fonts.googleapis.com' || u.host === 'fonts.gstatic.com';
   if (u.origin !== location.origin && !fonts) return;
-  const heavy = /\/(hero\.vrm|hero3d\.js)$/.test(u.pathname); // тяжёлые файлы героя: из кэша, сеть только в первый раз
+  const heavy = /\/heroes\/[\w-]+\.webp$/.test(u.pathname); // картинки героев: из кэша, сеть только в первый раз
   if (fonts || heavy) {
     e.respondWith(caches.open(V).then(c => c.match(r).then(hit => hit || fetch(r).then(res => { c.put(r, res.clone()); return res; }))));
     return;
