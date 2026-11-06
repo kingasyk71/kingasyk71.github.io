@@ -118,6 +118,11 @@ h2{margin:0;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:u
 .due.late{background:var(--late-soft);border-color:var(--late);color:var(--late)}
 .crit{background:var(--late-soft);color:var(--late)}
 .task.done .tag{opacity:.55}
+.edit{position:relative;cursor:pointer}
+.edit select,.edit input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;border:0;margin:0;padding:0}
+.edit:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.edit::after{content:"";width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4px solid currentColor;opacity:.6;margin-left:1px}
+.edit:hover{filter:brightness(.96)}
 
 .status{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--navy);color:#fff;font-size:14px;font-weight:500;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:20;max-width:calc(100% - 32px);text-align:center}
 .status.show{opacity:1;transform:translate(-50%,0)}
@@ -183,7 +188,7 @@ function taskHTML(t){
   return `<div class="task ${t.done?"done":""}" data-id="${esc(t.id)}">
     <input type="checkbox" class="box" id="c-${esc(t.id)}" data-id="${esc(t.id)}" ${t.done?"checked":""} aria-label="${esc(t.t)}">
     <div class="tx"><span class="tt">${esc(t.t)}</span>${t.n?`<span class="nt">${esc(t.n)}</span>`:""}
-    <div class="tags"><span class="tag who p-${esc(t.who)}" data-i="${esc(initial(t.who))}">${esc(t.who)}</span>${di?`<span class="tag due ${di.cls}">${di.txt}</span>`:""}${t.crit&&!t.done?'<span class="tag crit">критично</span>':""}</div></div></div>`;
+    <div class="tags"><label class="tag who edit p-${esc(t.who)}" data-i="${esc(initial(t.who))}" title="Сменить исполнителя">${esc(t.who)}<select data-id="${esc(t.id)}" data-f="who" aria-label="Исполнитель">${PEOPLE.slice(1).map(p=>`<option${p===t.who?" selected":""}>${p}</option>`).join("")}</select></label><label class="tag due edit ${di?di.cls:""}" title="Сменить дату">${di?di.txt:"без даты"}<input type="date" data-id="${esc(t.id)}" data-f="due" value="${esc(t.due||"")}" aria-label="Срок"></label>${t.crit&&!t.done?'<span class="tag crit">критично</span>':""}</div></div></div>`;
 }
 
 function renderTL(){
@@ -251,11 +256,19 @@ async function toggle(id){
 }
 
 document.getElementById("main").addEventListener("click",e=>{
+  if(e.target.closest(".edit")){const i=e.target.closest(".edit").querySelector("input[type=date]");if(i&&e.target===i&&i.showPicker){try{i.showPicker()}catch(_){}}return}
   const row=e.target.closest(".task");if(!row)return;
   if(e.target.classList.contains("box"))e.preventDefault();
   toggle(row.dataset.id);
 });
 document.getElementById("main").addEventListener("keydown",e=>{if(e.target.classList.contains("box")&&(e.key===" "||e.key==="Enter")){e.preventDefault();toggle(e.target.dataset.id)}});
+document.getElementById("main").addEventListener("change",e=>{const el=e.target;if(!el.dataset.f)return;save(el.dataset.id,el.dataset.f,el.value||null)});
+async function save(id,f,v){
+  const t=tasks.find(x=>x.id===id);if(!t||t[f]===v)return;const old=t[f];t[f]=v;render();busy++;
+  try{const body={updated_at:new Date().toISOString()};body[f]=v;const r=await fetch(API+"?id=eq."+encodeURIComponent(id),{method:"PATCH",headers:H,body:JSON.stringify(body)});if(!r.ok)throw 0;status(f==="who"?"Исполнитель: "+v:"Срок обновлён")}
+  catch(e){t[f]=old;render();status("Не сохранилось, попробуйте ещё раз",true)}
+  finally{busy--}
+}
 document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;filter=b.dataset.p;try{localStorage.setItem("sjw-filter",filter)}catch(e){}render()});
 document.getElementById("hide-done").addEventListener("change",e=>{hideDone=e.target.checked;try{localStorage.setItem("sjw-hide",hideDone?"1":"0")}catch(e){}render()});
 
