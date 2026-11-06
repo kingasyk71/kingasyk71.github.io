@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sun Job Work — запуск</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>body{margin:0}
+/* Layout: one narrow column, sticky progress header, stages in order with task rows */
+:root{
+  --bg:#F4F5F8; --surface:#FFFFFF; --fg:#11131A; --muted:#626879; --line:#E1E3EA;
+  --accent:#0A1EF5; --accent-soft:#E7E9FE; --done:#1E8A55; --late:#C9352B; --late-soft:#FBE9E7;
+  --f-body:"Onest",system-ui,-apple-system,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1016; --surface:#171A22; --fg:#ECEEF4; --muted:#9298A8; --line:#2A2E3A;
+  --accent:#6F7DFF; --accent-soft:#1E2350; --done:#4CC38A; --late:#FF7A6E; --late-soft:#3A1B19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1016; --surface:#171A22; --fg:#ECEEF4; --muted:#9298A8; --line:#2A2E3A;
+  --accent:#6F7DFF; --accent-soft:#1E2350; --done:#4CC38A; --late:#FF7A6E; --late-soft:#3A1B19; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header{display:grid;gap:6px;margin-bottom:14px}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:grid;gap:8px;border-bottom:1px solid var(--line)}
+.prog-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.prog-num{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
+.save{font-size:13px;color:var(--muted)}
+.track{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .3s}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.timeline{display:flex;gap:0;overflow-x:auto;margin:18px 0 6px;padding-bottom:4px}
+.tl{flex:1 0 92px;border-top:3px solid var(--line);padding:8px 8px 0 0;font-size:12px;color:var(--muted)}
+.tl b{display:block;font:600 13px var(--f-mono);color:var(--fg)}
+.tl.now{border-top-color:var(--accent)}
+.tl.goal{border-top-color:var(--done)}
+section{margin-top:22px}
+.st-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+h2{font-size:17px;margin:0;font-weight:600;display:flex;gap:10px;align-items:baseline}
+h2 .n{font:600 13px var(--f-mono);color:var(--accent)}
+.st-meta{font:500 12px var(--f-mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+ul{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px 14px;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+li.late{box-shadow:inset 3px 0 0 var(--late)}
+input[type=checkbox]{width:20px;height:20px;margin:2px 0 0;accent-color:var(--accent);cursor:pointer}
+input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.t{min-width:0}
+.t label{cursor:pointer;display:block}
+li.is-done .t label{color:var(--muted);text-decoration:line-through}
+.note{font-size:13px;color:var(--muted);margin-top:3px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{font:500 12px var(--f-body);padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.chip.date{background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--f-mono)}
+.chip.crit{background:var(--late-soft);color:var(--late)}
+li.late .chip.date{border-color:var(--late);color:var(--late)}
+.ro{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Growth AG · Sun Job Work</div>
+    <h1>Запуск рекламы: набор в Турцию</h1>
+    <p class="sub">От информации до таргета. Собеседования в Алматы 5–31 декабря, оплатившие кандидаты нужны к 15.12.</p>
+  </header>
+  <div class="timeline" id="tl"></div>
+  <div class="bar">
+    <div class="prog-row"><span class="prog-num" id="prog"></span><span class="save" id="save"></span></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <main id="stages"></main>
+</div>
+<script>
+(function(){
+const URL_="https://atjvitgupjmcyofouiuq.supabase.co/rest/v1/sjw_tasks";
+const KEY="sb_publishable_FbzqjYRbgXE6xgQ7r9mGSQ_xXsyZmjF";
+const H={"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json"};
+const PEOPLE=["Все","Асылбек","Расул","Арайлым"];
+const TL=[["05.11","Старт","now"],["06.11","Инфо + сценарии"],["07.11","Съёмка"],["09–10.11","Монтаж, апрув"],["11.11","Запуск теста"],["15.11","Разбор"],["05.12","Собеседования","goal"],["15.12","Дедлайн набора","goal"]];
+let tasks=[],filter="Все",busy=0;
+try{filter=localStorage.getItem("sjw-filter")||"Все"}catch(e){}
+const today=new Date();today.setHours(0,0,0,0);
+const fmt=d=>{const p=d.split("-");return p[2]+"."+p[1]};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const setSave=t=>document.getElementById("save").textContent=t;
+document.getElementById("tl").innerHTML=TL.map(([d,l,c])=>`<div class="tl ${c||""}"><b>${d}</b>${l}</div>`).join("");
+const fl=document.getElementById("filters");
+fl.innerHTML=PEOPLE.map(p=>`<button type="button" data-p="${p}" aria-pressed="${p===filter}">${p}</button>`).join("");
+fl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;filter=b.dataset.p;try{localStorage.setItem("sjw-filter",filter)}catch(e){}fl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===filter));render()});
+function render(){
+  const stages=[];tasks.forEach(t=>{let s=stages.find(x=>x.n===t.stage);if(!s){s={n:t.stage,title:t.stage_title,tasks:[]};stages.push(s)}s.tasks.push(t)});
+  stages.sort((a,b)=>a.n-b.n);
+  let all=0,done=0;
+  document.getElementById("stages").innerHTML=stages.map(st=>{
+    const vis=st.tasks.filter(t=>filter==="Все"||t.who===filter);
+    const sd=st.tasks.filter(t=>t.done).length;all+=st.tasks.length;done+=sd;
+    if(!vis.length)return "";
+    return `<section><div class="st-head"><h2><span class="n">${st.n}</span>${esc(st.title)}</h2><span class="st-meta">${sd}/${st.tasks.length}</span></div><ul>`+vis.map(t=>{
+      const late=!t.done&&t.due&&new Date(t.due+"T00:00:00")<today;
+      return `<li class="${t.done?"is-done":""} ${late?"late":""}"><input type="checkbox" id="c-${t.id}" data-id="${t.id}" ${t.done?"checked":""}><div class="t"><label for="c-${t.id}">${esc(t.t)}</label>${t.n?`<div class="note">${esc(t.n)}</div>`:""}<div class="chips"><span class="chip">${esc(t.who)}</span>${t.due?`<span class="chip date">до ${fmt(t.due)}${late?" · просрочено":""}</span>`:""}${t.crit?'<span class="chip crit">критично</span>':""}</div></div></li>`}).join("")+`</ul></section>`}).join("");
+  document.getElementById("prog").textContent=`Готово ${done} из ${all}`;
+  document.getElementById("fill").style.width=(all?done/all*100:0)+"%";
+}
+async function load(){
+  if(busy)return;
+  try{const r=await fetch(URL_+"?select=*&order=stage,pos",{headers:H});if(!r.ok)throw 0;tasks=await r.json();render();if(!busy)setSave("")}
+  catch(e){setSave("Нет связи, проверьте интернет")}
+}
+document.getElementById("stages").addEventListener("change",async e=>{
+  const id=e.target.dataset.id;if(!id)return;const t=tasks.find(x=>x.id===id);const v=e.target.checked;
+  t.done=v;render();busy++;setSave("Сохраняю…");
+  try{const r=await fetch(URL_+"?id=eq."+encodeURIComponent(id),{method:"PATCH",headers:H,body:JSON.stringify({done:v,updated_at:new Date().toISOString()})});if(!r.ok)throw 0;setSave("Сохранено")}
+  catch(err){t.done=!v;render();setSave("Не сохранилось, попробуйте ещё раз")}
+  finally{busy--}
+});
+load();setInterval(load,20000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
+})();
+</script>
+</body></html>
