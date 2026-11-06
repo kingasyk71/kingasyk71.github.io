@@ -227,6 +227,7 @@ h2{margin:0;font-size:clamp(24px,4vw,34px);line-height:1.1;font-weight:700}
 <main><div class="wrap" id="main"><div class="loading">Загружаю маршрут…</div></div></main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function(){
 const API="https://atjvitgupjmcyofouiuq.supabase.co/rest/v1/sjw_tasks";
@@ -352,7 +353,8 @@ document.getElementById("chips").addEventListener("click",e=>{const b=e.target.c
 document.getElementById("hide-done").addEventListener("change",e=>{hideDone=e.target.checked;try{localStorage.setItem("sjw-hide",hideDone?"1":"0")}catch(_){}render()});
 
 render();load();
-setInterval(load,20000);
+setInterval(load,30000);
+let rtT;try{supabase.createClient("https://atjvitgupjmcyofouiuq.supabase.co",KEY).channel("sjw-live").on("postgres_changes",{event:"*",schema:"public",table:"sjw_tasks"},()=>{clearTimeout(rtT);rtT=setTimeout(load,300)}).subscribe()}catch(_){}
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
 })();
 </script>
