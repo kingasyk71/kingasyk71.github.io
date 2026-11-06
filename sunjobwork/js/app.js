@@ -14,10 +14,10 @@ function $(s,c){return (c||document).querySelector(s)}
 function $$(s,c){return [].slice.call((c||document).querySelectorAll(s))}
 
 /* ---------- render lists (once, with i18n paths) ---------- */
-// visas
+// hero wall of visas (3 columns, duplicated for seamless loop)
 var rot=[-2.5,1.8,-1.2,2.4,-1.8,1.2,-2.2,1.5];
-$('#visas').innerHTML=[1,2,3,4,5,6,7].map(function(i){return '<figure class="polaroid"><img src="img/visa'+i+'.webp" data-l-alt="visaAlt" alt="" loading="lazy"><figcaption class="mono"><span data-l="visaCap"></span><b>TÜRKİYE ✓</b></figcaption></figure>'}).join('')+'<div class="cta-card polaroid" style="padding:24px"><span class="h" style="font-size:22px;line-height:1.2" data-l="visaCta"></span><a class="btn btn-sun" href="#quiz" style="min-height:50px;border-radius:14px" data-l="visaBtn"></a></div>';
-
+function pol(i){return '<figure class="polaroid" style="transform:rotate('+rot[i%8]+'deg)"><img src="img/visa'+i+'.webp" data-l-alt="visaAlt" alt="" loading="eager"><figcaption class="mono"><span data-l="visaCap"></span><b>TÜRKİYE ✓</b></figcaption></figure>'}
+$('#wall').innerHTML=[[1,4,7,2],[2,5,3,6],[3,6,1,5]].map(function(c,k){var h=c.map(pol).join('');return '<div class="wcol c'+(k+1)+'">'+h+h+'</div>'}).join('');
 // filters + jobs
 var deptIds=['all','anim','rest','front','house','sport'];
 var jobDept=['anim','anim','anim','rest','rest','rest','front','front','house','sport','sport'];
@@ -183,26 +183,25 @@ if(window.MotionPathPlugin)G.registerPlugin(MotionPathPlugin);
 G.defaults({ease:'expo.out'});
 
 var tl=G.timeline();
-tl.from('#loader .sunball',{y:80,scale:.6,opacity:0,duration:.8})
- .from('#loader .word span',{yPercent:110,duration:.7},'-=.45')
- .to('#loader .sunball',{scale:30,duration:.9,ease:'expo.in'},'+=.15')
- .to('#loader',{yPercent:-100,duration:.8,ease:'expo.inOut'},'-=.25')
+tl.from('#loader .ldmark',{scale:.6,opacity:0,duration:.7})
+ .from('#loader .lsun',{y:30,duration:.9,ease:'expo.out'},'-=.3')
+ .from('#loader .ll',{scaleX:0,transformOrigin:'50% 50%',duration:.5,stagger:.08},'-=.6')
+ .from('#loader .word .wordmark',{yPercent:110,duration:.7},'-=.5')
+ .to('#loader',{yPercent:-100,duration:.8,ease:'expo.inOut'},'+=.25')
  .add(function(){loader.remove()})
  .fromTo('#hdr',{yPercent:-100,opacity:0},{yPercent:0,opacity:1,duration:.9,clearProps:'transform,opacity'},'-=.45')
  .from('.hero h1 .w',{yPercent:110,rotate:4,duration:1.1,stagger:.05},'<')
  .from('[data-hero]',{y:28,opacity:0,duration:1,stagger:.08},'-=.85')
- .from('#heroMedia',{clipPath:'inset(18% 12% 18% 12% round 32px)',duration:1.4,ease:'expo.inOut'},'-=1.2')
- .from('#heroVid',{scale:1.35,duration:1.8},'<')
- .from('#ticket',{y:160,x:-60,rotate:-14,opacity:0,duration:1.3,ease:'back.out(1.2)'},'-=1.1')
- .to('#ticket',{rotate:-2.5,duration:.6},'-=.4');
-G.to('#tk',{y:-8,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1,delay:3});
-G.fromTo('#tkPlane',{x:0},{x:function(){return $('.track').clientWidth-28},duration:6,ease:'sine.inOut',repeat:-1,yoyo:true,delay:2.5});
-
+ .from('#arch',{clipPath:'inset(100% 0% 0% 0% round 40px)',duration:1.5,ease:'expo.inOut'},'-=1.3')
+ .from('#wall',{y:120,scale:1.15,duration:1.8},'<')
+ .from('#sunrise',{yPercent:100,duration:1.4,ease:'expo.out'},'-=.9')
+ .from('.refl i',{scaleX:0,duration:.8,stagger:.1},'-=1')
+ .from('#seal',{scale:0,rotate:-120,duration:1,ease:'back.out(1.8)'},'-=.8');
 $$('[data-count]').forEach(function(el){var n=+el.dataset.count,o={v:0},money=el.dataset.format==='money';
  ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:function(){G.to(o,{v:n,duration:2.2,delay:el.closest('.hero')?2.6:0,ease:'power3.out',onUpdate:function(){el.textContent=money?(Math.round(o.v/1000)*1000).toLocaleString('ru-RU'):Math.round(o.v)},onComplete:function(){el.dataset.done=1;el.textContent=fmt(el)}})}})});
 
-G.to('#heroVid',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-G.to('#ticket',{yPercent:-30,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+G.to('#arch',{yPercent:8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+G.to('#seal',{yPercent:-60,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
 
 // marquee + scroll velocity
 var mqT=$('#mq'),mqX=0,boost=0;
@@ -220,11 +219,6 @@ $$('.card .pclip').forEach(function(p){G.from(p,{clipPath:'inset(0 0 100% 0)',du
 // money rings + zero chips
 G.from('.money .rings',{scale:.4,opacity:0,duration:1.6,scrollTrigger:{trigger:'.money',start:'top 80%'}});
 G.from('.money .zero div',{y:20,opacity:0,duration:.8,stagger:.1,delay:.4,scrollTrigger:{trigger:'.money',start:'top 80%'}});
-
-// visas
-var pol=$$('#visas .polaroid');
-pol.forEach(function(p,i){G.set(p,{rotate:rot[i]||0})});
-G.from(pol,{y:-120,rotate:function(i){return (i%2?1:-1)*(18+i*3)},opacity:0,scale:.9,duration:1.2,ease:'back.out(1.4)',stagger:{each:.08,from:'random'},scrollTrigger:{trigger:'#visas',start:'top 80%'}});
 
 // map: arcs draw + planes fly
 var arcs=$$('#mapbox .arcs path'),planes=$$('#mapbox .mplane');
@@ -265,7 +259,7 @@ G.from('.qcard',{y:80,rotate:-2,opacity:0,duration:1.2,scrollTrigger:{trigger:'.
 
 if(fine){
  $$('.magnet').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();G.to(b,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.5})});b.addEventListener('mouseleave',function(){G.to(b,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'})})});
- $$('.country,.polaroid').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();G.to(c,{rotateY:(e.clientX-r.left-r.width/2)/r.width*8,rotateX:-(e.clientY-r.top-r.height/2)/r.height*8,transformPerspective:800,duration:.6})});c.addEventListener('mouseleave',function(){G.to(c,{rotateX:0,rotateY:0,duration:.8})})});
+ $$('.country').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();G.to(c,{rotateY:(e.clientX-r.left-r.width/2)/r.width*8,rotateX:-(e.clientY-r.top-r.height/2)/r.height*8,transformPerspective:800,duration:.6})});c.addEventListener('mouseleave',function(){G.to(c,{rotateX:0,rotateY:0,duration:.8})})});
 }
 addEventListener('load',function(){ScrollTrigger.refresh();moveKnob()});
 })();

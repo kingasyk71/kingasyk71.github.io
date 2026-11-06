@@ -14,21 +14,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
 <link rel="preload" as="image" href="img/hero.webp">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
 <div id="loader" aria-hidden="true">
-  <div class="sunball"></div>
-  <div class="word h"><span>SunJob</span></div>
+  <svg class="ldmark" viewBox="0 0 100 118" aria-hidden="true"><defs><clipPath id="ml"><path d="M0 50A50 50 0 0 1 100 50V112Q100 118 94 118H6Q0 118 0 112Z"/></clipPath></defs><g clip-path="url(#ml)"><rect width="100" height="80" fill="#1667D9"/><rect y="80" width="100" height="38" fill="#0A2540"/><path class="lsun" d="M24 80A26 26 0 0 1 76 80Z" fill="#FFC531"/><rect class="ll" x="32" y="86" width="36" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="38" y="93" width="24" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="45" y="100" width="10" height="3.6" rx="1.8" fill="#FFC531"/></g></svg>
+  <div class="word"><span class="wordmark wm-dark"><b>Sun</b><i>Job</i></span></div>
 </div>
 
 <header id="hdr">
  <div class="wrap">
-  <a class="logo h" href="#top">
-   <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#0A2540"/><circle cx="17" cy="19" r="7" fill="#FFC531"/><rect x="5" y="20" width="24" height="9" fill="#0A2540"/><path d="M7 22h20M9 25h16" stroke="#7FB2F0" stroke-width="1.6" stroke-linecap="round"/></svg>
-   SunJob
-  </a>
+  <a class="logo" href="#top" aria-label="SunJob"><svg class="lmark" viewBox="0 0 100 118" aria-hidden="true"><defs><clipPath id="mh"><path d="M0 50A50 50 0 0 1 100 50V112Q100 118 94 118H6Q0 118 0 112Z"/></clipPath></defs><g clip-path="url(#mh)"><rect width="100" height="80" fill="#1667D9"/><rect y="80" width="100" height="38" fill="#0A2540"/><path class="lsun" d="M24 80A26 26 0 0 1 76 80Z" fill="#FFC531"/><rect class="ll" x="32" y="86" width="36" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="38" y="93" width="24" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="45" y="100" width="10" height="3.6" rx="1.8" fill="#FFC531"/></g></svg><span class="wordmark"><b>Sun</b><i>Job</i></span></a>
   <nav aria-label="Разделы">
    <a href="#vacancies" data-i18n="nav1">Вакансии</a><a href="#conditions" data-i18n="nav2">Условия</a><a href="#route" data-i18n="nav3">Как это работает</a><a href="#founder" data-i18n="nav4">О нас</a><a href="#faq" data-i18n="nav5">Вопросы</a>
   </nav>
@@ -45,56 +43,40 @@
  <div class="wrap grid">
   <div style="display:flex;flex-direction:column;gap:24px">
    <div class="pill mono" data-hero><span class="dot"></span><span data-i18n="pill">Набор на сезон 2027 открыт</span></div>
-   <h1 class="h" data-split data-i18n="h1">Работа в отелях Турции, Египта и Кипра</h1>
-   <p class="lead" data-hero style="font-size:clamp(18px,1.6vw,21px);max-width:560px" data-i18n="lead"><span class="hl">От 500 000 ₸ в месяц на руки.</span> Жильё и питание — бесплатно, перелёт компенсирует отель. Официальный договор и сопровождение от заявки до конца сезона.</p>
+   <h1 class="h" data-split data-i18n="h1">Официальная работа в отелях Турции, Египта и Кипра</h1>
+   <p class="lead" data-hero style="font-size:clamp(18px,1.6vw,21px);max-width:560px" data-i18n="lead"><span class="hl">От 500 000 ₸ в месяц на руки.</span> Жильё и питание бесплатно, перелёт компенсирует отель. Договор до оплаты и сопровождение весь сезон.</p>
    <div class="btns" data-hero>
     <a class="btn btn-sun magnet" href="#quiz"><span data-i18n="cta1">Подобрать вакансию за 1 минуту</span> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a class="btn btn-ghost magnet" data-wa="hero" target="_blank" rel="noopener" data-i18n="cta2">Задать вопрос в WhatsApp</a>
    </div>
+   <a class="founder-chip" data-hero data-wa="founder" target="_blank" rel="noopener">
+    <img src="img/arailym.webp" alt="Арайлым Сембаевна">
+    <span><b>Арайлым Сембаевна</b><small data-i18n="fc1">Основатель SunJob · в отелях с 2019</small></span>
+    <em data-i18n="fc2">Отвечает лично</em>
+   </a>
    <div class="checks" data-hero>
     <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><i style="font-style:normal" data-i18n="ch1">С 18 лет, без опыта и языка</i></span>
     <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><i style="font-style:normal" data-i18n="ch2">Можно вдвоём или парой</i></span>
     <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><i style="font-style:normal" data-i18n="ch3">Возврат 50%, если не одобрили</i></span>
    </div>
-   <div class="count-card" data-hero><b class="h" data-count="562">562</b><span style="font-size:14px;line-height:1.35;font-weight:600;color:var(--ink2)" data-i18n="count">кандидата уже поехали работать<br>в отели с SunJob</span></div>
   </div>
 
   <div class="heroArt">
-   <div class="heroMedia" id="heroMedia">
-    <video id="heroVid" autoplay muted loop playsinline preload="auto" poster="img/hero.webp"><source src="vid/hero.mp4" type="video/mp4"></video>
-    <div class="tag mono" data-i18n="tag">Бодрум · сезон 2026</div>
-   </div>
-   <div class="ticket" id="ticket">
-    <div class="tk" id="tk">
-     <div class="tk-top mono"><span>Boarding pass</span><span style="color:var(--sun)">Season 2027</span></div>
-     <div class="tk-body">
-      <div class="route">
-       <div><b class="h">KZ</b><small data-i18n="tk1">Казахстан</small></div>
-       <div class="track"><svg id="tkPlane" width="28" height="28" viewBox="0 0 24 24" fill="#0A2540" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/></svg></div>
-       <div style="text-align:right"><b class="h">AYT</b><small>Анталья</small></div>
-      </div>
-      <div class="tk-cols mono"><div><span data-i18n="tk2">Пассажир</span><b data-i18n="tk3">Вы</b></div><div><span data-i18n="tk4">Интервью</span><b data-i18n="tk5">Декабрь</b></div><div><span data-i18n="tk6">Вылет</span><b data-i18n="tk7">Апрель</b></div></div>
-     </div>
-     <div class="perf" style="background-color:#fff"></div>
-     <div class="tk-bot"><div class="mono"><span style="display:block;font-size:11px;color:var(--ink3)" data-i18n="tk8">Контракт</span><b style="font-size:15px" data-i18n="tk9">6 месяцев</b></div><div class="barcode" aria-hidden="true"></div></div>
+   <div class="arch" id="arch">
+    <div class="wall" id="wall" aria-label="Реальные рабочие визы кандидатов SunJob"></div>
+    <div class="sky-fade"></div>
+    <div class="sea">
+     <div class="sunrise" id="sunrise"></div>
+     <div class="refl"><i></i><i></i><i></i></div>
+     <span class="mono sea-cap" data-i18n="wallcap">Реальные визы наших кандидатов · данные скрыты</span>
     </div>
    </div>
+   <div class="seal" id="seal"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sc" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" letter-spacing="3" fill="#0A2540"><textPath href="#sc">SUNJOB · ÇALIŞMA VİZESİ · WORK VISA · </textPath></text></svg><div><b class="h" data-count="562">562</b><span class="mono" data-i18n="sealtxt">рабочие визы</span></div></div>
   </div>
  </div>
 </section>
 
 <div class="marquee" aria-label="SunJob"><div class="mq-track mono" id="mq"></div></div>
-
-<!-- VISAS -->
-<section class="sec" style="padding-bottom:40px">
- <div class="wrap">
-  <div class="head">
-   <div><span class="eyebrow mono" data-i18n="v_eb">562 кандидата уже уехали с SunJob</span><h2 class="h2 h" data-split data-i18n="v_h">Они уже получили рабочие визы в Турцию</h2></div>
-   <p class="lead" data-reveal data-i18n="v_p">Реальные кандидаты SunJob. Личные данные на визах скрыты.</p>
-  </div>
-  <div class="visas" id="visas"></div>
- </div>
-</section>
 
 <!-- CONDITIONS -->
 <section class="sec" id="conditions">
@@ -320,6 +302,7 @@
 
 <footer>
  <div class="wrap">
+  <a class="logo flogo" href="#top" aria-label="SunJob"><svg class="lmark" viewBox="0 0 100 118" aria-hidden="true"><defs><clipPath id="mf"><path d="M0 50A50 50 0 0 1 100 50V112Q100 118 94 118H6Q0 118 0 112Z"/></clipPath></defs><g clip-path="url(#mf)"><rect width="100" height="80" fill="#1667D9"/><rect y="80" width="100" height="38" fill="#F4F7FB"/><path class="lsun" d="M24 80A26 26 0 0 1 76 80Z" fill="#FFC531"/><rect class="ll" x="32" y="86" width="36" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="38" y="93" width="24" height="3.6" rx="1.8" fill="#FFC531"/><rect class="ll" x="45" y="100" width="10" height="3.6" rx="1.8" fill="#FFC531"/></g></svg><span class="wordmark wm-dark"><b>Sun</b><i>Job</i></span></a>
   <div class="big h" data-split data-i18n="ft_big">Ваша карьера <span style="color:var(--sun)">без границ.</span></div>
   <div class="cols">
    <div><span class="mono" data-i18n="ft1">Связь</span><a data-wa="footer" target="_blank" rel="noopener">WhatsApp: +7 775 166 13 65</a><br><a href="https://instagram.com/sembaevnaaaaa" target="_blank" rel="noopener">Instagram: @sembaevnaaaaa</a></div>
