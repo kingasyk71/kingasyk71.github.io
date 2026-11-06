@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SunJob — работа в отелях Турции, Египта и Кипра</title>
+<meta name="description" content="От 500 000 ₸ в месяц на руки. Жильё и питание бесплатно, перелёт компенсирует отель. Официальный договор и сопровождение весь сезон.">
+<meta name="theme-color" content="#0A2540">
+<meta property="og:title" content="SunJob — работа в отелях Турции, Египта и Кипра">
+<meta property="og:description" content="От 500 000 ₸ в месяц на руки. Жильё и питание бесплатно. Договор и сопровождение весь сезон.">
+<meta property="og:image" content="img/hero.webp">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="preload" as="image" href="img/hero.webp">
+<style>
+:root{--navy:#0A2540;--navy2:#071A2E;--blue:#1667D9;--sun:#FFC531;--bg:#F4F7FB;--bg2:#E8F0FA;--white:#fff;--ink2:#3B4A5E;--ink3:#526175;--green:#12A150;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--navy);font-family:Onest,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.h{font-family:Onest,sans-serif;letter-spacing:-.03em;font-weight:800}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.sec{padding:120px 0}
+.eyebrow{font-size:12px;font-weight:700;color:var(--blue)}
+.h2{margin:0;font-size:clamp(30px,4vw,56px);line-height:1.05}
+.lead{margin:0;font-size:17px;line-height:1.55;color:var(--ink2)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+.head>div{display:flex;flex-direction:column;gap:14px;max-width:760px}
+.head p{max-width:380px}
+/* split text */
+.line{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.w{display:inline-block;will-change:transform}
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;font-weight:800;font-size:16px;text-decoration:none;border:0;cursor:pointer;overflow:hidden;isolation:isolate;transition:box-shadow .3s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s var(--ease)}
+.btn:hover::after{transform:translateX(120%)}
+.btn:hover{box-shadow:0 16px 34px -14px rgba(10,37,64,.5)}
+.btn svg{transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-sun{background:var(--sun);color:var(--navy)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-ghost{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy)}
+.btn-ghost-l{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;animation:ldFallback .01s 3s forwards}
+@keyframes ldFallback{to{opacity:0;visibility:hidden}}
+#loader .sunball{width:84px;height:84px;border-radius:50%;background:var(--sun);box-shadow:0 0 80px 10px rgba(255,197,49,.45)}
+#loader .word{color:#fff;font-size:28px;overflow:hidden}
+#loader .word span{display:inline-block}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:transform .5s var(--ease),background .3s,box-shadow .3s}
+header.scrolled{background:rgba(244,247,251,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(10,37,64,.08)}
+header.hide{transform:translateY(-110%)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:20px}
+nav{display:flex;gap:28px;font-weight:600;font-size:15px}
+nav a{text-decoration:none;position:relative}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+nav a:hover::after{transform:scaleX(1);transform-origin:left}
+header .btn{min-height:44px;padding:0 18px;font-size:14px}
+/* hero */
+.hero{padding:120px 0 56px}
+.hero .grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.hero h1{margin:0;font-size:clamp(38px,5.4vw,76px);line-height:1}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;border:1.5px dashed var(--navy);font-size:12px;font-weight:700;align-self:flex-start}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(18,161,80,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(18,161,80,0)}100%{box-shadow:0 0 0 0 rgba(18,161,80,0)}}
+.hl{background:linear-gradient(transparent 60%,rgba(255,197,49,.55) 60%);color:var(--navy);font-weight:700}
+.checks{display:flex;flex-wrap:wrap;gap:14px 26px;font-size:14px;font-weight:600;color:var(--ink2)}
+.checks span{display:flex;align-items:center;gap:8px}
+.count-card{display:inline-flex;align-items:center;gap:14px;padding:14px 18px;border-radius:16px;background:#fff;box-shadow:0 0 0 1px rgba(10,37,64,.07);align-self:flex-start}
+.count-card b{font-size:30px;color:var(--blue)}
+.heroArt{position:relative;min-height:620px}
+.heroMedia{position:absolute;inset:0 0 70px 40px;border-radius:32px;overflow:hidden;background:#12549F}
+.heroMedia video,.heroMedia img{width:100%;height:115%;object-fit:cover;position:absolute;top:-7%;left:0}
+.heroMedia::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,37,64,.5))}
+.tag{position:absolute;right:16px;top:16px;z-index:2;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.92);font-size:11px;font-weight:700}
+.ticket{position:absolute;left:0;bottom:0;width:min(430px,92%);z-index:3}
+.tk{border-radius:22px;background:#fff;box-shadow:0 30px 60px -24px rgba(10,37,64,.55);overflow:hidden}
+.tk-top{display:flex;justify-content:space-between;padding:14px 20px;background:var(--navy);color:#fff;font-size:12px;font-weight:700}
+.tk-body{padding:20px 22px 14px;display:flex;flex-direction:column;gap:16px}
+.route{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.route b{font-size:34px;display:block}
+.route small{font-size:12px;color:var(--ink3);font-weight:600}
+.track{flex:1;position:relative;height:28px}
+.track::before{content:"";position:absolute;left:0;right:0;top:13px;border-top:2px dashed #A9BCD3}
+.track svg{position:absolute;top:0;left:0}
+.tk-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tk-cols span{display:block;font-size:11px;color:var(--ink3)}
+.tk-cols b{font-size:15px}
+.perf{height:24px;position:relative;background:radial-gradient(circle at 0 50%,var(--bg) 11px,transparent 12px),radial-gradient(circle at 100% 50%,var(--bg) 11px,transparent 12px)}
+.perf::before{content:"";position:absolute;left:22px;right:22px;top:11px;border-top:2px dashed #D6E0EC}
+.tk-bot{display:flex;justify-content:space-between;align-items:center;padding:8px 22px 20px}
+.barcode{width:150px;height:40px;background:repeating-linear-gradient(90deg,var(--navy) 0 2px,transparent 2px 4px,var(--navy) 4px 5px,transparent 5px 8px,var(--navy) 8px 11px,transparent 11px 12px)}
+/* marquee */
+.marquee{background:var(--navy);color:#fff;padding:18px 0;overflow:hidden;white-space:nowrap}
+.mq-track{display:inline-flex;gap:48px;font-size:14px;font-weight:700;will-change:transform}
+.mq-track span{display:inline-flex;gap:48px;align-items:center}
+.mq-track i{color:var(--sun);font-style:normal}
+/* visas */
+.visas{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.polaroid{margin:0;padding:10px 10px 14px;background:#fff;border-radius:6px;box-shadow:0 18px 36px -22px rgba(10,37,64,.55);transition:transform .5s var(--ease),box-shadow .5s}
+.polaroid:hover{box-shadow:0 28px 50px -24px rgba(10,37,64,.6)}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px}
+.polaroid figcaption{display:flex;justify-content:space-between;margin-top:12px;font-size:11px;font-weight:700;color:var(--ink2)}
+.polaroid figcaption b{color:var(--green)}
+.cta-card{border-radius:22px;background:var(--navy);color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+/* perks */
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border-radius:28px;background:#fff;box-shadow:0 0 0 1px rgba(10,37,64,.07);padding:28px;display:flex;flex-direction:column;gap:16px;transition:transform .5s var(--ease),box-shadow .5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(10,37,64,.07),0 26px 50px -30px rgba(10,37,64,.5)}
+.card .ic{width:52px;height:52px;border-radius:16px;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.card h3{margin:0;font-size:22px}
+.card p{margin:0;font-size:15px;line-height:1.5;color:var(--ink3)}
+.money{grid-row:span 2;background:var(--navy);color:#fff;justify-content:space-between;min-height:360px;box-shadow:none}
+.money .big{font-size:clamp(46px,5vw,76px);line-height:1}
+/* countries */
+.countries{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.country{position:relative;min-height:340px;justify-content:space-between;overflow:hidden}
+.stamp{align-self:flex-end;width:132px;height:132px;border-radius:50%;border:3px solid currentColor;outline:1.5px solid currentColor;outline-offset:-12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:rotate(-8deg);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.country:hover .stamp{transform:rotate(-16deg) scale(1.08)}
+.stamp b{font-size:18px;letter-spacing:0}
+.stamp span{font-size:10px;font-weight:700}
+.country .nm{display:flex;align-items:center;gap:10px}
+.country .nm b{font-size:28px}
+.chip{font-size:11px;padding:4px 10px;border-radius:999px;background:var(--bg);font-weight:700}
+/* vacancies */
+.bg2{background:var(--bg2)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.filters button{min-height:44px;padding:0 18px;border-radius:999px;font-size:15px;font-weight:700;cursor:pointer;background:transparent;border:2px solid rgba(10,37,64,.2);transition:all .3s var(--ease)}
+.filters button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.job{border-radius:22px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s}
+.job:hover{transform:translateY(-4px);box-shadow:0 24px 48px -28px rgba(10,37,64,.5)}
+.job .in{padding:22px 22px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.job .top{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:700;color:var(--ink3)}
+.badge{padding:4px 8px;border-radius:6px;background:#E3F1EA;color:#1D6B47}
+.job h3{margin:0;font-size:21px;line-height:1.2}
+.job p{margin:0;font-size:14px;color:var(--ink3);line-height:1.5}
+.job .perf{background-color:#fff;background:radial-gradient(circle at 0 50%,var(--bg2) 11px,#fff 12px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,var(--bg2) 11px,#fff 12px) right/51% 100% no-repeat}
+.job .go{padding:6px 22px 22px}
+.job .go a{display:flex;justify-content:center;align-items:center;min-height:48px;border-radius:14px;background:var(--navy);color:#fff;font-weight:700;text-decoration:none;transition:background .3s}
+.job .go a:hover{background:var(--blue)}
+.note{margin:22px 0 0;font-size:13px;color:var(--ink3)}
+/* route */
+.steps{position:relative;padding-left:70px;display:flex;flex-direction:column;gap:18px}
+.rail{position:absolute;left:25px;top:10px;bottom:10px;width:3px;background:repeating-linear-gradient(180deg,#C9D6E6 0 10px,transparent 10px 18px)}
+.rail-fill{position:absolute;left:25px;top:10px;width:3px;height:calc(100% - 20px);background:var(--navy);transform-origin:top;transform:scaleY(0)}
+.rail-plane{position:absolute;left:14px;top:0;width:26px;height:26px;transform:rotate(180deg)}
+.step{position:relative}
+.step .num{position:absolute;left:-70px;top:18px;width:52px;height:52px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:4px solid var(--bg);box-shadow:inset 0 0 0 2px #C9D6E6;transition:background .4s,color .4s,box-shadow .4s,transform .5s cubic-bezier(.34,1.56,.64,1)}
+.step.on .num{background:var(--navy);color:#fff;box-shadow:none;transform:scale(1.08)}
+.step.key.on .num{background:var(--sun);color:var(--navy)}
+.step .box{border-radius:24px;background:#fff;box-shadow:0 0 0 1px rgba(10,37,64,.07);padding:24px 28px;display:flex;flex-direction:column;gap:8px}
+.step.key .box{background:var(--navy);color:#fff;box-shadow:none;padding:28px 30px}
+.step .row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 20px}
+.step h3{margin:0;font-size:22px}
+.step .gate{font-size:11px;font-weight:700;color:var(--blue)}
+.step.key .gate{color:var(--sun)}
+.step p{margin:0;font-size:15px;line-height:1.55;opacity:.88;max-width:760px}
+.clist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 24px;padding-top:6px}
+.clist div{display:flex;gap:10px;font-size:15px;line-height:1.45}
+/* founder */
+.founderWrap{padding:0 12px}
+.founder{background:var(--navy);color:#fff;border-radius:40px;overflow:hidden}
+.founder .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.portrait{position:relative}
+.portrait .ph{aspect-ratio:4/5;border-radius:32px;overflow:hidden}
+.portrait img{width:100%;height:110%;object-fit:cover;object-position:45% 30%}
+.since{position:absolute;right:-14px;top:28px;width:116px;height:116px;border-radius:50%;border:3px solid var(--sun);color:var(--sun);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(12deg);background:var(--navy)}
+.since b{font-size:26px;letter-spacing:0}
+.since span{font-size:10px;font-weight:700}
+.founder blockquote{margin:0;padding-left:22px;border-left:3px solid var(--sun);font-size:20px;line-height:1.5;font-weight:500}
+.career{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.career div{border-radius:16px;border:1px solid rgba(255,255,255,.18);padding:14px;display:flex;flex-direction:column;gap:6px}
+.career span{font-size:11px;color:var(--sun);font-weight:700}
+.career b{font-size:14px;line-height:1.3}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+/* reels */
+.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.reel{position:relative;aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#12549F;color:#fff;transition:transform .5s var(--ease)}
+.reel:hover{transform:scale(1.02)}
+.reel video,.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 25%,transparent 55%,rgba(0,0,0,.7))}
+.reel .bars{position:absolute;z-index:2;top:14px;left:14px;right:14px;display:flex;gap:4px}
+.reel .bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}
+.reel .bars i:first-child::after{content:"";display:block;height:100%;background:#fff;animation:bar 7s linear infinite}
+@keyframes bar{from{width:0}to{width:100%}}
+.reel .cap{position:absolute;z-index:2;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px}
+.reel .cap b{font-size:18px}
+.reel .cap span{font-size:11px;opacity:.85}
+.reel-cta{background:var(--navy);padding:24px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.reel-cta::after{display:none}
+/* reviews */
+.review{display:grid;grid-template-columns:.75fr 1.25fr;border-radius:28px;overflow:hidden;margin-top:24px}
+.review.dark{background:var(--navy);color:#fff}
+.review.light{background:#fff;box-shadow:0 0 0 1px rgba(10,37,64,.07)}
+.review .media{position:relative;min-height:420px;cursor:pointer;border:0;padding:0;background:#12549F;overflow:hidden}
+.review .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;transition:transform .8s var(--ease)}
+.review .media:hover img{transform:scale(1.05)}
+.play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:2}
+.play::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:ring 2s var(--ease) infinite}
+@keyframes ring{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+.review .txt{padding:44px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.review .txt p{margin:0;font-size:17px;line-height:1.6;opacity:.85}
+/* modal */
+#modal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:rgba(7,26,46,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#modal.open{display:flex}
+#modal .box{position:relative;width:min(420px,92vw);max-height:88vh;aspect-ratio:540/766;border-radius:24px;overflow:hidden;background:#000}
+#modal video{width:100%;height:100%;object-fit:contain}
+#modal .x{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;cursor:pointer}
+/* faq */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.faq-side{position:sticky;top:100px;display:flex;flex-direction:column;gap:22px}
+.ask{border-radius:22px;background:var(--navy);color:#fff;padding:24px;display:flex;flex-direction:column;gap:14px}
+.qa{border-radius:20px;background:#fff;box-shadow:0 0 0 1px rgba(10,37,64,.07);margin-bottom:12px}
+.qa button{width:100%;min-height:64px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;cursor:pointer;text-align:left;font-size:17px;font-weight:700}
+.qa .pm{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .45s var(--ease),background .3s}
+.qa.open .pm{transform:rotate(135deg);background:var(--sun)}
+.qa .ans{height:0;overflow:hidden}
+.qa .ans p{margin:0;padding:0 22px 22px;font-size:16px;line-height:1.6;color:var(--ink2)}
+/* quiz */
+.quiz{background:var(--navy)}
+.quiz .wrap{max-width:880px}
+.qhead{text-align:center;color:#fff;display:flex;flex-direction:column;gap:14px;align-items:center;margin-bottom:28px}
+.qcard{border-radius:28px;background:#fff;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+.qbar{padding:18px 26px;background:var(--bg);display:flex;align-items:center;gap:16px;font-size:11px;font-weight:700}
+.qtrack{flex:1;position:relative;height:24px}
+.qtrack::before{content:"";position:absolute;left:0;right:0;top:11px;border-top:2px dashed #B9C6D6}
+.qfill{position:absolute;left:0;top:10px;height:4px;border-radius:4px;background:var(--navy);width:0}
+.qplane{position:absolute;top:0;left:0}
+.qbody{padding:34px 30px 32px;min-height:380px;position:relative}
+.qq{font-size:clamp(22px,2.6vw,30px);line-height:1.2;margin:0 0 22px}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.opt{min-height:64px;padding:16px 20px;border-radius:16px;border:2px solid #D6E0EC;background:#fff;text-align:left;font-size:16px;font-weight:700;cursor:pointer;transition:border-color .25s,background .25s,transform .25s var(--ease)}
+.opt:hover{border-color:var(--navy);transform:translateY(-2px)}
+.opt.picked{background:var(--navy);color:#fff;border-color:var(--navy)}
+.back{margin-top:16px;min-height:44px;padding:0 4px;background:none;border:0;font-weight:700;color:var(--ink3);cursor:pointer}
+.qin{width:100%;min-height:60px;padding:0 20px;border-radius:16px;border:2px solid #D6E0EC;font:inherit;font-size:18px;margin:8px 0 14px}
+.qin:focus{border-color:var(--navy);outline:none}
+.sumgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 24px;margin:18px 0 22px}
+.sumgrid span{display:block;font-size:11px;color:var(--ink3);font-weight:700}
+.sumgrid b{font-size:16px}
+.approved{position:absolute;right:26px;top:22px;width:120px;height:120px;border-radius:50%;border:3px solid var(--green);outline:1.5px solid var(--green);outline-offset:-10px;color:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg)}
+.approved b{font-size:16px;letter-spacing:0}
+.approved span{font-size:10px;font-weight:700}
+.confetti{position:absolute;width:8px;height:12px;border-radius:2px;pointer-events:none}
+/* footer */
+footer{background:var(--navy2);color:#fff;padding:80px 0 40px}
+footer .big{font-size:clamp(38px,7vw,104px);line-height:.95}
+footer .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:48px 0;font-size:15px;line-height:1.8}
+footer .cols span.mono{display:block;font-size:11px;opacity:.6}
+footer .cols a{color:#fff}
+footer .bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;opacity:.6}
+.fab{position:fixed;right:18px;bottom:max(18px,env(safe-area-inset-bottom));z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.4)}
+/* responsive */
+@media (max-width:900px){
+ .sec{padding:80px 0}
+ nav{display:none}
+ header .btn{display:none}
+ .fab{display:flex}
+ .hero{padding-top:96px}
+ .hero .grid,.founder .grid,.faq-grid,.review{grid-template-columns:1fr}
+ .heroArt{min-height:460px}
+ .heroMedia{inset:0 0 70px 24px}
+ .perks,.countries{grid-template-columns:1fr}
+ .money{grid-row:auto;min-height:260px}
+ .visas{grid-template-columns:repeat(2,1fr);gap:16px}
+ .reels{grid-template-columns:repeat(2,1fr)}
+ .jobs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:-24px;padding:4px 24px 12px 0}
+ .jobs>*{scroll-snap-align:start}
+ .career{grid-template-columns:repeat(2,1fr)}
+ .faq-side{position:static}
+ .review .media{min-height:440px}
+ .review .txt{padding:30px}
+ footer .cols{grid-template-columns:1fr}
+ .opts,.sumgrid,.clist{grid-template-columns:1fr}
+ .polaroid figcaption span{display:none}
+ .polaroid figcaption{justify-content:flex-end}
+ .founderWrap{padding:0}
+ .founder{border-radius:28px}
+ .approved{width:96px;height:96px;right:16px;top:14px}
+}
+@media (max-width:520px){
+ .wrap{padding:0 18px}
+ .steps{padding-left:58px}
+ .step .num{left:-58px;width:44px;height:44px}
+ .rail,.rail-fill{left:20px}
+ .rail-plane{left:9px}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ #loader{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="sunball"></div>
+  <div class="word h"><span>SunJob</span></div>
+</div>
+
+<header id="hdr">
+ <div class="wrap">
+  <a class="logo h" href="#top">
+   <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#0A2540"/><circle cx="17" cy="19" r="7" fill="#FFC531"/><rect x="5" y="20" width="24" height="9" fill="#0A2540"/><path d="M7 22h20M9 25h16" stroke="#7FB2F0" stroke-width="1.6" stroke-linecap="round"/></svg>
+   SunJob
+  </a>
+  <nav aria-label="Разделы">
+   <a href="#vacancies">Вакансии</a><a href="#conditions">Условия</a><a href="#route">Как это работает</a><a href="#founder">О нас</a><a href="#faq">Вопросы</a>
+  </nav>
+  <a class="btn btn-navy" data-wa="Здравствуйте! Хочу узнать о работе в отелях." target="_blank" rel="noopener">WhatsApp</a>
+ </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+ <div class="wrap grid">
+  <div style="display:flex;flex-direction:column;gap:24px">
+   <div class="pill mono" data-hero><span class="dot"></span>Набор на сезон 2027 открыт</div>
+   <h1 class="h" data-split>Работа в отелях Турции, Египта и&nbsp;Кипра</h1>
+   <p class="lead" data-hero style="font-size:clamp(18px,1.6vw,21px);max-width:560px"><span class="hl">От 500 000 ₸ в месяц на руки.</span> Жильё и питание — бесплатно, перелёт компенсирует отель. Официальный договор и сопровождение от заявки до конца сезона.</p>
+   <div class="btns" data-hero>
+    <a class="btn btn-sun magnet" href="#quiz">Подобрать вакансию за 1 минуту <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn btn-ghost magnet" data-wa="Здравствуйте! У меня вопрос о работе в отелях Турции." target="_blank" rel="noopener">Задать вопрос в WhatsApp</a>
+   </div>
+   <div class="checks" data-hero>
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>С 18 лет, без опыта и языка</span>
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Можно вдвоём или парой</span>
+    <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12A150" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Возврат 50%, если не одобрили</span>
+   </div>
+   <div class="count-card" data-hero><b class="h" data-count="562">562</b><span style="font-size:14px;line-height:1.35;font-weight:600;color:var(--ink2)">кандидата уже поехали работать<br>в отели с SunJob</span></div>
+  </div>
+
+  <div class="heroArt">
+   <div class="heroMedia" id="heroMedia">
+    <video id="heroVid" autoplay muted loop playsinline preload="auto" poster="img/hero.webp"><source src="vid/hero.mp4" type="video/mp4"></video>
+    <div class="tag mono">Бодрум · сезон 2026</div>
+   </div>
+   <div class="ticket" id="ticket">
+    <div class="tk" id="tk">
+     <div class="tk-top mono"><span>Boarding pass</span><span style="color:var(--sun)">Season 2027</span></div>
+     <div class="tk-body">
+      <div class="route">
+       <div><b class="h">KZ</b><small>Казахстан</small></div>
+       <div class="track"><svg id="tkPlane" width="28" height="28" viewBox="0 0 24 24" fill="#0A2540" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/></svg></div>
+       <div style="text-align:right"><b class="h">AYT</b><small>Анталья</small></div>
+      </div>
+      <div class="tk-cols mono"><div><span>Пассажир</span><b>Вы</b></div><div><span>Интервью</span><b>Декабрь</b></div><div><span>Вылет</span><b>Апрель</b></div></div>
+     </div>
+     <div class="perf" style="background-color:#fff"></div>
+     <div class="tk-bot"><div class="mono"><span style="display:block;font-size:11px;color:var(--ink3)">Контракт</span><b style="font-size:15px">6 месяцев</b></div><div class="barcode" aria-hidden="true"></div></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="marquee" aria-label="Почему нам доверяют"><div class="mq-track mono" id="mq"></div></div>
+
+<!-- VISAS -->
+<section class="sec" style="padding-bottom:40px">
+ <div class="wrap">
+  <div class="head">
+   <div><span class="eyebrow mono">562 кандидата уже уехали с SunJob</span><h2 class="h2 h" data-split>Они уже получили рабочие визы в Турцию</h2></div>
+   <p class="lead" data-reveal>Реальные кандидаты SunJob. Личные данные на визах скрыты.</p>
+  </div>
+  <div class="visas" id="visas">
+   <figure class="polaroid"><img src="img/visa1.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa2.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa3.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa4.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa5.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa6.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <figure class="polaroid"><img src="img/visa7.webp" alt="Кандидат SunJob с рабочей визой в Турцию" loading="lazy"><figcaption class="mono"><span>Çalışma / Work</span><b>TÜRKİYE ✓</b></figcaption></figure>
+   <div class="cta-card polaroid" style="padding:24px"><span class="h" style="font-size:22px;line-height:1.2">Следующая виза может быть вашей</span><a class="btn btn-sun" href="#quiz" style="min-height:50px;border-radius:14px">Подобрать вакансию</a></div>
+  </div>
+ </div>
+</section>
+
+<!-- CONDITIONS -->
+<section class="sec" id="conditions">
+ <div class="wrap">
+  <div class="head">
+   <div><span class="eyebrow mono">01 · Условия</span><h2 class="h2 h" data-split>Зарабатываете — и почти ничего не тратите</h2></div>
+   <p class="lead" data-reveal>Жильё, еда и форма — за счёт отеля. Поэтому почти весь доход остаётся у вас.</p>
+  </div>
+  <div class="perks" data-stagger>
+   <div class="card money"><span class="mono" style="font-size:12px;color:var(--sun)">Доход на руки</span><div><div class="big h">от <span data-count="500000" data-format="money">500 000</span> ₸</div><p style="margin-top:12px;font-size:17px;color:rgba(255,255,255,.85)">в месяц на любой позиции. Точная сумма — в договоре до подписания.</p></div></div>
+   <div class="card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A2540" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div><h3 class="h">Жильё бесплатно</h3><p>Проживание для персонала рядом с отелем.</p></div>
+   <div class="card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A2540" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-2 0-3 2-3 5s1 4 3 4v9"/></svg></div><h3 class="h">Питание бесплатно</h3><p>Кормят в столовой для сотрудников.</p></div>
+   <div class="card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A2540" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16l20-6-9 11-2-5z"/></svg></div><h3 class="h">Перелёт за счёт отеля</h3><p>Стоимость билетов компенсирует работодатель.</p></div>
+   <div class="card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A2540" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg></div><h3 class="h">Контракт 6 месяцев</h3><p>Сезон с апреля. Можно поехать вдвоём или парой.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="sec" style="padding-top:20px">
+ <div class="wrap">
+  <div class="head"><div><span class="eyebrow mono">02 · Направления</span><h2 class="h2 h" data-split>Три страны. Один штамп в паспорте — и вы на море</h2></div></div>
+  <div class="countries" data-stagger>
+   <div class="card country"><div class="stamp" style="color:#1667D9"><span class="mono">SunJob · 2027</span><b class="h">TÜRKİYE</b><span class="mono">Approved</span></div><div style="display:flex;flex-direction:column;gap:12px"><div class="nm"><b class="h">Турция</b><span class="chip mono">Основное</span></div><p>Анимация, официанты, ресепшн, хостес, горничные и другие службы курортных отелей.</p></div></div>
+   <div class="card country"><div class="stamp" style="color:#0A2540"><span class="mono">SunJob · 2027</span><b class="h">EGYPT</b><span class="mono">Approved</span></div><div style="display:flex;flex-direction:column;gap:12px"><div class="nm"><b class="h">Египет</b><span class="chip mono">Курорты</span></div><p>Вакансии в курортных отелях: анимация и другие гостиничные подразделения.</p></div></div>
+   <div class="card country"><div class="stamp" style="color:#1D6B47"><span class="mono">SunJob · 2027</span><b class="h">KKTC</b><span class="mono">Approved</span></div><div style="display:flex;flex-direction:column;gap:12px"><div class="nm"><b class="h">Сев. Кипр</b><span class="chip mono">Новое</span></div><p>Дополнительное направление: гостиничный и курортный сектор.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- VACANCIES -->
+<section class="sec bg2" id="vacancies">
+ <div class="wrap">
+  <div class="head">
+   <div><span class="eyebrow mono">03 · Вакансии</span><h2 class="h2 h" data-split>Выберите, кем хотите работать</h2></div>
+   <p class="lead" data-reveal>Нажмите «Хочу сюда» — откроется WhatsApp с готовым сообщением.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Фильтр по отделам" id="filters"></div>
+  <div class="jobs" id="jobs"></div>
+  <p class="note">Наличие вакансий, требования и условия зависят от актуальных предложений работодателей.</p>
+ </div>
+</section>
+
+<!-- ROUTE -->
+<section class="sec" id="route">
+ <div class="wrap">
+  <div class="head"><div><span class="eyebrow mono">04 · Маршрут</span><h2 class="h2 h" data-split>От заявки до первого рабочего дня — 8 остановок</h2><p class="lead" data-reveal>На каждом этапе вы знаете, что происходит и что будет дальше. Оформление занимает около недели.</p></div></div>
+  <div class="steps" id="steps">
+   <div class="rail" aria-hidden="true"></div><div class="rail-fill" id="railFill" aria-hidden="true"></div>
+   <svg class="rail-plane" id="railPlane" viewBox="0 0 24 24" fill="#0A2540" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+  </div>
+ </div>
+</section>
+
+<!-- FOUNDER -->
+<div class="founderWrap" id="founder">
+<section class="founder sec" id="founderSec">
+ <div class="wrap grid">
+  <div class="portrait">
+   <div class="ph"><img id="portraitImg" src="img/arailym.webp" alt="Арайлым Сембаевна, основательница SunJob" loading="lazy"></div>
+   <div class="since" id="since"><span class="mono">в отелях</span><b class="h">с 2019</b><span class="mono">TR · EG</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px">
+   <span class="eyebrow mono" style="color:var(--sun)">05 · Основательница</span>
+   <h2 class="h2 h" data-split style="font-size:clamp(28px,3.6vw,50px)">Я прошла этот путь сама — от аниматора до координатора команд</h2>
+   <blockquote data-reveal>«Для меня SunJob — это не просто трудоустройство. Это ответственность за каждого кандидата».</blockquote>
+   <div data-reveal><b style="font-size:18px;display:block">Арайлым Сембаевна</b><span style="opacity:.75">Founder &amp; Director SunJob</span></div>
+   <div class="career" data-stagger>
+    <div><span class="mono">Шаг 1 · 2019</span><b>Детский аниматор</b></div>
+    <div><span class="mono">Шаг 2</span><b>Шеф анимации</b></div>
+    <div><span class="mono">Шаг 3</span><b>Супервайзер</b></div>
+    <div><span class="mono">Сейчас</span><b>Координатор команд и основатель SunJob</b></div>
+   </div>
+   <p data-reveal style="margin:0;font-size:16px;line-height:1.6;opacity:.85">Я знаю отели изнутри: как устроена работа, что требуют работодатели и как помочь новому сотруднику освоиться. Поэтому сопровождаю каждого кандидата не только до вылета, но и весь сезон.</p>
+   <div class="btns" data-reveal>
+    <a class="btn btn-sun magnet" data-wa="Здравствуйте, Арайлым! Хочу задать вопрос." target="_blank" rel="noopener">Задать вопрос Арайлым</a>
+    <a class="btn btn-ghost-l magnet" data-wa="Здравствуйте, Арайлым! Хочу созвониться в Zoom или встретиться в Атырау, чтобы обсудить работу." target="_blank" rel="noopener">Zoom или встреча в Атырау</a>
+   </div>
+  </div>
+ </div>
+</section>
+</div>
+
+<!-- LIFE -->
+<section class="sec" id="life">
+ <div class="wrap">
+  <div class="head">
+   <div><span class="eyebrow mono">06 · Как это на самом деле</span><h2 class="h2 h" data-split>Без рекламных картинок — только наши ребята</h2></div>
+   <p class="lead" data-reveal>Где живут, что едят и как проходит рабочий день — снято самими сотрудниками.</p>
+  </div>
+  <div class="reels" id="reels" data-stagger></div>
+
+  <div class="review dark" data-reveal>
+   <button class="media" data-video="vid/aidana.mp4" aria-label="Смотреть видео-отзыв Айданы"><img src="img/aidana.webp" alt="Айдана, артист в отеле в Бодруме" loading="lazy"><span class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button>
+   <div class="txt">
+    <span class="eyebrow mono" style="color:var(--sun)">Видео-отзыв · сезон 2026</span>
+    <div class="h" style="font-size:clamp(26px,2.8vw,38px);line-height:1.12">Айдана, 22 года — артист в отеле в Бодруме</div>
+    <p>Показывает, как живёт и работает в Турции: комната для персонала, питание в отеле, вечерние шоу, команда и выходные на море.</p>
+    <button class="btn btn-sun magnet" data-video="vid/aidana.mp4" style="align-self:flex-start">Смотреть видео <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+   </div>
+  </div>
+  <div class="review light" data-reveal>
+   <button class="media" data-video="vid/alena.mp4" aria-label="Смотреть видео-отзыв Алёны"><img src="img/alena.webp" alt="Алёна, шеф-аниматор из Павлодара" loading="lazy"><span class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button>
+   <div class="txt">
+    <span class="eyebrow mono">Видео-отзыв · Египет</span>
+    <div class="h" style="font-size:clamp(24px,2.6vw,34px);line-height:1.12">Алёна из Павлодара — шеф-аниматор</div>
+    <p style="color:var(--ink2);opacity:1">Показывает, чем кормят аниматоров в отеле — честный обзор столовой для персонала.</p>
+    <button class="btn btn-navy magnet" data-video="vid/alena.mp4" style="align-self:flex-start">Смотреть видео <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec bg2" id="faq">
+ <div class="wrap faq-grid">
+  <div class="faq-side">
+   <span class="eyebrow mono">07 · Вопросы</span>
+   <h2 class="h2 h" data-split style="font-size:clamp(30px,3.4vw,48px)">Всё, что вы узнаете до подписания</h2>
+   <p class="lead" data-reveal>Зарплата и валюта, график и выходные, жильё, питание, униформа, перелёт и виза, трудовой договор — по каждой вакансии вы получаете условия заранее и решаете спокойно.</p>
+   <div class="ask" data-reveal><b>Не нашли свой вопрос?</b><a class="btn btn-sun" data-wa="Здравствуйте! Не нашёл(ла) ответ на сайте, хочу уточнить." target="_blank" rel="noopener" style="border-radius:14px;min-height:50px">Спросить в WhatsApp</a></div>
+  </div>
+  <div id="faqList"></div>
+ </div>
+</section>
+
+<!-- QUIZ -->
+<section class="sec quiz" id="quiz">
+ <div class="wrap">
+  <div class="qhead">
+   <span class="eyebrow mono" style="color:var(--sun)">Подбор вакансии · 1 минута</span>
+   <h2 class="h2 h" data-split>Соберём ваш посадочный талон</h2>
+   <p style="margin:0;font-size:17px;opacity:.8">6 коротких шагов — и Арайлым пришлёт подходящие вакансии в WhatsApp.</p>
+  </div>
+  <div class="qcard">
+   <div class="qbar mono"><span id="qLabel">Шаг 1 из 6</span><div class="qtrack"><div class="qfill" id="qFill"></div><svg class="qplane" id="qPlane" width="24" height="24" viewBox="0 0 24 24" fill="#0A2540" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/></svg></div><span>AYT</span></div>
+   <div class="qbody" id="qBody" aria-live="polite"></div>
+  </div>
+  <p style="margin:22px 0 0;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">Собеседования с отелями — в декабре 2026. Выход на работу — с апреля 2027.</p>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="big h" data-split>Ваша карьера <span style="color:var(--sun)">без границ.</span></div>
+  <div class="cols">
+   <div><span class="mono">Связь</span><a data-wa="Здравствуйте!" target="_blank" rel="noopener">WhatsApp: +7 775 166 13 65</a><br><a href="https://instagram.com/sembaevnaaaaa" target="_blank" rel="noopener">Instagram: @sembaevnaaaaa</a></div>
+   <div><span class="mono">Компания</span>ИП «SunJob»<br>Атырау · встреча и Zoom по записи</div>
+   <div><span class="mono">Гарантии</span>Договор — до начала оплаты<br>Турция · Египет · Северный Кипр</div>
+  </div>
+  <div class="bot"><span>© 2026 SunJob</span><span>Сайт: Growth AG</span></div>
+ </div>
+</footer>
+
+<a class="fab" data-wa="Здравствуйте! Хочу узнать о вакансиях." target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3L3 21z"/></svg></a>
+
+<div id="modal" role="dialog" aria-modal="true" aria-label="Видео-отзыв"><div class="box"><video id="mVid" playsinline controls></video></div><button class="x" id="mClose" aria-label="Закрыть">×</button></div>
+
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/Flip.min.js"></script>
+<script>
+(function(){
+var PHONE='77751661365';
+function wa(t){return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(t)}
+document.querySelectorAll('[data-wa]').forEach(function(a){a.href=wa(a.getAttribute('data-wa'))});
+
+/* ---------- data ---------- */
+var mq=['562 кандидата уже уехали','Договор с каждым кандидатом','Возврат 50%, если не одобрили','Жильё и питание — за счёт отеля','Перелёт компенсирует отель','С 18 лет, без опыта','Сопровождение весь сезон'];
+var mqHtml=mq.map(function(m){return '<span>'+m+'<i>✦</i></span>'}).join('');
+document.getElementById('mq').innerHTML=mqHtml+mqHtml;
+
+var depts=[['all','Все'],['anim','Анимация'],['rest','Ресторан и бар'],['front','Ресепшн и гости'],['house','Housekeeping'],['sport','Спорт']];
+var jobs=[
+['anim','Анимация','Детский аниматор','Турция, Египет · мини-клуб, шоу, игры с детьми','Без опыта'],
+['anim','Анимация','Спортивный аниматор','Турция, Египет · активности у бассейна и на пляже','Без опыта'],
+['anim','Анимация','Артист шоу (Event Artist)','Турция · вечерние шоу и программы','Сцена'],
+['rest','Ресторан и бар','Официант','Турция, Сев. Кипр · рестораны и бары отеля','Без опыта'],
+['rest','Ресторан и бар','Хостес','Турция · встреча и рассадка гостей','Без опыта'],
+['rest','Ресторан и бар','Бармен','Турция, Сев. Кипр · лобби, пляжный, пул-бары','Опыт — плюс'],
+['front','Приём гостей','Ресепшн','Турция · заселение и помощь гостям','Язык — плюс'],
+['front','Приём гостей','Guest Relations','Турция · забота о гостях отеля','Язык — плюс'],
+['house','Хозяйственная служба','Горничная (Housekeeping)','Турция, Египет, Сев. Кипр','Без опыта'],
+['sport','Спорт','Фитнес-тренер','Турция · фитнес-зал и групповые занятия','Опыт — плюс'],
+['sport','Спорт','Спортивный тренер','Турция · спортивные программы для гостей','Опыт — плюс']];
+var fEl=document.getElementById('filters'),jEl=document.getElementById('jobs');
+fEl.innerHTML=depts.map(function(d,i){return '<button type="button" data-d="'+d[0]+'" aria-pressed="'+(i?'false':'true')+'">'+d[1]+'</button>'}).join('');
+jEl.innerHTML=jobs.map(function(j){return '<div class="job" data-d="'+j[0]+'"><div class="in"><div class="top mono"><span>'+j[1]+'</span><span class="badge">'+j[4]+'</span></div><h3 class="h">'+j[2]+'</h3><p>'+j[3]+'</p></div><div class="perf"></div><div class="go"><a target="_blank" rel="noopener" href="'+wa('Здравствуйте! Интересует вакансия «'+j[2]+'». Расскажите об условиях.')+'">Хочу сюда →</a></div></div>'}).join('');
+
+var steps=[
+['01','Заявка','Оставляете заявку на сайте или пишете в WhatsApp. Рассказываем о направлениях и вакансиях.','Check-in'],
+['02','Договор с SunJob','До начала работы подписываем договор. Вы заранее знаете все условия и решаете спокойно.','Главное',1],
+['03','Анкета и резюме','Собираем ваш опыт, навыки и языки. Готовим резюме для работодателя.','Gate 03'],
+['04','Подбор вакансии','Подбираем предложения под ваши пожелания и требования отелей.','Gate 04'],
+['05','Собеседование','Организуем собеседование с отелем и помогаем к нему подготовиться.','Декабрь 2026'],
+['06','Одобрение и условия','Подтверждаем должность, зарплату, график и срок контракта.','Gate 06'],
+['07','Документы и вылет','Помогаем с документами, визой и организацией поездки.','Boarding'],
+['08','Выход на работу','Вы на месте, оформлены и работаете. Мы на связи весь сезон.','Апрель 2027']];
+var contract=['Стоимость услуг и сроки оплаты','Права и обязанности сторон','Порядок оказания услуг','Условия возврата денег','Должность и зарплата','Другие существенные условия вакансии'];
+var tick='<svg style="flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC531" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+document.getElementById('steps').insertAdjacentHTML('beforeend',steps.map(function(s){return '<div class="step'+(s[4]?' key':'')+'"><div class="num mono">'+s[0]+'</div><div class="box"><div class="row"><h3 class="h">'+s[1]+'</h3><span class="gate mono">'+s[3]+'</span></div><p>'+s[2]+'</p>'+(s[4]?'<div class="clist">'+contract.map(function(c){return '<div>'+tick+c+'</div>'}).join('')+'</div>':'')+'</div></div>'}).join(''));
+
+var reels=[['team','Команда анимации','Коллеги со всего мира'],['show','Вечернее шоу','Работа артиста на сцене'],['food','Питание','Шведская линия для персонала'],['chef','Кухня отеля','Питание входит в условия'],['club','Мини-клуб','Детские аниматоры'],['fire','Огненное шоу','Ночная программа отеля'],['marina','Выходной','Набережная Бодрума']];
+document.getElementById('reels').innerHTML=reels.map(function(r){return '<div class="reel"><video muted loop playsinline preload="none" poster="img/'+r[0]+'.webp" data-src="vid/'+r[0]+'.mp4"></video><div class="bars"><i></i><i></i><i></i></div><div class="cap"><b class="h">'+r[1]+'</b><span class="mono">'+r[2]+'</span></div></div>'}).join('')+'<a class="reel reel-cta" href="https://instagram.com/sembaevnaaaaa" target="_blank" rel="noopener"><span class="mono" style="font-size:11px;font-weight:700;color:var(--sun)">Instagram</span><span class="h" style="font-size:24px;line-height:1.15">Больше видео из отелей — у Арайлым</span><span style="font-weight:700">@sembaevnaaaaa →</span></a>';
+
+var faq=[
+['Как понять, что вы не мошенники?','Можно созвониться с Арайлым в Zoom или встретиться лично в Атырау — до оплаты. С каждым кандидатом мы заключаем договор до начала работы: в нём прописаны стоимость, сроки, права сторон и условия возврата. Агентство работает 5 лет, основательница сама прошла путь от аниматора до координатора команд в отелях Турции и Египта.'],
+['С какого возраста можно поехать?','С 18 лет. Опыт работы в отеле не обязателен.'],
+['Нужен ли опыт и иностранный язык?','На многие позиции — нет: аниматоров, официантов и горничных берут без опыта и без языка. Если знаете английский или турецкий, выбор вакансий шире.'],
+['Сколько стоят услуги и что если меня не возьмут?','Стоимость услуги — 200 000 ₸. Если работодатель не одобрит кандидата или не одобрят визу, возвращаем 50% — 100 000 ₸. Всё это прописано в договоре, который вы подписываете до оплаты.'],
+['Как происходит оплата?','Только после подписания договора с ИП «SunJob». Способ и сроки оплаты указаны в договоре — никаких платежей «на карту знакомому».'],
+['Можно встретиться лично? У вас есть офис?','Офиса пока нет — мы работаем онлайн по всему Казахстану. Но с Арайлым можно созвониться в Zoom или встретиться лично в Атырау, в том числе вместе с родителями.'],
+['Кто оплачивает перелёт, жильё и питание?','Жильё для персонала и питание предоставляет отель. Стоимость авиабилетов компенсирует отель. Точные условия по каждой вакансии вы получите до подписания.'],
+['Можно поехать с другом или парой?','Да. Подбираем вакансии так, чтобы вы могли работать в одном отеле.'],
+['Когда собеседования и выезд?','Собеседования с отелями — в декабре 2026, выход на работу — с апреля 2027. Контракт — 6 месяцев. Оформление занимает около недели.'],
+['Вы помогаете только до вылета?','Нет. Мы сопровождаем от заявки до конца сезона: документы, подготовка к собеседованию, вылет и поддержка во время работы в отеле.']];
+document.getElementById('faqList').innerHTML=faq.map(function(f,i){return '<div class="qa" data-reveal><button type="button" aria-expanded="false" aria-controls="a'+i+'" id="q'+i+'"><span>'+f[0]+'</span><span class="pm" aria-hidden="true">+</span></button><div class="ans" id="a'+i+'" role="region" aria-labelledby="q'+i+'"><p>'+f[1]+'</p></div></div>'}).join('');
+
+/* ---------- motion ---------- */
+var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var G=window.gsap;
+var loader=document.getElementById('loader');
+var fine=window.matchMedia('(pointer:fine)').matches;
+
+// split headings into words with masks
+document.querySelectorAll('[data-split]').forEach(function(el){
+  if(RM||!G)return;
+  var html='';
+  el.childNodes.forEach(function(n){
+    if(n.nodeType===3){n.textContent.split(/([ \t\n\r]+)/).forEach(function(p){html+=/^[ \t\n\r]+$/.test(p)||!p?p:'<span class="line" style="display:inline-block"><span class="w">'+p+'</span></span>'})}
+    else{var c=n.cloneNode(false);var inner='';(n.textContent||'').split(/([ \t\n\r]+)/).forEach(function(p){inner+=/^[ \t\n\r]+$/.test(p)||!p?p:'<span class="line" style="display:inline-block"><span class="w">'+p+'</span></span>'});c.innerHTML=inner;html+=c.outerHTML}
+  });
+  el.innerHTML=html.replace(/&amp;nbsp;/g,'&nbsp;');
+});
+
+// header hide/show
+var hdr=document.getElementById('hdr'),lastY=0;
+addEventListener('scroll',function(){var y=scrollY;hdr.classList.toggle('scrolled',y>20);hdr.classList.toggle('hide',y>lastY&&y>400);lastY=y},{passive:true});
+
+// reels autoplay in view
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(!v.src&&v.dataset.src)v.src=v.dataset.src;var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}})},{threshold:.35});
+document.querySelectorAll('.reel video').forEach(function(v){io.observe(v)});
+
+// video modal
+var modal=document.getElementById('modal'),mv=document.getElementById('mVid');
+function openVid(src,from){mv.src=src;modal.classList.add('open');document.body.style.overflow='hidden';var p=mv.play();if(p&&p.catch)p.catch(function(){});
+  if(G&&!RM){var box=modal.querySelector('.box');var r=from.getBoundingClientRect(),b=box.getBoundingClientRect();
+   G.fromTo(modal,{backgroundColor:'rgba(7,26,46,0)'},{backgroundColor:'rgba(7,26,46,.86)',duration:.4});
+   G.fromTo(box,{x:(r.left+r.width/2)-(b.left+b.width/2),y:(r.top+r.height/2)-(b.top+b.height/2),scale:Math.min(r.width/b.width,1),borderRadius:28,opacity:.4},{x:0,y:0,scale:1,opacity:1,duration:.7,ease:'expo.out'});}
+}
+function closeVid(){mv.pause();if(G&&!RM){G.to(modal.querySelector('.box'),{scale:.85,opacity:0,duration:.3,ease:'power2.in',onComplete:done})}else done();function done(){modal.classList.remove('open');mv.removeAttribute('src');mv.load();document.body.style.overflow='';if(G)G.set(modal.querySelector('.box'),{clearProps:'all'})}}
+document.querySelectorAll('[data-video]').forEach(function(b){b.addEventListener('click',function(){openVid(b.dataset.video,b.closest('.review').querySelector('.media'))})});
+document.getElementById('mClose').onclick=closeVid;
+modal.addEventListener('click',function(e){if(e.target===modal)closeVid()});
+addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeVid()});
+
+// FAQ accordion
+document.querySelectorAll('.qa button').forEach(function(btn){btn.addEventListener('click',function(){
+  var qa=btn.parentNode,ans=qa.querySelector('.ans'),open=!qa.classList.contains('open');
+  document.querySelectorAll('.qa.open').forEach(function(o){if(o!==qa){o.classList.remove('open');o.querySelector('button').setAttribute('aria-expanded','false');if(G)G.to(o.querySelector('.ans'),{height:0,duration:.45,ease:'power3.inOut'});else o.querySelector('.ans').style.height='0'}});
+  qa.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+  if(G&&!RM){G.to(ans,{height:open?'auto':0,duration:.55,ease:'power3.inOut'});if(open)G.from(ans.querySelector('p'),{y:-10,opacity:0,duration:.5,delay:.1})}else ans.style.height=open?'auto':'0';
+})});
+
+// filters with FLIP
+fEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var d=b.dataset.d;
+  fEl.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  var cards=[].slice.call(jEl.children);
+  if(G&&window.Flip&&!RM){var st=Flip.getState(cards);cards.forEach(function(c){c.style.display=(d==='all'||c.dataset.d===d)?'':'none'});
+    Flip.from(st,{duration:.6,ease:'expo.out',absolute:true,scale:true,onEnter:function(el){return G.fromTo(el,{opacity:0,scale:.85,y:20},{opacity:1,scale:1,y:0,duration:.6,ease:'expo.out',stagger:.04})},onLeave:function(el){return G.to(el,{opacity:0,scale:.85,duration:.3})}});
+  }else cards.forEach(function(c){c.style.display=(d==='all'||c.dataset.d===d)?'':'none'});
+});
+
+/* ---------- quiz ---------- */
+var Q=[['Работа','Какая работа вам интересна?',['Анимация','Ресторан и бар','Ресепшн и гости','Горничная','Спорт и фитнес','Пока не знаю']],
+['Опыт','Есть опыт работы в отеле?',['Нет, это будет первый раз','Был один сезон','Два сезона и больше','Есть опыт в сервисе дома']],
+['Языки','Иностранные языки?',['Не знаю','Английский — базовый','Английский — свободно','Турецкий']],
+['Еду','Как планируете ехать?',['Один / одна','С другом или подругой','Парой','Ещё не решил(а)']],
+['Возраст','Сколько вам лет?',['18–24','25–34','35–44','45+']]];
+var st={step:0,ans:[],name:''},qb=document.getElementById('qBody'),TOT=Q.length+1;
+function prog(){var p=Math.min(st.step,TOT)/TOT;document.getElementById('qLabel').textContent=st.step<TOT?'Шаг '+(st.step+1)+' из '+TOT:'Готово';
+  var tr=document.querySelector('.qtrack').clientWidth;
+  if(G)G.to('#qFill',{width:(p*100)+'%',duration:.7,ease:'expo.out'}),G.to('#qPlane',{x:p*(tr-24),duration:.9,ease:'expo.out'});else{document.getElementById('qFill').style.width=(p*100)+'%';document.getElementById('qPlane').style.transform='translateX('+p*(tr-24)+'px)'}}
+function render(dir){
+  var html;
+  if(st.step<Q.length){var q=Q[st.step];html='<h3 class="qq h">'+q[1]+'</h3><div class="opts">'+q[2].map(function(o){return '<button type="button" class="opt'+(st.ans[st.step]===o?' picked':'')+'">'+o+'</button>'}).join('')+'</div>'+(st.step?'<button type="button" class="back" data-back>← Назад</button>':'');}
+  else if(st.step===Q.length){html='<h3 class="qq h">Последнее: как к вам обращаться?</h3><label class="mono" for="qn" style="font-size:11px;font-weight:700;color:var(--ink3)">Имя пассажира</label><input class="qin" id="qn" type="text" autocomplete="given-name" placeholder="Например, Айгерим" value="'+st.name.replace(/"/g,'&quot;')+'"><button type="button" class="btn btn-sun" id="qGo" style="width:100%">Получить талон →</button><br><button type="button" class="back" data-back>← Назад</button>';}
+  else{var msg='Здравствуйте! Я '+st.name+', прошёл(ла) подбор на сайте SunJob.\n'+Q.map(function(q,i){return q[0]+': '+(st.ans[i]||'—')}).join('\n')+'\nПодберите, пожалуйста, вакансию.';
+    html='<div class="approved" id="appr"><span class="mono">SunJob</span><b class="h">APPROVED</b><span class="mono">2027</span></div><h3 class="qq h" style="max-width:70%">'+(st.name?st.name+', ваш':'Ваш')+' талон готов</h3><div class="sumgrid mono">'+Q.map(function(q,i){return '<div><span>'+q[0]+'</span><b style="text-transform:none;letter-spacing:0;font-family:Onest,system-ui,sans-serif">'+(st.ans[i]||'—')+'</b></div>'}).join('')+'</div><a class="btn btn-navy" style="width:100%" target="_blank" rel="noopener" href="'+wa(msg)+'">Отправить талон Арайлым в WhatsApp</a><br><button type="button" class="back" data-restart>Пройти заново</button>';}
+  function swap(){qb.innerHTML=html;bind();prog();
+    if(G&&!RM){G.fromTo(qb.children,{x:dir*40,opacity:0},{x:0,opacity:1,duration:.55,ease:'expo.out',stagger:.05});var o=qb.querySelectorAll('.opt');if(o.length)G.fromTo(o,{y:16,opacity:0},{y:0,opacity:1,duration:.5,ease:'expo.out',stagger:.05,delay:.08});
+      var a=document.getElementById('appr');if(a){G.fromTo(a,{scale:2.4,rotate:-40,opacity:0},{scale:1,rotate:-12,opacity:1,duration:.55,ease:'back.out(2.2)',delay:.25,onComplete:burst});}}}
+  if(G&&!RM&&qb.children.length){G.to(qb.children,{x:-dir*40,opacity:0,duration:.25,ease:'power2.in',onComplete:swap})}else swap();
+}
+function burst(){var cols=['#FFC531','#1667D9','#12A150','#0A2540','#7FB2F0'];var a=document.getElementById('appr');if(!a)return;var r=a.getBoundingClientRect(),b=qb.getBoundingClientRect();
+  for(var i=0;i<26;i++){var p=document.createElement('i');p.className='confetti';p.style.background=cols[i%5];p.style.left=(r.left-b.left+r.width/2)+'px';p.style.top=(r.top-b.top+r.height/2)+'px';qb.appendChild(p);
+   G.to(p,{x:(Math.random()-.5)*360,y:(Math.random()-.2)*-260+120,rotation:Math.random()*720,opacity:0,duration:1.4+Math.random(),ease:'power3.out',onComplete:function(){this.targets()[0].remove()}})}}
+function bind(){
+  qb.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){b.classList.add('picked');st.ans[st.step]=b.textContent;st.step++;setTimeout(function(){render(1)},RM?0:180)}});
+  var bk=qb.querySelector('[data-back]');if(bk)bk.onclick=function(){st.step--;render(-1)};
+  var rs=qb.querySelector('[data-restart]');if(rs)rs.onclick=function(){st={step:0,ans:[],name:''};render(-1)};
+  var go=document.getElementById('qGo'),inp=document.getElementById('qn');
+  if(inp){inp.oninput=function(){st.name=inp.value.trim()};inp.onkeydown=function(e){if(e.key==='Enter')go.click()}}
+  if(go)go.onclick=function(){st.step++;render(1)};
+}
+render(1);
+
+/* ---------- GSAP choreography ---------- */
+if(!G||RM){if(loader)loader.remove();return}
+G.registerPlugin(ScrollTrigger);
+if(window.Flip)G.registerPlugin(Flip);
+G.defaults({ease:'expo.out'});
+
+// loader → hero
+var tl=G.timeline();
+tl.from('#loader .sunball',{y:80,scale:.6,opacity:0,duration:.8})
+  .from('#loader .word span',{yPercent:110,duration:.7},'-=.45')
+  .to('#loader .sunball',{scale:30,duration:.9,ease:'expo.in'},'+=.15')
+  .to('#loader',{yPercent:-100,duration:.8,ease:'expo.inOut'},'-=.25')
+  .add(function(){loader.remove()})
+  .from('#hdr',{y:-80,opacity:0,duration:.9},'-=.45')
+  .from('.hero h1 .w',{yPercent:110,rotate:4,duration:1.1,stagger:.05},'<')
+  .from('[data-hero]',{y:28,opacity:0,duration:1,stagger:.08},'-=.85')
+  .from('#heroMedia',{clipPath:'inset(18% 12% 18% 12% round 32px)',duration:1.4,ease:'expo.inOut'},'-=1.2')
+  .from('#heroVid',{scale:1.35,duration:1.8},'<')
+  .from('#ticket',{y:160,x:-60,rotate:-14,opacity:0,duration:1.3,ease:'back.out(1.2)'},'-=1.1')
+  .to('#ticket',{rotate:-2.5,duration:.6},'-=.4');
+// idle ticket float + plane
+G.to('#tk',{y:-8,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1,delay:3});
+G.fromTo('#tkPlane',{x:0},{x:function(){return document.querySelector('.track').clientWidth-28},duration:6,ease:'sine.inOut',repeat:-1,yoyo:true,delay:2.5});
+// counters
+document.querySelectorAll('[data-count]').forEach(function(el){var n=+el.dataset.count,o={v:0},money=el.dataset.format==='money';
+  ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:function(){G.to(o,{v:n,duration:2.2,delay:el.closest('.hero')?2.6:0,ease:'power3.out',onUpdate:function(){el.textContent=money?Math.round(o.v/1000)*1000>=1000?(Math.round(o.v/1000)*1000).toLocaleString('ru-RU'):'0':Math.round(o.v)}})}})});
+// hero parallax
+G.to('#heroVid',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+G.to('#ticket',{yPercent:-30,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+// marquee with scroll velocity
+var mqT=document.getElementById('mq'),mqX=0,mqSpeed=.6,boost=0;
+G.ticker.add(function(){mqX-=mqSpeed+boost;boost*=.92;var w=mqT.scrollWidth/2;if(-mqX>=w)mqX+=w;G.set(mqT,{x:mqX})});
+ScrollTrigger.create({onUpdate:function(s){boost=Math.min(Math.abs(s.getVelocity())/300,8)}});
+
+// headings
+document.querySelectorAll('[data-split]').forEach(function(el){if(el.closest('.hero'))return;
+  G.from(el.querySelectorAll('.w'),{yPercent:110,rotate:3,duration:1.1,stagger:.04,scrollTrigger:{trigger:el,start:'top 88%'}})});
+G.utils.toArray('.eyebrow').forEach(function(el){if(el.closest('.hero'))return;G.from(el,{opacity:0,x:-20,duration:.9,scrollTrigger:{trigger:el,start:'top 90%'}})});
+G.utils.toArray('[data-reveal]').forEach(function(el){G.from(el,{y:40,opacity:0,duration:1.1,clearProps:'transform',scrollTrigger:{trigger:el,start:'top 90%'}})});
+G.utils.toArray('[data-stagger]').forEach(function(el){G.from(el.children,{y:60,opacity:0,duration:1.1,stagger:.09,clearProps:'transform',scrollTrigger:{trigger:el,start:'top 85%'}})});
+
+// visas: drop-in polaroids with random tilt
+var pol=G.utils.toArray('#visas .polaroid');
+pol.forEach(function(p,i){G.set(p,{rotate:[-2.5,1.8,-1.2,2.4,-1.8,1.2,-2.2,1.5][i]||0})});
+G.from(pol,{y:-120,rotate:function(i){return (i%2?1:-1)*(18+i*3)},opacity:0,scale:.9,duration:1.2,ease:'back.out(1.4)',stagger:{each:.08,from:'random'},scrollTrigger:{trigger:'#visas',start:'top 80%'}});
+
+// stamps thump
+G.utils.toArray('.stamp').forEach(function(s){G.from(s,{scale:2.2,rotate:-40,opacity:0,duration:.7,ease:'back.out(2)',scrollTrigger:{trigger:s,start:'top 85%'}})});
+
+// jobs enter
+G.from('#jobs .job',{y:50,opacity:0,duration:1,stagger:.06,clearProps:'transform',scrollTrigger:{trigger:'#jobs',start:'top 85%'}});
+
+// route: rail fill + plane + active steps
+var stepsEl=document.getElementById('steps');
+G.to('#railFill',{scaleY:1,ease:'none',scrollTrigger:{trigger:stepsEl,start:'top 60%',end:'bottom 60%',scrub:.6}});
+G.fromTo('#railPlane',{y:0},{y:function(){return stepsEl.clientHeight-30},ease:'none',scrollTrigger:{trigger:stepsEl,start:'top 60%',end:'bottom 60%',scrub:.6}});
+G.utils.toArray('.step').forEach(function(s){ScrollTrigger.create({trigger:s,start:'top 62%',onEnter:function(){s.classList.add('on')},onLeaveBack:function(){s.classList.remove('on')}});
+  G.from(s.querySelector('.box'),{x:60,opacity:0,duration:1,scrollTrigger:{trigger:s,start:'top 88%'}})});
+
+// founder: section expands from card to full width
+var mm=G.matchMedia();
+mm.add('(min-width:901px)',function(){
+  G.fromTo('#founderSec',{clipPath:'inset(0% 6% 0% 6% round 48px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'#founderSec',start:'top 90%',end:'top 20%',scrub:true}});
+});
+G.fromTo('#portraitImg',{yPercent:-6},{yPercent:4,ease:'none',scrollTrigger:{trigger:'#founderSec',start:'top bottom',end:'bottom top',scrub:true}});
+G.from('.portrait .ph',{clipPath:'inset(100% 0 0 0 round 32px)',duration:1.4,ease:'expo.inOut',scrollTrigger:{trigger:'.portrait',start:'top 80%'}});
+G.from('#since',{scale:0,rotate:-180,duration:1,ease:'back.out(1.8)',delay:.6,scrollTrigger:{trigger:'.portrait',start:'top 80%'}});
+
+// reviews media reveal
+G.utils.toArray('.review .media img').forEach(function(img){G.from(img,{scale:1.3,duration:1.6,scrollTrigger:{trigger:img,start:'top 85%'}})});
+
+// quiz card rise
+G.from('.qcard',{y:80,rotate:-2,opacity:0,duration:1.2,scrollTrigger:{trigger:'.qcard',start:'top 90%'}});
+
+// magnetic buttons
+if(fine){document.querySelectorAll('.magnet').forEach(function(b){
+  b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();G.to(b,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.5})});
+  b.addEventListener('mouseleave',function(){G.to(b,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'})});
+});
+ // tilt on cards
+ document.querySelectorAll('.country,.polaroid').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();G.to(c,{rotateY:(e.clientX-r.left-r.width/2)/r.width*8,rotateX:-(e.clientY-r.top-r.height/2)/r.height*8,transformPerspective:800,duration:.6})});c.addEventListener('mouseleave',function(){G.to(c,{rotateX:0,rotateY:0,duration:.8})})});
+}
+// smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})})});
+addEventListener('load',function(){ScrollTrigger.refresh()});
+})();
+</script>
+</body>
+</html>
