@@ -1500,7 +1500,6 @@ function computeItems(){
     }
   }
   {const w=S.workouts[t]||{},go=()=>{S.tab='sport';render()};
-   if(!wdone(w))add('today',{key:'wc'+t,title:'Кардио: бег или велик',sub:'Спорт · выбери во вкладке «Спорт»',open:go});
    if(!w.squats)add('today',{key:'wq'+t,title:'100 приседаний',sub:'Спорт · каждый день',open:go,done:()=>setWorkout(t,{squats:true},'100 приседаний засчитано'),doneLabel:'Сделал'});}
   for(const e of S.gcal.events){if(!e.isTask)continue;const dk='gt'+e.id+'_'+e.date;if(S.gtasks[e.id+'_'+e.date])continue;
     const it2={key:dk,kind:'task',title:e.title,sub:'Google Календарь'+(e.allDay?'':' · '+e.time),open:()=>{let w=null;try{w=e.link?window.open(e.link,'_blank'):null}catch(_){}if(!w)toast('Задача из Google Календаря. Отметь кружком, когда сделаешь.')},done:()=>{put('gtasks',e.id+'_'+e.date,{done:true,title:e.title,at:today()});toast('Готово: '+e.title,()=>del('gtasks',e.id+'_'+e.date))},doneLabel:'Готово'};
@@ -1696,13 +1695,13 @@ function quickTiles(w){
   const nn=Object.keys(S.notes||{}).length,vw=Object.values(S.videos).filter(v=>!v.example&&['script','shot','edit'].includes(v.stage)).length;
   const T=(go,ic,b,s)=>'<button class="qt" data-go="'+go+'"><span class="ic" aria-hidden="true">'+ic+'</span><b>'+b+'</b><small>'+s+'</small></button>';
   return'<section class="qtiles" aria-label="Разделы">'+(FULL()?T('content',IC('content'),'Контент',vw+' в работе'):T('projects',IC('projects'),'Проекты',Object.values(S.clients).filter(isActive).length+' активных'))+
-    T('sport',IC('sport'),'Спорт',wk+'/7 кардио')+T('notes',IC('notes'),'Заметки',nn?nn+' '+plural(nn,'запись','записи','записей'):'пусто')+(FULL()?T('money',IC('money'),'Деньги','за месяц'):'<button class="qt" data-epochs><span class="ic" aria-hidden="true">'+IC('epochs')+'</span><b>Эпохи</b><small>все 12</small></button>')+'</section>';
+    T('sport',IC('sport'),'Спорт',wk+'/7 приседаний')+T('notes',IC('notes'),'Заметки',nn?nn+' '+plural(nn,'запись','записи','записей'):'пусто')+(FULL()?T('money',IC('money'),'Деньги','за месяц'):'<button class="qt" data-epochs><span class="ic" aria-hidden="true">'+IC('epochs')+'</span><b>Эпохи</b><small>все 12</small></button>')+'</section>';
 }
-function habitsCount(){const x=S.workouts[today()]||{};return (wdone(x)?1:0)+(x.squats?1:0)+'/2'}
+function habitsCount(){const x=S.workouts[today()]||{};return (x.squats?1:0)+'/1'}
 function habitsBlock(){
   const t=today(),ws=weekStart(t),x=S.workouts[t]||{};
   const dots=f=>{let s='';for(let i=0;i<7;i++){const d=addDays(ws,i);s+='<i class="'+(f(S.workouts[d])?'on':'')+(d===t?' now':'')+'"></i>'}return'<span class="dots7b">'+s+'</span>'};
-  return'<section class="habits"><button class="hb'+(wdone(x)?' on':'')+'" data-go="sport"><span class="ic" aria-hidden="true">'+IC('run')+'</span><b>Кардио</b><span class="st">'+(wdone(x)?(x.cardio==='bike'?'велик':'бег')+(x.min?' · '+x.min+' мин':''):'бег или велик')+'</span>'+dots(wdone)+'</button>'+
+  return'<section class="habits">'+
     '<button class="hb'+(x.squats?' on':'')+'" data-squats><span class="ic" aria-hidden="true">'+IC('squat')+'</span><b>100 приседаний</b><span class="st">'+(x.squats?'сделано':'нажми, когда сделал')+'</span>'+dots(w=>!!(w&&w.squats))+'</button></section>';
 }
 function openAdd(){
@@ -1779,7 +1778,7 @@ function renderToday(){
   const nn=Object.keys(S.notes||{}).length;
   const wi=(go,l,v,m,txt)=>'<button class="wk-i" data-go="'+go+'"><span class="wk-l">'+l+'</span><span class="wk-v">'+(txt!=null?txt:v+(m?'<small>/'+m+'</small>':''))+'</span>'+(m?'<span class="wk-b"><i style="width:'+Math.min(100,v/m*100).toFixed(0)+'%"></i></span>':'')+'</button>';
   h+=accOpen('week','▤','Неделя','')+'<section><div class="sec-head"><h2>Неделя</h2></div><div class="wk card">'+
-    wi('sport','Кардио',wk,7)+wi('sport','Приседания',sq,7)+wi('projects','Дел закрыто',tdw,0)+
+    wi('sport','Приседания',sq,7)+wi('projects','Дел закрыто',tdw,0)+
     (FULL()?wi('content','Ролики',w.fact,w.plan):wi('notes','Заметки',nn,0))+
     (FULL()?wi('money','Доход за месяц',got,goal||0,kM(got)+(goal?'<small>/'+kM(goal)+'</small>':''))+'<span></span>':'')+
     '</div>'+(lastR&&lastR.goal?'<p class="note">Цель недели: '+esc(lastR.goal)+'</p>':'')+(FULL()?'<div class="actions"><button class="btn ghost" data-review="'+(reviewDue()||ws)+'">Разбор недели</button></div>':'')+'</section></details>';
@@ -1869,7 +1868,7 @@ function moodAdvice(md){
   return{
     fire:'Огонь — значит, используем. Начни с самого тяжёлого: '+f+'.'+(!FULL()?' Остальное по списку, пока прёт.':scr?' А на пике энергии сними ролик «'+scr.topic+'».':' Энергию после дел — в ролик.'),
     ok:'Ровный день — лучший для скучных задач. Закрой '+f+', потом по списку. Без героизма, просто темп.',
-    meh:'Понял. Не геройствуй: сначала '+(wdone(w)?'короткая прогулка':'20 минут бега или велика — это поднимает лучше кофе')+', потом одно дело: '+f+'. Остальное подождёт.',
+    meh:'Понял. Не геройствуй: сначала '+'короткая прогулка'+', потом одно дело: '+f+'. Остальное подождёт.',
     tired:'Устал — значит, режим экономии. Сделай одно главное: '+f+'. Всё остальное переноси на завтра без чувства вины. Сегодня лечь до 00:00.',
     stress:'Выдохни. Запиши в журнал проекта, что бесит, — одной строкой. Потом закрой самое маленькое дело, мозгу нужна быстрая победа. Тяжёлые разговоры — не сегодня.'}[md];
 }
@@ -1892,9 +1891,9 @@ function jarvisLines(){
   else L.push('Системы в норме. Ничего не горит.');
   if(it.today.length)L.push('На сегодня '+it.today.length+' '+plural(it.today.length,'дело','дела','дел')+'. Предлагаю начать с «'+it.today[0].title+'».');
   else L.push(FULL()?'Дела на сегодня закрыты. Можно снять лишний ролик или отдохнуть.':'Дела на сегодня закрыты. Заслуженный отдых.');
-  L.push(FULL()?'Неделя: ролики '+w.fact+' из '+w.plan+', кардио '+wk+' из 7.'+(w.need>0&&w.left<=3?' Пора снимать, дос.':''):'Неделя: кардио '+wk+' из 7.');
+  L.push(FULL()?'Неделя: ролики '+w.fact+' из '+w.plan+', приседания '+wk+' из 7.'+(w.need>0&&w.left<=3?' Пора снимать, дос.':''):'Неделя: приседания '+wk+' из 7.');
   const g=+S.settings.incomeGoal||0;if(g){const got=monthPays(mKey(t)).filter(p=>p.status==='paid').reduce((a,p)=>a+(+p.amount||0),0);L.push(got>=g?'Цель по деньгам на месяц закрыта. Уважение.':'До цели месяца не хватает '+money(g-got)+'.')}
-  if(!wdone(S.workouts[t])&&new Date().getHours()>=6)L.push('Бег или велик сегодня ещё не отмечен. 30 минут, и я замолчу.');
+  if(!wdone(S.workouts[t])&&new Date().getHours()>=6)L.push('100 приседаний сегодня ещё не отмечены. Пять минут, и я замолчу.');
   {const F2=FULL()?FUN:FUN_P;L.push(F2[Math.floor(Math.random()*F2.length)])}
   return L;
 }
@@ -1945,7 +1944,7 @@ function askPrompt(q){
   const projs=Object.values(S.clients).filter(c=>!c.example&&isActive(c)).map(c=>({name:pname(c),type:TL[ptype(c)],open:openTasks(c).slice(0,5).map(x=>x.title+(x.date?' ('+x.date+')':'')),monthly:c.payType!=='once'?c.amount:null}));
   const vids=Object.values(S.videos).filter(v=>['pub','done'].includes(v.stage)).sort((a,b)=>(b.publishedAt||'')>(a.publishedAt||'')?1:-1).slice(0,15).map(v=>{const m=metric(v);return{topic:v.topic,date:v.publishedAt,format:v.format,views:m.views||null,saves:m.saves||null,shares:m.shares||null,tiktok:(v.m7||{}).ttViews||null,skipPct:(v.m7||{}).skip}});
   const ps=monthPays(mKey(t));const ws=weekStart(t);let wk=0,sq=0;for(let i=0;i<7;i++){const x=S.workouts[addDays(ws,i)];if(wdone(x))wk++;if(x&&x.squats)sq++}
-  const data={today:t,burning:it.burn.map(x=>x.title+' — '+x.sub),todo:it.today.map(x=>x.title+' — '+x.sub),week:{videos:w.fact+'/'+w.plan,cardio:wk+'/7',squats:sq+'/7'},
+  const data={today:t,burning:it.burn.map(x=>x.title+' — '+x.sub),todo:it.today.map(x=>x.title+' — '+x.sub),week:{videos:w.fact+'/'+w.plan,squats:sq+'/7'},
     money:{month:mKey(t),received:ps.filter(p=>p.status==='paid').reduce((a,p)=>a+(+p.amount||0),0),expected:ps.filter(p=>p.status!=='paid').reduce((a,p)=>a+(+p.amount||0),0),goal:+S.settings.incomeGoal||null},
     projects:projs,recentVideos:vids,notes:notesSorted().slice(0,15).map(([,n])=>NKL[noteKind(n)].l+': '+(n.title?n.title+' — ':'')+noteText(n).slice(0,200)),pipeline:STAGES.map(([k,l])=>l+': '+Object.values(S.videos).filter(v=>v.stage===k).length).join(', ')};
   return'Ты Дос, личный ассистент Асылбека (маркетолог-блогер из Атырау) внутри его приложения «Штаб». Говори как Джарвис у Тони Старка, только по-казахстански просто: коротко, уверенно, с лёгким юмором, обращайся «дос». Отвечай по-русски, максимум 6 коротких строк, без markdown-таблиц. Опирайся только на данные ниже, ничего не выдумывай; если данных не хватает, так и скажи. Если уместно, закончи одним конкретным следующим шагом.\n\nДанные штаба (JSON):\n'+JSON.stringify(data).slice(0,12000)+'\n\nВопрос: '+q;
@@ -2788,7 +2787,7 @@ function openReview(ws){
   const tile=(v,l)=>'<div class="card tile"><span class="v">'+v+'</span><span class="l">'+l+'</span></div>';
   let h=sheetTop('Разбор недели '+fmtD(ws)+' – '+fmtD(addDays(ws,6)))+'<div class="form">'+
     '<div class="tiles">'+tile(st.published+' / '+st.plan,'роликов')+tile(money(st.earned),'заработано')+tile(st.tasksDone,'задач закрыто')+'</div>'+
-    '<p class="note">'+[st.wk!=null?'Кардио: '+st.wk+' из 7 дней.':'',st.best?'Лучший ролик по сохранениям: «'+esc(st.best)+'».':'',st.leads?'Новых лидов: '+st.leads+'.':'Новых лидов не было.',st.overdue?'Просрочено задач: '+st.overdue+'.':'Просрочек нет.'].filter(Boolean).join(' ')+'</p>'+
+    '<p class="note">'+[st.wk!=null?'Приседания: '+st.wk+' из 7 дней.':'',st.best?'Лучший ролик по сохранениям: «'+esc(st.best)+'».':'',st.leads?'Новых лидов: '+st.leads+'.':'Новых лидов не было.',st.overdue?'Просрочено задач: '+st.overdue+'.':'Просрочек нет.'].filter(Boolean).join(' ')+'</p>'+
     '<form class="form" id="rform"><div class="group">'+
     '<div class="field"><label for="r_win">Главная победа недели</label><input id="r_win" maxlength="160" value="'+esc(r.win||'')+'"></div>'+
     '<div class="field"><label for="r_lesson">Чему научился, главный вывод</label><textarea id="r_lesson" rows="3" maxlength="500" placeholder="Одна мысль, которую можно рассказать в ролике">'+esc(r.lesson||'')+'</textarea></div>'+
@@ -2916,12 +2915,12 @@ const DAYS=['Понедельник','Вторник','Среда','Четвер
 const DSH=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 const CARDIO={run:'Бег',bike:'Велик'};
 const dow=s=>(parse(s).getDay()+6)%7;
-const wdone=x=>!!(x&&(x.cardio||x.done));
-const wfull=x=>!!(x&&(x.cardio||x.done)&&x.squats);
+const wdone=x=>!!(x&&x.squats);
+const wfull=x=>!!(x&&x.squats);
 function setWorkout(day,patch,msg){
   const prev=S.workouts[day]?clone(S.workouts[day]):null;
   const n={...(prev||{}),...patch};delete n.done;
-  if(!n.cardio&&!n.squats)del('workouts',day);else put('workouts',day,n);
+  if(!n.squats)del('workouts',day);else put('workouts',day,n);
   if(patch.cardio){dosReact('run');FX.buzz(20)}else if(patch.squats){dosReact('jump');FX.confetti(innerWidth/2,innerHeight*.35,epColors(),40)}
   if(day===today()&&wfull(n)&&!wfull(prev)){setTimeout(()=>{dosReact('dance');FX.confetti(innerWidth/2,innerHeight*.3,epColors(),90)},700)}
   toast(msg,()=>{prev?put('workouts',day,prev):del('workouts',day)});
@@ -2932,19 +2931,15 @@ function renderSport(){
   const since=Object.keys(S.workouts).sort()[0]||t;
   let wk=0,sq=0;const cells=[];
   for(let i=0;i<7;i++){const d=addDays(ws,i),w=S.workouts[d];const c=wdone(w),q=!!(w&&w.squats);if(c)wk++;if(q)sq++;
-    const st=c&&q?'ok':c||q?'half':d<since?'fut':d<t?'miss':d===t?'now':'fut';
-    const lbl=w&&w.cardio?(w.cardio==='bike'?'🚲':'🏃'):c?'✓':q?'½':d<t&&d>=since?'–':String(parse(d).getDate());
-    cells.push('<button class="sday sd-'+st+'" data-sday="'+d+'" '+(d>t?'disabled':'')+' aria-label="'+DAYS[i]+', '+fmtD(d)+': '+(c?(CARDIO[w.cardio]||'кардио')+(w.min?' '+w.min+' мин':''):'кардио нет')+', '+(q?'приседания сделаны':'приседаний нет')+'"><span>'+DSH[i]+'</span><b>'+lbl+'</b></button>')}
+    const st=q?'ok':d<since?'fut':d<t?'miss':d===t?'now':'fut';
+    const lbl=q?'✓':d<t&&d>=since?'–':String(parse(d).getDate());
+    cells.push('<button class="sday sd-'+st+'" data-sday="'+d+'" '+(d>t?'disabled':'')+' aria-label="'+DAYS[i]+', '+fmtD(d)+': '+(q?'приседания сделаны':'приседаний нет')+'"><span>'+DSH[i]+'</span><b>'+lbl+'</b></button>')}
   const streak=sportStreak();
-  const chip=(k)=>'<button type="button" class="chip" data-cardio="'+k+'" aria-pressed="'+(x.cardio===k)+'" style="min-height:48px;flex:1;font-size:16px">'+(k==='run'?'🏃 Бег':'🚲 Велик')+'</button>';
-  let h='<section class="card sport-dos"><div class="slot" id="sportDosSlot"></div><div><b>'+(wfull(x)?'Сегодня всё. Уважение.':x.cardio?'Кардио есть. Осталось 100 приседаний.':x.squats?'Приседания есть. Теперь бег или велик.':'Ну что, бег или велик?')+'</b><p>'+(wfull(x)?'Отдыхай, дос. Завтра повторим.':'Я уже размялся. Отметь, когда сделаешь — порадуюсь вместе с тобой.')+'</p></div></section>';
-  h+='<section><div class="card goal"><div class="kicker"><h2>Сегодня</h2>'+(wfull(x)?'<span class="tag ok">всё сделано</span>':'')+'</div>'+
-    '<span class="flabel">Кардио: что сегодня?</span><div class="chips" style="flex-wrap:nowrap">'+chip('run')+chip('bike')+'</div>'+
-    (x.cardio?'<div class="inline"><label class="sr" for="sp_min">Минут</label><input id="sp_min" inputmode="numeric" placeholder="Сколько минут" value="'+esc(x.min||'')+'" style="flex:1;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--surface);font-size:16px"><button class="btn sm ghost" data-spmin>Записать</button></div>':'')+
-    '<button class="btn '+(x.squats?'plain':'')+'" data-squats style="width:100%">'+(x.squats?'✓ 100 приседаний сделано · отменить':'100 приседаний · отметить')+'</button>'+
-    '<span class="row-sub">День засчитан, когда есть кардио. Полный день — кардио и 100 приседаний.</span></div></section>';
-  h+='<section><div class="card goal"><div class="kicker"><h2>Неделя</h2><span class="tag acc">кардио '+wk+'/7 · приседания '+sq+'/7</span></div><div class="sweek">'+cells.join('')+'</div>'+
-    '<span class="row-sub">'+(streak?'Серия: '+days(streak)+' подряд.':'Серия начнётся с первого кардио.')+' Забыл отметить вчера? Нажми на день.</span></div></section>';
+  let h='<section class="card sport-dos"><div class="slot" id="sportDosSlot"></div><div><b>'+(x.squats?'Сегодня всё. Уважение.':'100 приседаний — и день засчитан.')+'</b><p>'+(x.squats?'Отдыхай, дос. Завтра повторим.':'Пять минут. Отметь, когда сделаешь — порадуюсь вместе с тобой.')+'</p></div></section>';
+  h+='<section><div class="card goal"><div class="kicker"><h2>Сегодня</h2>'+(x.squats?'<span class="tag ok">сделано</span>':'')+'</div>'+
+    '<button class="btn '+(x.squats?'plain':'')+'" data-squats style="width:100%">'+(x.squats?'✓ 100 приседаний сделано · отменить':'100 приседаний · отметить')+'</button></div></section>';
+  h+='<section><div class="card goal"><div class="kicker"><h2>Неделя</h2><span class="tag acc">приседания '+sq+'/7</span></div><div class="sweek">'+cells.join('')+'</div>'+
+    '<span class="row-sub">'+(streak?'Серия: '+days(streak)+' подряд.':'Серия начнётся с первых приседаний.')+' Забыл отметить вчера? Нажми на день.</span></div></section>';
   const be=Object.entries(S.body).filter(([,x])=>x&&(x.weight||x.waist)).sort((a,b)=>a[0]<b[0]?-1:1);
   const ws2=be.filter(([,x])=>x.weight);const last=ws2[ws2.length-1];const first=ws2[0];
   const lw=be.filter(([,x])=>x.waist);const lastW=lw[lw.length-1],firstW=lw[0];
@@ -2960,13 +2955,10 @@ function renderSport(){
 }
 function openSportDay(d){
   const x=S.workouts[d]||{};
-  openSheet(sheetTop(DAYS[dow(d)]+', '+fmtD(d))+'<div class="form"><div class="group"><div class="field"><span class="flabel">Кардио</span><div class="chips">'+
-    ['run','bike'].map(k=>'<button type="button" class="chip" data-dcardio="'+k+'" aria-pressed="'+(x.cardio===k)+'">'+(k==='run'?'🏃 Бег':'🚲 Велик')+'</button>').join('')+'<button type="button" class="chip" data-dcardio="" aria-pressed="'+(!x.cardio&&!x.done)+'">Не было</button></div></div>'+
+  openSheet(sheetTop(DAYS[dow(d)]+', '+fmtD(d))+'<div class="form"><div class="group">'+
     '<div class="field"><label class="inline" style="min-height:44px;color:var(--ink);font-size:15px;font-weight:500"><input type="checkbox" id="sd_sq" style="width:22px;height:22px;flex:none" '+(x.squats?'checked':'')+'> 100 приседаний</label></div></div>'+
     '<div class="actions"><button class="btn" id="sd_save">Сохранить</button></div></div>');
-  let c=x.cardio||(x.done?'run':'');const panel=$('#panel');
-  panel.querySelectorAll('[data-dcardio]').forEach(b=>b.onclick=()=>{c=b.dataset.dcardio;panel.querySelectorAll('[data-dcardio]').forEach(z=>z.setAttribute('aria-pressed',z===b))});
-  $('#sd_save').onclick=()=>{setWorkout(d,{cardio:c||null,squats:$('#sd_sq').checked,min:c?x.min:null},'Сохранено за '+fmtD(d));closeSheet()};
+  $('#sd_save').onclick=()=>{setWorkout(d,{squats:$('#sd_sq').checked},'Сохранено за '+fmtD(d));closeSheet()};
 }
 const fmtKg=x=>(x>0?'+':x<0?'−':'')+String(Math.abs(Math.round(x*10)/10)).replace('.',',')+' кг';
 const fmtCm=x=>(x>0?'+':x<0?'−':'')+String(Math.abs(Math.round(x*10)/10)).replace('.',',')+' см';
@@ -3330,6 +3322,7 @@ header .ava{background:radial-gradient(circle at 40% 35%,#FFFDF8,#F1E6CF)!import
 .boss-hp{height:8px;border-radius:4px;background:rgba(70,50,20,.1);overflow:hidden}
 .boss-hp i{display:block;height:100%;background:linear-gradient(90deg,#B8341F,#FF7A5A);box-shadow:0 0 10px rgba(240,96,74,.45)}
 .boss.dead .boss-l{color:var(--gold-2)}
+.habits .hb{grid-column:1/-1;flex:1 1 100%}
 /* ===== эмоции маленьких аватарок ===== */
 .dos.pic::after{position:absolute;right:-4px;top:-4px;z-index:2;min-width:16px;height:16px;padding:0 3px;border-radius:9px;background:#fff;color:#2A2230;font:800 10px/16px system-ui;text-align:center;box-shadow:0 2px 6px rgba(70,50,20,.35);display:none}
 .dos.pic.e-happy::after{content:"♪";display:block;color:#C8902E}.dos.pic.e-proud::after{content:"★";display:block;color:#C8902E}
@@ -3432,7 +3425,7 @@ header .ava{background:radial-gradient(circle at 40% 35%,#FFFDF8,#F1E6CF)!import
     const M = k => R === 'human' ? 1.05 : RACES[R] && RACES[R].k === k ? 1.15 : 1;
     let tasks = 0, sport = 0, notes = 0, moods = 0, videos = 0, gold = 0;
     Object.values(S.clients).forEach(c => { if (c.example) return; (c.tasks || []).forEach(t => { if (t.done) tasks += 10; }); });
-    Object.values(S.workouts).forEach(w => { if (wdone(w)) sport += 15; if (w && w.squats) sport += 10; });
+    Object.values(S.workouts).forEach(w => { if (w && (w.cardio || w.done || w.squats)) sport += 15; if (w && w.squats) sport += 10; });
     moods = Object.keys(S.moods).length * 5; notes = Object.keys(S.notes || {}).length * 3;
     videos = Object.values(S.videos).filter(v => !v.example && ['pub', 'done'].includes(v.stage)).length * 20;
     if (FULL()) { const nw = new Date(); for (let i = 0; i < 24; i++) { const d = new Date(nw.getFullYear(), nw.getMonth() - i, 1); const mk = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); try { monthPays(mk).forEach(p => { if (p.status === 'paid') gold += 25; }); } catch (e) {} } }

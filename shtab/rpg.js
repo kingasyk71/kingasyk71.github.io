@@ -145,6 +145,7 @@ header .ava{background:radial-gradient(circle at 40% 35%,#FFFDF8,#F1E6CF)!import
 .boss-hp{height:8px;border-radius:4px;background:rgba(70,50,20,.1);overflow:hidden}
 .boss-hp i{display:block;height:100%;background:linear-gradient(90deg,#B8341F,#FF7A5A);box-shadow:0 0 10px rgba(240,96,74,.45)}
 .boss.dead .boss-l{color:var(--gold-2)}
+.habits .hb{grid-column:1/-1;flex:1 1 100%}
 /* ===== эмоции маленьких аватарок ===== */
 .dos.pic::after{position:absolute;right:-4px;top:-4px;z-index:2;min-width:16px;height:16px;padding:0 3px;border-radius:9px;background:#fff;color:#2A2230;font:800 10px/16px system-ui;text-align:center;box-shadow:0 2px 6px rgba(70,50,20,.35);display:none}
 .dos.pic.e-happy::after{content:"♪";display:block;color:#C8902E}.dos.pic.e-proud::after{content:"★";display:block;color:#C8902E}
@@ -247,7 +248,7 @@ header .ava{background:radial-gradient(circle at 40% 35%,#FFFDF8,#F1E6CF)!import
     const M = k => R === 'human' ? 1.05 : RACES[R] && RACES[R].k === k ? 1.15 : 1;
     let tasks = 0, sport = 0, notes = 0, moods = 0, videos = 0, gold = 0;
     Object.values(S.clients).forEach(c => { if (c.example) return; (c.tasks || []).forEach(t => { if (t.done) tasks += 10; }); });
-    Object.values(S.workouts).forEach(w => { if (wdone(w)) sport += 15; if (w && w.squats) sport += 10; });
+    Object.values(S.workouts).forEach(w => { if (w && (w.cardio || w.done || w.squats)) sport += 15; if (w && w.squats) sport += 10; });
     moods = Object.keys(S.moods).length * 5; notes = Object.keys(S.notes || {}).length * 3;
     videos = Object.values(S.videos).filter(v => !v.example && ['pub', 'done'].includes(v.stage)).length * 20;
     if (FULL()) { const nw = new Date(); for (let i = 0; i < 24; i++) { const d = new Date(nw.getFullYear(), nw.getMonth() - i, 1); const mk = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); try { monthPays(mk).forEach(p => { if (p.status === 'paid') gold += 25; }); } catch (e) {} } }
