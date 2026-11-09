@@ -17,7 +17,7 @@ function $$(s,c){return [].slice.call((c||document).querySelectorAll(s))}
 // hero wall of visas (3 columns, duplicated for seamless loop)
 var rot=[-2.5,1.8,-1.2,2.4,-1.8,1.2,-2.2,1.5];
 function pol(i){return '<figure class="polaroid" style="transform:rotate('+rot[i%8]+'deg)"><img src="img/visa'+i+'.webp" data-l-alt="visaAlt" alt="" loading="eager"><figcaption class="mono"><span data-l="visaCap"></span><b>TÜRKİYE ✓</b></figcaption></figure>'}
-$('#wall').innerHTML=[[1,4,7,2],[2,5,3,6],[3,6,1,5]].map(function(c,k){var h=c.map(pol).join('');return '<div class="wcol c'+(k+1)+'">'+h+h+'</div>'}).join('');
+$('#wall').innerHTML=[[1,8,4,11,7],[2,10,5,9],[3,12,6,1]].map(function(c,k){var h=c.map(pol).join('');return '<div class="wcol c'+(k+1)+'">'+h+h+'</div>'}).join('');
 // filters + jobs
 var deptIds=['all','anim','rest','front','house','sport'];
 var jobDept=['anim','anim','anim','rest','rest','rest','front','front','house','sport','sport'];
